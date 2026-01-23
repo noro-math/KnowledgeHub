@@ -27,15 +27,26 @@ Knowledge Hub is designed to be a centralized resource for various academic subj
 
 **For the impatient:** Here's the minimal steps to get your site live with comments:
 
-1. Create GitHub repository named `knowledge-hub` (public)
-2. Push this code: `git init && git add . && git commit -m "Initial commit" && git remote add origin https://github.com/YOUR_USERNAME/knowledge-hub.git && git push -u origin main`
-3. Enable GitHub Pages (Settings → Pages → Source: GitHub Actions)
-4. Enable Discussions (Settings → Features → Check "Discussions")
-5. Install Giscus app: [github.com/apps/giscus](https://github.com/apps/giscus)
-6. Configure at [giscus.app](https://giscus.app) and update `_quarto.yml`
-7. Push changes: `git add . && git commit -m "Add comments" && git push`
+1. **Create GitHub repository** (public) - any name you prefer
+2. **Push this code** using these exact commands:
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit: Knowledge Hub with Mathematics section"
+   git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+   git push -u origin master
+   git checkout -b main
+   git push origin main --force
+   ```
+3. **Enable GitHub Pages**: Settings → Pages → Source: "GitHub Actions"
+4. **Enable Discussions**: Settings → Features → Check "Discussions"
+5. **Install Giscus app**: [github.com/apps/giscus](https://github.com/apps/giscus)
+6. **Configure comments**: Get settings from [giscus.app](https://giscus.app) and update `_quarto.yml`
+7. **Push final changes**: `git add . && git commit -m "Configure comments" && git push`
 
-**Done!** Your site will be live at `https://YOUR_USERNAME.github.io/knowledge-hub`
+**Done!** Your site will be live at `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME`
+
+**Note**: If you get merge conflicts during step 2, use `git push origin main --force` to override.
 
 ### Local Development
 

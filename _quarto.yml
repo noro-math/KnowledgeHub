@@ -14,6 +14,9 @@ website:
       - href: demo-comments.qmd
         text: Comments Demo
     right:
+      - text: "<i class='bi bi-sun-fill theme-icon-active' id='theme-toggle'></i>"
+        href: "#"
+        aria-label: "Toggle dark mode"
       - icon: github
         href: https://github.com/yourusername/knowledge-hub
         aria-label: GitHub
@@ -29,12 +32,15 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme: 
+      light: cosmo
+      dark: darkly
     css: styles.css
     toc: true
     toc-depth: 3
     number-sections: true
     code-fold: true
+    include-after-body: theme-toggle.html
     comments:
       giscus:
         repo: noro-math/KnowledgeHub
