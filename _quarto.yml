@@ -29,7 +29,11 @@ website:
             - mathematics/linear-algebra/index.qmd
             - mathematics/linear-algebra/notes.qmd
             - mathematics/linear-algebra/exercises.qmd
-            - mathematics/linear-algebra/notebooks.qmd
+            - section: "Interactive Notebooks"
+              contents:
+                - mathematics/linear-algebra/notebooks/01-vector-spaces.ipynb
+                - mathematics/linear-algebra/notebooks/02-linear-transformations.ipynb
+                - mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.ipynb
 
 format:
   html:
@@ -54,3 +58,5 @@ format:
         theme: "preferred_color_scheme"
         language: "en"
         loading: "lazy"
+
+jupyter: python3

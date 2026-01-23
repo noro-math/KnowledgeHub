@@ -141,7 +141,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../../../styles.css">
 </head>
 
-<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -323,7 +323,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../index.html"> 
+    <a class="nav-link active" href="../../../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -352,21 +352,109 @@ window.Quarto = {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../mathematics/linear-algebra/index.html">Linear Algebra</a></li><li class="breadcrumb-item"><a href="../../../mathematics/linear-algebra/notebooks/01-vector-spaces.html">Interactive Notebooks</a></li><li class="breadcrumb-item"><a href="../../../mathematics/linear-algebra/notebooks/02-linear-transformations.html">Linear Transformations</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../mathematics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mathematics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Linear Algebra</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../mathematics/linear-algebra/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Algebra</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../mathematics/linear-algebra/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Algebra Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../mathematics/linear-algebra/exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Algebra Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Interactive Notebooks</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../mathematics/linear-algebra/notebooks/01-vector-spaces.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vector Spaces</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../mathematics/linear-algebra/notebooks/02-linear-transformations.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Linear Transformations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Eigenvalues and Eigenvectors</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">1</span> Learning Objectives</a></li>
-  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition"><span class="header-section-number">2</span> Definition</a></li>
-  <li><a href="#visualization-of-linear-transformations" id="toc-visualization-of-linear-transformations" class="nav-link" data-scroll-target="#visualization-of-linear-transformations"><span class="header-section-number">3</span> Visualization of Linear Transformations</a></li>
-  <li><a href="#kernel-and-image" id="toc-kernel-and-image" class="nav-link" data-scroll-target="#kernel-and-image"><span class="header-section-number">4</span> Kernel and Image</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5</span> Exercises</a></li>
+  <li><a href="#linear-transformations" id="toc-linear-transformations" class="nav-link active" data-scroll-target="#linear-transformations"><span class="header-section-number">1</span> Linear Transformations</a>
+  <ul class="collapse">
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives"><span class="header-section-number">1.1</span> Learning Objectives</a></li>
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition"><span class="header-section-number">1.2</span> Definition</a></li>
+  <li><a href="#visualization-of-linear-transformations" id="toc-visualization-of-linear-transformations" class="nav-link" data-scroll-target="#visualization-of-linear-transformations"><span class="header-section-number">1.3</span> Visualization of Linear Transformations</a></li>
+  <li><a href="#kernel-and-image" id="toc-kernel-and-image" class="nav-link" data-scroll-target="#kernel-and-image"><span class="header-section-number">1.4</span> Kernel and Image</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">1.5</span> Exercises</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -374,7 +462,7 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../mathematics/linear-algebra/index.html">Linear Algebra</a></li><li class="breadcrumb-item"><a href="../../../mathematics/linear-algebra/notebooks/01-vector-spaces.html">Interactive Notebooks</a></li><li class="breadcrumb-item"><a href="../../../mathematics/linear-algebra/notebooks/02-linear-transformations.html">Linear Transformations</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Linear Transformations</h1>
 </div>
@@ -393,9 +481,11 @@ window.Quarto = {
 </header>
 
 
+<section id="linear-transformations" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Linear Transformations</h1>
 <p>This notebook explores linear transformations and their properties.</p>
-<section id="learning-objectives" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">1</span> Learning Objectives</h2>
+<section id="learning-objectives" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">1.1</span> Learning Objectives</h2>
 <ul>
 <li>Understand the definition of linear transformations</li>
 <li>Explore matrix representations of linear transformations</li>
@@ -414,8 +504,8 @@ window.Quarto = {
 </details>
 </div>
 </section>
-<section id="definition" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="definition"><span class="header-section-number">2</span> Definition</h2>
+<section id="definition" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="definition"><span class="header-section-number">1.2</span> Definition</h2>
 <p>A function <span class="math inline">\(T: V \to W\)</span> between vector spaces is called a <strong>linear transformation</strong> if:</p>
 <ol type="1">
 <li><span class="math inline">\(T(u + v) = T(u) + T(v)\)</span> for all <span class="math inline">\(u, v \in V\)</span></li>
@@ -445,8 +535,8 @@ window.Quarto = {
 </details>
 </div>
 </section>
-<section id="visualization-of-linear-transformations" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="visualization-of-linear-transformations"><span class="header-section-number">3</span> Visualization of Linear Transformations</h2>
+<section id="visualization-of-linear-transformations" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="visualization-of-linear-transformations"><span class="header-section-number">1.3</span> Visualization of Linear Transformations</h2>
 <div id="cell-6" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -488,8 +578,8 @@ window.Quarto = {
 </details>
 </div>
 </section>
-<section id="kernel-and-image" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="kernel-and-image"><span class="header-section-number">4</span> Kernel and Image</h2>
+<section id="kernel-and-image" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="kernel-and-image"><span class="header-section-number">1.4</span> Kernel and Image</h2>
 <p>For a linear transformation <span class="math inline">\(T: V \to W\)</span>: - <strong>Kernel (Null Space)</strong>: <span class="math inline">\(\ker(T) = \{v \in V : T(v) = 0\}\)</span> - <strong>Image (Range)</strong>: <span class="math inline">\(\text{im}(T) = \{T(v) : v \in V\}\)</span></p>
 <div id="cell-8" class="cell">
 <details class="code-fold">
@@ -516,8 +606,8 @@ window.Quarto = {
 </details>
 </div>
 </section>
-<section id="exercises" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">5</span> Exercises</h2>
+<section id="exercises" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">1.5</span> Exercises</h2>
 <ol type="1">
 <li>Verify that the transformation <span class="math inline">\(T(x, y) = (2x + y, x - y)\)</span> is linear.</li>
 <li>Find the matrix representation of the transformation that reflects vectors across the line <span class="math inline">\(y = x\)</span>.</li>
@@ -526,6 +616,7 @@ window.Quarto = {
 </ol>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

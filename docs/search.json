@@ -60,246 +60,81 @@
     ]
   },
   {
-    "objectID": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html",
-    "href": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html",
-    "title": "Eigenvalues and Eigenvectors",
+    "objectID": "mathematics/linear-algebra/notebooks/02-linear-transformations.html",
+    "href": "mathematics/linear-algebra/notebooks/02-linear-transformations.html",
+    "title": "Linear Transformations",
     "section": "",
-    "text": "This notebook explores eigenvalues and eigenvectors, fundamental concepts in linear algebra."
-  },
-  {
-    "objectID": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#learning-objectives",
-    "href": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#learning-objectives",
-    "title": "Eigenvalues and Eigenvectors",
-    "section": "1 Learning Objectives",
-    "text": "1 Learning Objectives\n\nUnderstand eigenvalues and eigenvectors\nCompute eigenvalues and eigenvectors\nVisualize eigenvectors geometrically\nExplore applications in data analysis\n\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.datasets import make_blobs\nfrom sklearn.decomposition import PCA\n\nplt.rcParams['figure.figsize'] = (12, 8)\nnp.random.seed(42)"
-  },
-  {
-    "objectID": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#definition",
-    "href": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#definition",
-    "title": "Eigenvalues and Eigenvectors",
-    "section": "2 Definition",
-    "text": "2 Definition\nFor a square matrix \\(A\\), a non-zero vector \\(v\\) is an eigenvector with eigenvalue \\(\\lambda\\) if:\n\\[Av = \\lambda v\\]\nThis means the transformation \\(A\\) scales the vector \\(v\\) by factor \\(\\lambda\\) without changing its direction.\n\n\nCode\n# Example: Find eigenvalues and eigenvectors\nA = np.array([[3, 1],\n              [0, 2]])\n\n# Compute eigenvalues and eigenvectors\neigenvalues, eigenvectors = np.linalg.eig(A)\n\nprint(f\"Matrix A:\\n{A}\")\nprint(f\"\\nEigenvalues: {eigenvalues}\")\nprint(f\"\\nEigenvectors:\\n{eigenvectors}\")\n\n# Verify the eigenvalue equation\nfor i in range(len(eigenvalues)):\n    λ = eigenvalues[i]\n    v = eigenvectors[:, i]\n    \n    Av = A @ v\n    λv = λ * v\n    \n    print(f\"\\nFor eigenvalue {λ:.3f}:\")\n    print(f\"Av = {Av}\")\n    print(f\"λv = {λv}\")\n    print(f\"Equal? {np.allclose(Av, λv)}\")"
-  },
-  {
-    "objectID": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#geometric-visualization",
-    "href": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#geometric-visualization",
-    "title": "Eigenvalues and Eigenvectors",
-    "section": "3 Geometric Visualization",
-    "text": "3 Geometric Visualization\n\n\nCode\n# Visualize eigenvectors and their transformation\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))\n\n# Original eigenvectors\ncolors = ['red', 'blue']\nfor i in range(len(eigenvalues)):\n    v = eigenvectors[:, i]\n    ax1.quiver(0, 0, v[0], v[1], angles='xy', scale_units='xy', scale=1, \n               color=colors[i], width=0.005, label=f'v{i+1}')\n    \n    # Show transformed eigenvectors\n    Av = A @ v\n    ax2.quiver(0, 0, Av[0], Av[1], angles='xy', scale_units='xy', scale=1, \n               color=colors[i], width=0.005, label=f'Av{i+1} = {eigenvalues[i]:.1f}v{i+1}')\n\n# Add some other vectors to show general transformation\ntest_vectors = np.array([[1, 0], [0, 1], [1, 1], [-1, 1]]).T\ntransformed_vectors = A @ test_vectors\n\nfor i in range(test_vectors.shape[1]):\n    v_orig = test_vectors[:, i]\n    v_trans = transformed_vectors[:, i]\n    \n    ax1.quiver(0, 0, v_orig[0], v_orig[1], angles='xy', scale_units='xy', scale=1, \n               color='gray', alpha=0.5, width=0.003)\n    ax2.quiver(0, 0, v_trans[0], v_trans[1], angles='xy', scale_units='xy', scale=1, \n               color='gray', alpha=0.5, width=0.003)\n\n# Setup plots\nfor ax, title in zip([ax1, ax2], ['Original Vectors', 'Transformed Vectors']):\n    ax.set_xlim(-2, 4)\n    ax.set_ylim(-2, 3)\n    ax.grid(True, alpha=0.3)\n    ax.set_aspect('equal')\n    ax.set_title(title)\n    ax.legend()\n\nplt.tight_layout()\nplt.show()"
-  },
-  {
-    "objectID": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#principal-component-analysis-pca",
-    "href": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#principal-component-analysis-pca",
-    "title": "Eigenvalues and Eigenvectors",
-    "section": "4 Principal Component Analysis (PCA)",
-    "text": "4 Principal Component Analysis (PCA)\nPCA uses eigenvalues and eigenvectors to find the principal directions of variation in data.\n\n\nCode\n# Generate sample data\nX, _ = make_blobs(n_samples=200, centers=1, n_features=2, \n                  random_state=42, cluster_std=2.0)\n\n# Add correlation by transforming the data\ntransform_matrix = np.array([[1, 0.8], [0, 1]])\nX = X @ transform_matrix.T\n\n# Perform PCA\npca = PCA(n_components=2)\nX_pca = pca.fit_transform(X)\n\n# Get principal components (eigenvectors of covariance matrix)\ncomponents = pca.components_\nexplained_variance = pca.explained_variance_\n\nprint(f\"Explained variance: {explained_variance}\")\nprint(f\"Explained variance ratio: {pca.explained_variance_ratio_}\")\n\n# Visualize\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))\n\n# Original data with principal components\nax1.scatter(X[:, 0], X[:, 1], alpha=0.6, s=30)\nmean_point = np.mean(X, axis=0)\n\n# Plot principal components\nfor i, (component, variance) in enumerate(zip(components, explained_variance)):\n    # Scale by square root of eigenvalue for visualization\n    scaled_component = component * np.sqrt(variance) * 2\n    ax1.arrow(mean_point[0], mean_point[1], \n              scaled_component[0], scaled_component[1],\n              head_width=0.3, head_length=0.3, fc=f'C{i}', ec=f'C{i}',\n              label=f'PC{i+1} (var={variance:.2f})')\n\nax1.set_title('Original Data with Principal Components')\nax1.legend()\nax1.grid(True, alpha=0.3)\nax1.set_aspect('equal')\n\n# Transformed data (in PC space)\nax2.scatter(X_pca[:, 0], X_pca[:, 1], alpha=0.6, s=30)\nax2.set_title('Data in Principal Component Space')\nax2.set_xlabel('First Principal Component')\nax2.set_ylabel('Second Principal Component')\nax2.grid(True, alpha=0.3)\nax2.set_aspect('equal')\n\nplt.tight_layout()\nplt.show()"
-  },
-  {
-    "objectID": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#characteristic-polynomial",
-    "href": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#characteristic-polynomial",
-    "title": "Eigenvalues and Eigenvectors",
-    "section": "5 Characteristic Polynomial",
-    "text": "5 Characteristic Polynomial\nEigenvalues are roots of the characteristic polynomial: \\(\\det(A - \\lambda I) = 0\\)\n\n\nCode\n# Example: Compute characteristic polynomial manually\nA = np.array([[2, 1],\n              [1, 2]])\n\nprint(f\"Matrix A:\\n{A}\")\n\n# For 2x2 matrix [[a,b],[c,d]], characteristic polynomial is:\n# λ² - (a+d)λ + (ad-bc) = 0\na, b = A[0, 0], A[0, 1]\nc, d = A[1, 0], A[1, 1]\n\ntrace = a + d\ndeterminant = a*d - b*c\n\nprint(f\"\\nTrace (a+d): {trace}\")\nprint(f\"Determinant (ad-bc): {determinant}\")\nprint(f\"Characteristic polynomial: λ² - {trace}λ + {determinant} = 0\")\n\n# Solve quadratic equation\ndiscriminant = trace**2 - 4*determinant\nλ1 = (trace + np.sqrt(discriminant)) / 2\nλ2 = (trace - np.sqrt(discriminant)) / 2\n\nprint(f\"\\nEigenvalues from formula: {λ1:.3f}, {λ2:.3f}\")\n\n# Compare with numpy\neigenvals_numpy = np.linalg.eigvals(A)\nprint(f\"Eigenvalues from numpy: {eigenvals_numpy}\")"
-  },
-  {
-    "objectID": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#exercises",
-    "href": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#exercises",
-    "title": "Eigenvalues and Eigenvectors",
-    "section": "6 Exercises",
-    "text": "6 Exercises\n\nFind the eigenvalues and eigenvectors of \\(\\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}\\)\nShow that if \\(v\\) is an eigenvector of \\(A\\) with eigenvalue \\(\\lambda\\), then \\(v\\) is also an eigenvector of \\(A^2\\) with eigenvalue \\(\\lambda^2\\)\nProve that the eigenvalues of a triangular matrix are its diagonal entries\nUse PCA to analyze a dataset of your choice and interpret the principal components"
-  },
-  {
-    "objectID": "mathematics/linear-algebra/notebooks/01-vector-spaces.html",
-    "href": "mathematics/linear-algebra/notebooks/01-vector-spaces.html",
-    "title": "Vector Spaces",
-    "section": "",
-    "text": "This notebook explores the fundamental concepts of vector spaces in linear algebra."
-  },
-  {
-    "objectID": "mathematics/linear-algebra/notebooks/01-vector-spaces.html#learning-objectives",
-    "href": "mathematics/linear-algebra/notebooks/01-vector-spaces.html#learning-objectives",
-    "title": "Vector Spaces",
-    "section": "1 Learning Objectives",
-    "text": "1 Learning Objectives\n\nUnderstand the definition of a vector space\nExplore examples of vector spaces\nWork with vector operations\nVerify vector space axioms\n\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom mpl_toolkits.mplot3d import Axes3D\n\n# Set up plotting style\nplt.style.use('default')\nplt.rcParams['figure.figsize'] = (10, 6)"
-  },
-  {
-    "objectID": "mathematics/linear-algebra/notebooks/01-vector-spaces.html#definition-of-vector-space",
-    "href": "mathematics/linear-algebra/notebooks/01-vector-spaces.html#definition-of-vector-space",
-    "title": "Vector Spaces",
-    "section": "2 Definition of Vector Space",
-    "text": "2 Definition of Vector Space\nA vector space \\(V\\) over a field \\(F\\) is a set equipped with two operations: - Vector addition: \\(+: V \\times V \\to V\\) - Scalar multiplication: \\(\\cdot: F \\times V \\to V\\)\nThese operations must satisfy the following axioms…\n\n\nCode\n# Example: R^2 as a vector space\nv1 = np.array([2, 3])\nv2 = np.array([1, -1])\nscalar = 2.5\n\n# Vector addition\nv_sum = v1 + v2\nprint(f\"v1 + v2 = {v_sum}\")\n\n# Scalar multiplication\nv_scaled = scalar * v1\nprint(f\"{scalar} * v1 = {v_scaled}\")"
-  },
-  {
-    "objectID": "mathematics/linear-algebra/notebooks/01-vector-spaces.html#visualization-of-vector-operations",
-    "href": "mathematics/linear-algebra/notebooks/01-vector-spaces.html#visualization-of-vector-operations",
-    "title": "Vector Spaces",
-    "section": "3 Visualization of Vector Operations",
-    "text": "3 Visualization of Vector Operations\n\n\nCode\n# Visualize vectors in R^2\nfig, ax = plt.subplots(1, 1, figsize=(8, 6))\n\n# Plot vectors\nax.quiver(0, 0, v1[0], v1[1], angles='xy', scale_units='xy', scale=1, color='blue', label='v1')\nax.quiver(0, 0, v2[0], v2[1], angles='xy', scale_units='xy', scale=1, color='red', label='v2')\nax.quiver(0, 0, v_sum[0], v_sum[1], angles='xy', scale_units='xy', scale=1, color='green', label='v1 + v2')\n\n# Set up the plot\nax.set_xlim(-1, 4)\nax.set_ylim(-2, 4)\nax.grid(True, alpha=0.3)\nax.set_aspect('equal')\nax.legend()\nax.set_title('Vector Addition in R²')\nax.set_xlabel('x')\nax.set_ylabel('y')\n\nplt.show()"
-  },
-  {
-    "objectID": "mathematics/linear-algebra/notebooks/01-vector-spaces.html#exercises",
-    "href": "mathematics/linear-algebra/notebooks/01-vector-spaces.html#exercises",
-    "title": "Vector Spaces",
-    "section": "4 Exercises",
-    "text": "4 Exercises\n\nVerify that \\(\\mathbb{R}^3\\) with standard addition and scalar multiplication forms a vector space.\nShow that the set of all polynomials of degree at most \\(n\\) forms a vector space.\nDetermine if the set \\(\\{(x, y) \\in \\mathbb{R}^2 : x + y = 1\\}\\) is a vector space."
-  },
-  {
-    "objectID": "mathematics/linear-algebra/exercises.html",
-    "href": "mathematics/linear-algebra/exercises.html",
-    "title": "Linear Algebra Exercises",
-    "section": "",
-    "text": "Prove that \\(-(-v) = v\\) for every \\(v\\) in a vector space \\(V\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nLet \\(v \\in V\\). We know that \\(-v\\) is the additive inverse of \\(v\\), so \\(v + (-v) = 0\\).\nSince \\(-v \\in V\\), it has an additive inverse, which we denote as \\(-(-v)\\). By definition: \\((-v) + (-(-v)) = 0\\).\nNow, consider: \\[v + (-v) = 0 = (-v) + (-(-v))\\]\nAdding \\(-(-v)\\) to both sides: \\[-(-v) + v + (-v) = -(-v) + (-v) + (-(-v))\\] \\[-(-v) + 0 = -(-v) + 0\\] \\[-(-v) = -(-v)\\]\nThis is always true. Let’s try a different approach.\nFrom \\(v + (-v) = 0\\), we can add \\(-(-v)\\) to both sides: \\[-(-v) + v + (-v) = -(-v) + 0\\] \\[(-(-v) + v) + (-v) = -(-v)\\]\nSince \\((-v) + (-(-v)) = 0\\), we have \\(-(-v) = -(-v)\\).\nActually, let’s use uniqueness of additive inverse: Since \\(v + (-v) = 0\\) and \\((-v) + (-(-v)) = 0\\), and the additive inverse is unique, we must have \\(v = -(-v)\\).\n\n\n\n\n\n\nSuppose \\(v_1, v_2, v_3, v_4\\) spans \\(V\\). Prove that the list \\(v_1 - v_2, v_2 - v_3, v_3 - v_4, v_4\\) also spans \\(V\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nWe need to show that every vector in \\(V\\) can be written as a linear combination of \\(v_1 - v_2, v_2 - v_3, v_3 - v_4, v_4\\).\nSince \\(v_1, v_2, v_3, v_4\\) spans \\(V\\), any \\(v \\in V\\) can be written as: \\[v = a_1v_1 + a_2v_2 + a_3v_3 + a_4v_4\\]\nWe need to express \\(v_1, v_2, v_3\\) in terms of our new list: - \\(v_4 = v_4\\) - \\(v_3 = (v_3 - v_4) + v_4\\) - \\(v_2 = (v_2 - v_3) + v_3 = (v_2 - v_3) + (v_3 - v_4) + v_4\\) - \\(v_1 = (v_1 - v_2) + v_2 = (v_1 - v_2) + (v_2 - v_3) + (v_3 - v_4) + v_4\\)\nTherefore: \\[v = a_1[(v_1 - v_2) + (v_2 - v_3) + (v_3 - v_4) + v_4] + a_2[(v_2 - v_3) + (v_3 - v_4) + v_4] + a_3[(v_3 - v_4) + v_4] + a_4v_4\\]\nCollecting terms: \\[v = a_1(v_1 - v_2) + (a_1 + a_2)(v_2 - v_3) + (a_1 + a_2 + a_3)(v_3 - v_4) + (a_1 + a_2 + a_3 + a_4)v_4\\]\nThis shows that \\(v\\) is in the span of \\(v_1 - v_2, v_2 - v_3, v_3 - v_4, v_4\\).\n\n\n\n\n\n\n\n\n\nFind a basis for the vector space of polynomials in \\(\\mathcal{P}_3(\\mathbb{R})\\) that have the property that \\(p(2) = 0\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nWe need polynomials \\(p(x) = a_0 + a_1x + a_2x^2 + a_3x^3\\) such that \\(p(2) = 0\\).\nThis gives us: \\(a_0 + 2a_1 + 4a_2 + 8a_3 = 0\\), so \\(a_0 = -2a_1 - 4a_2 - 8a_3\\).\nTherefore: \\(p(x) = (-2a_1 - 4a_2 - 8a_3) + a_1x + a_2x^2 + a_3x^3\\) \\(= a_1(x - 2) + a_2(x^2 - 4) + a_3(x^3 - 8)\\)\nA basis is: \\(\\{x - 2, x^2 - 4, x^3 - 8\\}\\)\nWe can verify: - These polynomials are linearly independent (check by setting linear combination to zero) - They span the space (any polynomial with \\(p(2) = 0\\) can be written in this form) - The dimension is 3 (which makes sense: we have one constraint on a 4-dimensional space)\n\n\n\n\n\n\nProve that if \\(U_1, U_2, W\\) are subspaces of \\(V\\) such that \\(V = U_1 \\oplus W = U_2 \\oplus W\\), then \\(U_1 = U_2\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nWe need to show \\(U_1 \\subseteq U_2\\) and \\(U_2 \\subseteq U_1\\).\nLet \\(u_1 \\in U_1\\). Since \\(V = U_2 \\oplus W\\), we can write: \\[u_1 = u_2 + w\\] for unique \\(u_2 \\in U_2\\) and \\(w \\in W\\).\nSince \\(V = U_1 \\oplus W\\), we also have: \\[u_1 = u_1 + 0\\] where \\(u_1 \\in U_1\\) and \\(0 \\in W\\).\nBy uniqueness of the direct sum decomposition \\(V = U_1 \\oplus W\\): - The \\(U_1\\) component is \\(u_1\\) - The \\(W\\) component is \\(0\\)\nBut we also wrote \\(u_1 = u_2 + w\\) where \\(u_2 \\in U_2\\) and \\(w \\in W\\). Since \\(u_1 \\in U_1\\) and \\(V = U_1 \\oplus W\\), we must have \\(w = 0\\) and the \\(U_1\\) component equals \\(u_2\\).\nTherefore \\(u_1 = u_2 \\in U_2\\), so \\(U_1 \\subseteq U_2\\).\nBy symmetry, \\(U_2 \\subseteq U_1\\), so \\(U_1 = U_2\\).\n\n\n\n\n\n\n\n\n\nGive an example of a linear map \\(T: \\mathbb{R}^4 \\to \\mathbb{R}^2\\) such that \\(\\dim(\\text{null } T) = 2\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nBy the fundamental theorem of linear maps: \\[\\dim \\mathbb{R}^4 = \\dim(\\text{null } T) + \\dim(\\text{range } T)\\] \\[4 = 2 + \\dim(\\text{range } T)\\]\nSo \\(\\dim(\\text{range } T) = 2\\).\nDefine \\(T: \\mathbb{R}^4 \\to \\mathbb{R}^2\\) by: \\[T(x_1, x_2, x_3, x_4) = (x_1 + x_2, x_3 + x_4)\\]\nThen: - \\(\\text{null } T = \\{(x_1, x_2, x_3, x_4) : x_1 + x_2 = 0 \\text{ and } x_3 + x_4 = 0\\}\\) - \\(= \\{(a, -a, b, -b) : a, b \\in \\mathbb{R}\\}\\) - \\(= \\text{span}((1, -1, 0, 0), (0, 0, 1, -1))\\)\nSo \\(\\dim(\\text{null } T) = 2\\) as required.\n\n\n\n\nNote: This represents a sample of exercises. A complete version would include many more problems from each chapter, with varying difficulty levels and comprehensive solutions.\n\n\n\n\n\n\n\n\n\n\nNoteCommunity Discussion\n\n\n\nThe comment section will appear here once the site is deployed to GitHub Pages with Giscus configured. Readers will be able to:\n\nAsk questions about the exercises\nShare alternative solutions\nDiscuss mathematical concepts\nProvide feedback and suggestions\n\nTo enable comments after GitHub deployment: 1. Install the Giscus GitHub App 2. Enable Discussions in your repository 3. Configure the repository details in _quarto.yml",
+    "text": "This notebook explores linear transformations and their properties.\n\n\n\nUnderstand the definition of linear transformations\nExplore matrix representations of linear transformations\nVisualize geometric effects of linear transformations\nWork with kernel and image of transformations\n\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom matplotlib.patches import Polygon\nimport matplotlib.animation as animation\n\nplt.rcParams['figure.figsize'] = (12, 8)\n\n\n\n\n\nA function \\(T: V \\to W\\) between vector spaces is called a linear transformation if:\n\n\\(T(u + v) = T(u) + T(v)\\) for all \\(u, v \\in V\\)\n\\(T(cv) = cT(v)\\) for all \\(c \\in \\mathbb{F}\\) and \\(v \\in V\\)\n\nThese can be combined into: \\(T(au + bv) = aT(u) + bT(v)\\)\n\n\nCode\n# Example: Rotation transformation in R^2\ndef rotation_matrix(theta):\n    \"\"\"Create a 2D rotation matrix for angle theta (in radians)\"\"\"\n    return np.array([[np.cos(theta), -np.sin(theta)],\n                     [np.sin(theta), np.cos(theta)]])\n\n# 45-degree rotation\ntheta = np.pi / 4\nR = rotation_matrix(theta)\nprint(f\"Rotation matrix (45°):\\n{R}\")\n\n# Apply to some vectors\nvectors = np.array([[1, 0], [0, 1], [1, 1], [-1, 1]]).T\nrotated_vectors = R @ vectors\n\nprint(f\"\\nOriginal vectors:\\n{vectors}\")\nprint(f\"\\nRotated vectors:\\n{rotated_vectors}\")\n\n\n\n\n\n\n\nCode\n# Visualize the effect of linear transformation on a unit square\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))\n\n# Original unit square\nsquare = np.array([[0, 1, 1, 0, 0],\n                   [0, 0, 1, 1, 0]])\n\n# Apply transformation\nA = np.array([[2, 1],\n              [0, 1]])\ntransformed_square = A @ square\n\n# Plot original\nax1.plot(square[0], square[1], 'b-', linewidth=2, label='Unit Square')\nax1.fill(square[0], square[1], alpha=0.3, color='blue')\nax1.grid(True, alpha=0.3)\nax1.set_aspect('equal')\nax1.set_title('Original')\nax1.set_xlim(-0.5, 2.5)\nax1.set_ylim(-0.5, 2.5)\n\n# Plot transformed\nax2.plot(transformed_square[0], transformed_square[1], 'r-', linewidth=2, label='Transformed')\nax2.fill(transformed_square[0], transformed_square[1], alpha=0.3, color='red')\nax2.grid(True, alpha=0.3)\nax2.set_aspect('equal')\nax2.set_title('After Transformation')\nax2.set_xlim(-0.5, 3.5)\nax2.set_ylim(-0.5, 2.5)\n\nplt.tight_layout()\nplt.show()\n\nprint(f\"Transformation matrix:\\n{A}\")\nprint(f\"Determinant (area scaling factor): {np.linalg.det(A)}\")\n\n\n\n\n\nFor a linear transformation \\(T: V \\to W\\): - Kernel (Null Space): \\(\\ker(T) = \\{v \\in V : T(v) = 0\\}\\) - Image (Range): \\(\\text{im}(T) = \\{T(v) : v \\in V\\}\\)\n\n\nCode\n# Example: Find kernel and image of a transformation\nA = np.array([[1, 2, 3],\n              [2, 4, 6],\n              [1, 1, 2]])\n\nprint(f\"Matrix A:\\n{A}\")\nprint(f\"\\nRank of A: {np.linalg.matrix_rank(A)}\")\n\n# Find null space (kernel)\nU, s, Vt = np.linalg.svd(A)\nnull_space = Vt[np.abs(s) &lt; 1e-10]\nprint(f\"\\nNull space basis:\\n{null_space}\")\n\n# Verify it's in the kernel\nif len(null_space) &gt; 0:\n    test_vector = null_space[0]\n    result = A @ test_vector\n    print(f\"\\nA * null_vector = {result}\")\n    print(f\"Is approximately zero: {np.allclose(result, 0)}\")\n\n\n\n\n\n\nVerify that the transformation \\(T(x, y) = (2x + y, x - y)\\) is linear.\nFind the matrix representation of the transformation that reflects vectors across the line \\(y = x\\).\nFor the matrix \\(\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}\\), find the kernel and image.\nShow that composition of linear transformations is linear.",
     "crumbs": [
       "Mathematics",
       "Linear Algebra",
-      "Linear Algebra Exercises"
+      "Interactive Notebooks",
+      "Linear Transformations"
     ]
   },
   {
-    "objectID": "mathematics/linear-algebra/exercises.html#chapter-1-vector-spaces",
-    "href": "mathematics/linear-algebra/exercises.html#chapter-1-vector-spaces",
-    "title": "Linear Algebra Exercises",
+    "objectID": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#learning-objectives",
+    "href": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#learning-objectives",
+    "title": "Linear Transformations",
     "section": "",
-    "text": "Prove that \\(-(-v) = v\\) for every \\(v\\) in a vector space \\(V\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nLet \\(v \\in V\\). We know that \\(-v\\) is the additive inverse of \\(v\\), so \\(v + (-v) = 0\\).\nSince \\(-v \\in V\\), it has an additive inverse, which we denote as \\(-(-v)\\). By definition: \\((-v) + (-(-v)) = 0\\).\nNow, consider: \\[v + (-v) = 0 = (-v) + (-(-v))\\]\nAdding \\(-(-v)\\) to both sides: \\[-(-v) + v + (-v) = -(-v) + (-v) + (-(-v))\\] \\[-(-v) + 0 = -(-v) + 0\\] \\[-(-v) = -(-v)\\]\nThis is always true. Let’s try a different approach.\nFrom \\(v + (-v) = 0\\), we can add \\(-(-v)\\) to both sides: \\[-(-v) + v + (-v) = -(-v) + 0\\] \\[(-(-v) + v) + (-v) = -(-v)\\]\nSince \\((-v) + (-(-v)) = 0\\), we have \\(-(-v) = -(-v)\\).\nActually, let’s use uniqueness of additive inverse: Since \\(v + (-v) = 0\\) and \\((-v) + (-(-v)) = 0\\), and the additive inverse is unique, we must have \\(v = -(-v)\\).\n\n\n\n\n\n\nSuppose \\(v_1, v_2, v_3, v_4\\) spans \\(V\\). Prove that the list \\(v_1 - v_2, v_2 - v_3, v_3 - v_4, v_4\\) also spans \\(V\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nWe need to show that every vector in \\(V\\) can be written as a linear combination of \\(v_1 - v_2, v_2 - v_3, v_3 - v_4, v_4\\).\nSince \\(v_1, v_2, v_3, v_4\\) spans \\(V\\), any \\(v \\in V\\) can be written as: \\[v = a_1v_1 + a_2v_2 + a_3v_3 + a_4v_4\\]\nWe need to express \\(v_1, v_2, v_3\\) in terms of our new list: - \\(v_4 = v_4\\) - \\(v_3 = (v_3 - v_4) + v_4\\) - \\(v_2 = (v_2 - v_3) + v_3 = (v_2 - v_3) + (v_3 - v_4) + v_4\\) - \\(v_1 = (v_1 - v_2) + v_2 = (v_1 - v_2) + (v_2 - v_3) + (v_3 - v_4) + v_4\\)\nTherefore: \\[v = a_1[(v_1 - v_2) + (v_2 - v_3) + (v_3 - v_4) + v_4] + a_2[(v_2 - v_3) + (v_3 - v_4) + v_4] + a_3[(v_3 - v_4) + v_4] + a_4v_4\\]\nCollecting terms: \\[v = a_1(v_1 - v_2) + (a_1 + a_2)(v_2 - v_3) + (a_1 + a_2 + a_3)(v_3 - v_4) + (a_1 + a_2 + a_3 + a_4)v_4\\]\nThis shows that \\(v\\) is in the span of \\(v_1 - v_2, v_2 - v_3, v_3 - v_4, v_4\\).",
+    "text": "Understand the definition of linear transformations\nExplore matrix representations of linear transformations\nVisualize geometric effects of linear transformations\nWork with kernel and image of transformations\n\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom matplotlib.patches import Polygon\nimport matplotlib.animation as animation\n\nplt.rcParams['figure.figsize'] = (12, 8)",
     "crumbs": [
       "Mathematics",
       "Linear Algebra",
-      "Linear Algebra Exercises"
+      "Interactive Notebooks",
+      "Linear Transformations"
     ]
   },
   {
-    "objectID": "mathematics/linear-algebra/exercises.html#chapter-2-finite-dimensional-vector-spaces",
-    "href": "mathematics/linear-algebra/exercises.html#chapter-2-finite-dimensional-vector-spaces",
-    "title": "Linear Algebra Exercises",
+    "objectID": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#definition",
+    "href": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#definition",
+    "title": "Linear Transformations",
     "section": "",
-    "text": "Find a basis for the vector space of polynomials in \\(\\mathcal{P}_3(\\mathbb{R})\\) that have the property that \\(p(2) = 0\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nWe need polynomials \\(p(x) = a_0 + a_1x + a_2x^2 + a_3x^3\\) such that \\(p(2) = 0\\).\nThis gives us: \\(a_0 + 2a_1 + 4a_2 + 8a_3 = 0\\), so \\(a_0 = -2a_1 - 4a_2 - 8a_3\\).\nTherefore: \\(p(x) = (-2a_1 - 4a_2 - 8a_3) + a_1x + a_2x^2 + a_3x^3\\) \\(= a_1(x - 2) + a_2(x^2 - 4) + a_3(x^3 - 8)\\)\nA basis is: \\(\\{x - 2, x^2 - 4, x^3 - 8\\}\\)\nWe can verify: - These polynomials are linearly independent (check by setting linear combination to zero) - They span the space (any polynomial with \\(p(2) = 0\\) can be written in this form) - The dimension is 3 (which makes sense: we have one constraint on a 4-dimensional space)\n\n\n\n\n\n\nProve that if \\(U_1, U_2, W\\) are subspaces of \\(V\\) such that \\(V = U_1 \\oplus W = U_2 \\oplus W\\), then \\(U_1 = U_2\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nWe need to show \\(U_1 \\subseteq U_2\\) and \\(U_2 \\subseteq U_1\\).\nLet \\(u_1 \\in U_1\\). Since \\(V = U_2 \\oplus W\\), we can write: \\[u_1 = u_2 + w\\] for unique \\(u_2 \\in U_2\\) and \\(w \\in W\\).\nSince \\(V = U_1 \\oplus W\\), we also have: \\[u_1 = u_1 + 0\\] where \\(u_1 \\in U_1\\) and \\(0 \\in W\\).\nBy uniqueness of the direct sum decomposition \\(V = U_1 \\oplus W\\): - The \\(U_1\\) component is \\(u_1\\) - The \\(W\\) component is \\(0\\)\nBut we also wrote \\(u_1 = u_2 + w\\) where \\(u_2 \\in U_2\\) and \\(w \\in W\\). Since \\(u_1 \\in U_1\\) and \\(V = U_1 \\oplus W\\), we must have \\(w = 0\\) and the \\(U_1\\) component equals \\(u_2\\).\nTherefore \\(u_1 = u_2 \\in U_2\\), so \\(U_1 \\subseteq U_2\\).\nBy symmetry, \\(U_2 \\subseteq U_1\\), so \\(U_1 = U_2\\).",
+    "text": "A function \\(T: V \\to W\\) between vector spaces is called a linear transformation if:\n\n\\(T(u + v) = T(u) + T(v)\\) for all \\(u, v \\in V\\)\n\\(T(cv) = cT(v)\\) for all \\(c \\in \\mathbb{F}\\) and \\(v \\in V\\)\n\nThese can be combined into: \\(T(au + bv) = aT(u) + bT(v)\\)\n\n\nCode\n# Example: Rotation transformation in R^2\ndef rotation_matrix(theta):\n    \"\"\"Create a 2D rotation matrix for angle theta (in radians)\"\"\"\n    return np.array([[np.cos(theta), -np.sin(theta)],\n                     [np.sin(theta), np.cos(theta)]])\n\n# 45-degree rotation\ntheta = np.pi / 4\nR = rotation_matrix(theta)\nprint(f\"Rotation matrix (45°):\\n{R}\")\n\n# Apply to some vectors\nvectors = np.array([[1, 0], [0, 1], [1, 1], [-1, 1]]).T\nrotated_vectors = R @ vectors\n\nprint(f\"\\nOriginal vectors:\\n{vectors}\")\nprint(f\"\\nRotated vectors:\\n{rotated_vectors}\")",
     "crumbs": [
       "Mathematics",
       "Linear Algebra",
-      "Linear Algebra Exercises"
+      "Interactive Notebooks",
+      "Linear Transformations"
     ]
   },
   {
-    "objectID": "mathematics/linear-algebra/exercises.html#chapter-3-linear-maps",
-    "href": "mathematics/linear-algebra/exercises.html#chapter-3-linear-maps",
-    "title": "Linear Algebra Exercises",
+    "objectID": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#visualization-of-linear-transformations",
+    "href": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#visualization-of-linear-transformations",
+    "title": "Linear Transformations",
     "section": "",
-    "text": "Give an example of a linear map \\(T: \\mathbb{R}^4 \\to \\mathbb{R}^2\\) such that \\(\\dim(\\text{null } T) = 2\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nBy the fundamental theorem of linear maps: \\[\\dim \\mathbb{R}^4 = \\dim(\\text{null } T) + \\dim(\\text{range } T)\\] \\[4 = 2 + \\dim(\\text{range } T)\\]\nSo \\(\\dim(\\text{range } T) = 2\\).\nDefine \\(T: \\mathbb{R}^4 \\to \\mathbb{R}^2\\) by: \\[T(x_1, x_2, x_3, x_4) = (x_1 + x_2, x_3 + x_4)\\]\nThen: - \\(\\text{null } T = \\{(x_1, x_2, x_3, x_4) : x_1 + x_2 = 0 \\text{ and } x_3 + x_4 = 0\\}\\) - \\(= \\{(a, -a, b, -b) : a, b \\in \\mathbb{R}\\}\\) - \\(= \\text{span}((1, -1, 0, 0), (0, 0, 1, -1))\\)\nSo \\(\\dim(\\text{null } T) = 2\\) as required.\n\n\n\n\nNote: This represents a sample of exercises. A complete version would include many more problems from each chapter, with varying difficulty levels and comprehensive solutions.",
+    "text": "Code\n# Visualize the effect of linear transformation on a unit square\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))\n\n# Original unit square\nsquare = np.array([[0, 1, 1, 0, 0],\n                   [0, 0, 1, 1, 0]])\n\n# Apply transformation\nA = np.array([[2, 1],\n              [0, 1]])\ntransformed_square = A @ square\n\n# Plot original\nax1.plot(square[0], square[1], 'b-', linewidth=2, label='Unit Square')\nax1.fill(square[0], square[1], alpha=0.3, color='blue')\nax1.grid(True, alpha=0.3)\nax1.set_aspect('equal')\nax1.set_title('Original')\nax1.set_xlim(-0.5, 2.5)\nax1.set_ylim(-0.5, 2.5)\n\n# Plot transformed\nax2.plot(transformed_square[0], transformed_square[1], 'r-', linewidth=2, label='Transformed')\nax2.fill(transformed_square[0], transformed_square[1], alpha=0.3, color='red')\nax2.grid(True, alpha=0.3)\nax2.set_aspect('equal')\nax2.set_title('After Transformation')\nax2.set_xlim(-0.5, 3.5)\nax2.set_ylim(-0.5, 2.5)\n\nplt.tight_layout()\nplt.show()\n\nprint(f\"Transformation matrix:\\n{A}\")\nprint(f\"Determinant (area scaling factor): {np.linalg.det(A)}\")",
     "crumbs": [
       "Mathematics",
       "Linear Algebra",
-      "Linear Algebra Exercises"
+      "Interactive Notebooks",
+      "Linear Transformations"
     ]
   },
   {
-    "objectID": "mathematics/linear-algebra/exercises.html#comments-discussion",
-    "href": "mathematics/linear-algebra/exercises.html#comments-discussion",
-    "title": "Linear Algebra Exercises",
+    "objectID": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#kernel-and-image",
+    "href": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#kernel-and-image",
+    "title": "Linear Transformations",
     "section": "",
-    "text": "NoteCommunity Discussion\n\n\n\nThe comment section will appear here once the site is deployed to GitHub Pages with Giscus configured. Readers will be able to:\n\nAsk questions about the exercises\nShare alternative solutions\nDiscuss mathematical concepts\nProvide feedback and suggestions\n\nTo enable comments after GitHub deployment: 1. Install the Giscus GitHub App 2. Enable Discussions in your repository 3. Configure the repository details in _quarto.yml",
+    "text": "For a linear transformation \\(T: V \\to W\\): - Kernel (Null Space): \\(\\ker(T) = \\{v \\in V : T(v) = 0\\}\\) - Image (Range): \\(\\text{im}(T) = \\{T(v) : v \\in V\\}\\)\n\n\nCode\n# Example: Find kernel and image of a transformation\nA = np.array([[1, 2, 3],\n              [2, 4, 6],\n              [1, 1, 2]])\n\nprint(f\"Matrix A:\\n{A}\")\nprint(f\"\\nRank of A: {np.linalg.matrix_rank(A)}\")\n\n# Find null space (kernel)\nU, s, Vt = np.linalg.svd(A)\nnull_space = Vt[np.abs(s) &lt; 1e-10]\nprint(f\"\\nNull space basis:\\n{null_space}\")\n\n# Verify it's in the kernel\nif len(null_space) &gt; 0:\n    test_vector = null_space[0]\n    result = A @ test_vector\n    print(f\"\\nA * null_vector = {result}\")\n    print(f\"Is approximately zero: {np.allclose(result, 0)}\")",
     "crumbs": [
       "Mathematics",
       "Linear Algebra",
-      "Linear Algebra Exercises"
+      "Interactive Notebooks",
+      "Linear Transformations"
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome to Knowledge Hub",
+    "objectID": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#exercises",
+    "href": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#exercises",
+    "title": "Linear Transformations",
     "section": "",
-    "text": "This is a comprehensive knowledge repository designed to be your go-to resource for various academic subjects. Our goal is to provide well-organized, accessible content that serves both as a learning tool and reference material.\n\n\n\n\nOur mathematics section covers fundamental and advanced topics through carefully curated content based on renowned textbooks. Each section includes:\n\nComprehensive Notes: Detailed explanations and key concepts\nPractice Exercises: Problems to reinforce understanding\nInteractive Comments: Community discussions and clarifications\n\n\n\n\n\nLinear Algebra: Based on “Linear Algebra Done Right” by Sheldon Axler\n\n\n\n\n\nUse the navigation bar above to explore different subjects, or browse through the sidebar for specific topics within each subject area.\n\n\n\nThis knowledge hub is designed to grow over time. Each page includes a comment section where you can: - Ask questions about the material - Share insights and alternative explanations - Discuss problem-solving approaches - Suggest improvements or corrections\n\nHappy learning!"
-  },
-  {
-    "objectID": "index.html#what-youll-find-here",
-    "href": "index.html#what-youll-find-here",
-    "title": "Welcome to Knowledge Hub",
-    "section": "",
-    "text": "Our mathematics section covers fundamental and advanced topics through carefully curated content based on renowned textbooks. Each section includes:\n\nComprehensive Notes: Detailed explanations and key concepts\nPractice Exercises: Problems to reinforce understanding\nInteractive Comments: Community discussions and clarifications\n\n\n\n\n\nLinear Algebra: Based on “Linear Algebra Done Right” by Sheldon Axler"
-  },
-  {
-    "objectID": "index.html#how-to-navigate",
-    "href": "index.html#how-to-navigate",
-    "title": "Welcome to Knowledge Hub",
-    "section": "",
-    "text": "Use the navigation bar above to explore different subjects, or browse through the sidebar for specific topics within each subject area."
-  },
-  {
-    "objectID": "index.html#contributing",
-    "href": "index.html#contributing",
-    "title": "Welcome to Knowledge Hub",
-    "section": "",
-    "text": "This knowledge hub is designed to grow over time. Each page includes a comment section where you can: - Ask questions about the material - Share insights and alternative explanations - Discuss problem-solving approaches - Suggest improvements or corrections\n\nHappy learning!"
-  },
-  {
-    "objectID": "demo-comments.html",
-    "href": "demo-comments.html",
-    "title": "Comments Demo",
-    "section": "",
-    "text": "This page demonstrates what the comment section will look like when properly configured with Giscus.\n\n\nHere’s some sample mathematical content:\nTheorem: For any vector space \\(V\\) over field \\(\\mathbb{F}\\), the zero vector is unique.\nProof: Suppose there are two zero vectors \\(0_1\\) and \\(0_2\\). Then: \\[0_1 = 0_1 + 0_2 = 0_2\\]\nThe first equality uses the fact that \\(0_2\\) is a zero vector, and the second uses the fact that \\(0_1\\) is a zero vector.\n\n\n\nBelow you’ll see the actual Giscus comment system in action (using the Giscus repository as a demo):"
-  },
-  {
-    "objectID": "demo-comments.html#sample-content",
-    "href": "demo-comments.html#sample-content",
-    "title": "Comments Demo",
-    "section": "",
-    "text": "Here’s some sample mathematical content:\nTheorem: For any vector space \\(V\\) over field \\(\\mathbb{F}\\), the zero vector is unique.\nProof: Suppose there are two zero vectors \\(0_1\\) and \\(0_2\\). Then: \\[0_1 = 0_1 + 0_2 = 0_2\\]\nThe first equality uses the fact that \\(0_2\\) is a zero vector, and the second uses the fact that \\(0_1\\) is a zero vector."
-  },
-  {
-    "objectID": "demo-comments.html#discussion",
-    "href": "demo-comments.html#discussion",
-    "title": "Comments Demo",
-    "section": "",
-    "text": "Below you’ll see the actual Giscus comment system in action (using the Giscus repository as a demo):"
-  },
-  {
-    "objectID": "mathematics/index.html",
-    "href": "mathematics/index.html",
-    "title": "Mathematics",
-    "section": "",
-    "text": "Welcome to the Mathematics section of our knowledge hub. Here you’ll find comprehensive coverage of various mathematical topics, organized by textbook and subject area.\n\n\n\n\nBased on: “Linear Algebra Done Right” by Sheldon Axler\nThis section provides a rigorous introduction to linear algebra, focusing on: - Vector spaces and subspaces - Linear independence and bases - Linear maps and matrices - Eigenvalues and eigenvectors - Inner product spaces - Operators on inner product spaces\nExplore Linear Algebra →\n\n\n\n\nWe’re continuously expanding our mathematics coverage. Future sections will include: - Real Analysis - Abstract Algebra - Differential Equations - Probability Theory - Number Theory\n\n\n\nEach mathematical topic is organized into:\n\nOverview Pages: Introduction and roadmap for the topic\nNotes: Detailed explanations of concepts, theorems, and proofs\nExercises: Practice problems with varying difficulty levels\nComments: Community discussion for each page\n\n\n\n\n\nStart with the overview to understand the big picture\nWork through notes systematically\nAttempt exercises to test your understanding\nUse the comment sections to ask questions or share insights\n\n\nMathematics is not about numbers, equations, computations, or algorithms: it is about understanding. - William Paul Thurston",
+    "text": "Verify that the transformation \\(T(x, y) = (2x + y, x - y)\\) is linear.\nFind the matrix representation of the transformation that reflects vectors across the line \\(y = x\\).\nFor the matrix \\(\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}\\), find the kernel and image.\nShow that composition of linear transformations is linear.",
     "crumbs": [
-      "Mathematics"
-    ]
-  },
-  {
-    "objectID": "mathematics/index.html#available-sections",
-    "href": "mathematics/index.html#available-sections",
-    "title": "Mathematics",
-    "section": "",
-    "text": "Based on: “Linear Algebra Done Right” by Sheldon Axler\nThis section provides a rigorous introduction to linear algebra, focusing on: - Vector spaces and subspaces - Linear independence and bases - Linear maps and matrices - Eigenvalues and eigenvectors - Inner product spaces - Operators on inner product spaces\nExplore Linear Algebra →",
-    "crumbs": [
-      "Mathematics"
-    ]
-  },
-  {
-    "objectID": "mathematics/index.html#coming-soon",
-    "href": "mathematics/index.html#coming-soon",
-    "title": "Mathematics",
-    "section": "",
-    "text": "We’re continuously expanding our mathematics coverage. Future sections will include: - Real Analysis - Abstract Algebra - Differential Equations - Probability Theory - Number Theory",
-    "crumbs": [
-      "Mathematics"
-    ]
-  },
-  {
-    "objectID": "mathematics/index.html#how-to-use-this-section",
-    "href": "mathematics/index.html#how-to-use-this-section",
-    "title": "Mathematics",
-    "section": "",
-    "text": "Each mathematical topic is organized into:\n\nOverview Pages: Introduction and roadmap for the topic\nNotes: Detailed explanations of concepts, theorems, and proofs\nExercises: Practice problems with varying difficulty levels\nComments: Community discussion for each page",
-    "crumbs": [
-      "Mathematics"
-    ]
-  },
-  {
-    "objectID": "mathematics/index.html#study-tips",
-    "href": "mathematics/index.html#study-tips",
-    "title": "Mathematics",
-    "section": "",
-    "text": "Start with the overview to understand the big picture\nWork through notes systematically\nAttempt exercises to test your understanding\nUse the comment sections to ask questions or share insights\n\n\nMathematics is not about numbers, equations, computations, or algorithms: it is about understanding. - William Paul Thurston",
-    "crumbs": [
-      "Mathematics"
+      "Mathematics",
+      "Linear Algebra",
+      "Interactive Notebooks",
+      "Linear Transformations"
     ]
   },
   {
@@ -375,105 +210,318 @@
     ]
   },
   {
-    "objectID": "mathematics/linear-algebra/notebooks/02-linear-transformations.html",
-    "href": "mathematics/linear-algebra/notebooks/02-linear-transformations.html",
-    "title": "Linear Transformations",
+    "objectID": "mathematics/index.html",
+    "href": "mathematics/index.html",
+    "title": "Mathematics",
     "section": "",
-    "text": "This notebook explores linear transformations and their properties."
-  },
-  {
-    "objectID": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#learning-objectives",
-    "href": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#learning-objectives",
-    "title": "Linear Transformations",
-    "section": "1 Learning Objectives",
-    "text": "1 Learning Objectives\n\nUnderstand the definition of linear transformations\nExplore matrix representations of linear transformations\nVisualize geometric effects of linear transformations\nWork with kernel and image of transformations\n\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom matplotlib.patches import Polygon\nimport matplotlib.animation as animation\n\nplt.rcParams['figure.figsize'] = (12, 8)"
-  },
-  {
-    "objectID": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#definition",
-    "href": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#definition",
-    "title": "Linear Transformations",
-    "section": "2 Definition",
-    "text": "2 Definition\nA function \\(T: V \\to W\\) between vector spaces is called a linear transformation if:\n\n\\(T(u + v) = T(u) + T(v)\\) for all \\(u, v \\in V\\)\n\\(T(cv) = cT(v)\\) for all \\(c \\in \\mathbb{F}\\) and \\(v \\in V\\)\n\nThese can be combined into: \\(T(au + bv) = aT(u) + bT(v)\\)\n\n\nCode\n# Example: Rotation transformation in R^2\ndef rotation_matrix(theta):\n    \"\"\"Create a 2D rotation matrix for angle theta (in radians)\"\"\"\n    return np.array([[np.cos(theta), -np.sin(theta)],\n                     [np.sin(theta), np.cos(theta)]])\n\n# 45-degree rotation\ntheta = np.pi / 4\nR = rotation_matrix(theta)\nprint(f\"Rotation matrix (45°):\\n{R}\")\n\n# Apply to some vectors\nvectors = np.array([[1, 0], [0, 1], [1, 1], [-1, 1]]).T\nrotated_vectors = R @ vectors\n\nprint(f\"\\nOriginal vectors:\\n{vectors}\")\nprint(f\"\\nRotated vectors:\\n{rotated_vectors}\")"
-  },
-  {
-    "objectID": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#visualization-of-linear-transformations",
-    "href": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#visualization-of-linear-transformations",
-    "title": "Linear Transformations",
-    "section": "3 Visualization of Linear Transformations",
-    "text": "3 Visualization of Linear Transformations\n\n\nCode\n# Visualize the effect of linear transformation on a unit square\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))\n\n# Original unit square\nsquare = np.array([[0, 1, 1, 0, 0],\n                   [0, 0, 1, 1, 0]])\n\n# Apply transformation\nA = np.array([[2, 1],\n              [0, 1]])\ntransformed_square = A @ square\n\n# Plot original\nax1.plot(square[0], square[1], 'b-', linewidth=2, label='Unit Square')\nax1.fill(square[0], square[1], alpha=0.3, color='blue')\nax1.grid(True, alpha=0.3)\nax1.set_aspect('equal')\nax1.set_title('Original')\nax1.set_xlim(-0.5, 2.5)\nax1.set_ylim(-0.5, 2.5)\n\n# Plot transformed\nax2.plot(transformed_square[0], transformed_square[1], 'r-', linewidth=2, label='Transformed')\nax2.fill(transformed_square[0], transformed_square[1], alpha=0.3, color='red')\nax2.grid(True, alpha=0.3)\nax2.set_aspect('equal')\nax2.set_title('After Transformation')\nax2.set_xlim(-0.5, 3.5)\nax2.set_ylim(-0.5, 2.5)\n\nplt.tight_layout()\nplt.show()\n\nprint(f\"Transformation matrix:\\n{A}\")\nprint(f\"Determinant (area scaling factor): {np.linalg.det(A)}\")"
-  },
-  {
-    "objectID": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#kernel-and-image",
-    "href": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#kernel-and-image",
-    "title": "Linear Transformations",
-    "section": "4 Kernel and Image",
-    "text": "4 Kernel and Image\nFor a linear transformation \\(T: V \\to W\\): - Kernel (Null Space): \\(\\ker(T) = \\{v \\in V : T(v) = 0\\}\\) - Image (Range): \\(\\text{im}(T) = \\{T(v) : v \\in V\\}\\)\n\n\nCode\n# Example: Find kernel and image of a transformation\nA = np.array([[1, 2, 3],\n              [2, 4, 6],\n              [1, 1, 2]])\n\nprint(f\"Matrix A:\\n{A}\")\nprint(f\"\\nRank of A: {np.linalg.matrix_rank(A)}\")\n\n# Find null space (kernel)\nU, s, Vt = np.linalg.svd(A)\nnull_space = Vt[np.abs(s) &lt; 1e-10]\nprint(f\"\\nNull space basis:\\n{null_space}\")\n\n# Verify it's in the kernel\nif len(null_space) &gt; 0:\n    test_vector = null_space[0]\n    result = A @ test_vector\n    print(f\"\\nA * null_vector = {result}\")\n    print(f\"Is approximately zero: {np.allclose(result, 0)}\")"
-  },
-  {
-    "objectID": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#exercises",
-    "href": "mathematics/linear-algebra/notebooks/02-linear-transformations.html#exercises",
-    "title": "Linear Transformations",
-    "section": "5 Exercises",
-    "text": "5 Exercises\n\nVerify that the transformation \\(T(x, y) = (2x + y, x - y)\\) is linear.\nFind the matrix representation of the transformation that reflects vectors across the line \\(y = x\\).\nFor the matrix \\(\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}\\), find the kernel and image.\nShow that composition of linear transformations is linear."
-  },
-  {
-    "objectID": "mathematics/linear-algebra/notebooks.html",
-    "href": "mathematics/linear-algebra/notebooks.html",
-    "title": "Linear Algebra Jupyter Notebooks",
-    "section": "",
-    "text": "This section contains interactive Jupyter notebooks for learning linear algebra concepts through computational examples and visualizations.\n\n\n\n\nIntroduction to vector spaces, operations, and axioms. Learn about: - Definition and properties of vector spaces - Vector operations and visualizations - Verification of vector space axioms - Examples in R² and R³\n\n\n\nLinear transformations, matrices, and geometric interpretations. Topics include: - Definition and properties of linear transformations - Matrix representations - Geometric visualization of transformations - Kernel and image of transformations\n\n\n\nEigenvalues, eigenvectors, and applications like PCA. Covers: - Definition and computation of eigenvalues/eigenvectors - Geometric interpretation - Principal Component Analysis (PCA) - Real-world applications\n\n\n\n\n\n\n\nPython 3.7+\nJupyter Notebook or JupyterLab\nRequired packages: numpy, matplotlib, scikit-learn\n\n\n\n\npip install jupyter numpy matplotlib scikit-learn\n\n\n\n\nDownload the notebook files from the links above\nOpen your terminal/command prompt\nNavigate to the folder containing the notebooks\nRun: jupyter notebook\nOpen any notebook in your browser\n\n\n\n\n\n\nInteractive Visualizations: Each notebook includes plots and animations to illustrate concepts\nComputational Examples: Hands-on coding examples using NumPy\nExercises: Practice problems to reinforce learning\nReal-world Applications: Examples like PCA for data analysis\n\n\n\n\n\nStart with Vector Spaces to understand the mathematical foundation\nMove to Linear Transformations to see how matrices work geometrically\nExplore Eigenvalues and Eigenvectors for advanced applications and data analysis\n\nThese notebooks complement the theoretical material in the Notes and provide practical experience with linear algebra computations.",
+    "text": "Welcome to the Mathematics section of our knowledge hub. Here you’ll find comprehensive coverage of various mathematical topics, organized by textbook and subject area.\n\n\n\n\nBased on: “Linear Algebra Done Right” by Sheldon Axler\nThis section provides a rigorous introduction to linear algebra, focusing on: - Vector spaces and subspaces - Linear independence and bases - Linear maps and matrices - Eigenvalues and eigenvectors - Inner product spaces - Operators on inner product spaces\nExplore Linear Algebra →\n\n\n\n\nWe’re continuously expanding our mathematics coverage. Future sections will include: - Real Analysis - Abstract Algebra - Differential Equations - Probability Theory - Number Theory\n\n\n\nEach mathematical topic is organized into:\n\nOverview Pages: Introduction and roadmap for the topic\nNotes: Detailed explanations of concepts, theorems, and proofs\nExercises: Practice problems with varying difficulty levels\nComments: Community discussion for each page\n\n\n\n\n\nStart with the overview to understand the big picture\nWork through notes systematically\nAttempt exercises to test your understanding\nUse the comment sections to ask questions or share insights\n\n\nMathematics is not about numbers, equations, computations, or algorithms: it is about understanding. - William Paul Thurston",
     "crumbs": [
-      "Mathematics",
-      "Linear Algebra",
-      "Linear Algebra Jupyter Notebooks"
+      "Mathematics"
     ]
   },
   {
-    "objectID": "mathematics/linear-algebra/notebooks.html#available-notebooks",
-    "href": "mathematics/linear-algebra/notebooks.html#available-notebooks",
-    "title": "Linear Algebra Jupyter Notebooks",
+    "objectID": "mathematics/index.html#available-sections",
+    "href": "mathematics/index.html#available-sections",
+    "title": "Mathematics",
     "section": "",
-    "text": "Introduction to vector spaces, operations, and axioms. Learn about: - Definition and properties of vector spaces - Vector operations and visualizations - Verification of vector space axioms - Examples in R² and R³\n\n\n\nLinear transformations, matrices, and geometric interpretations. Topics include: - Definition and properties of linear transformations - Matrix representations - Geometric visualization of transformations - Kernel and image of transformations\n\n\n\nEigenvalues, eigenvectors, and applications like PCA. Covers: - Definition and computation of eigenvalues/eigenvectors - Geometric interpretation - Principal Component Analysis (PCA) - Real-world applications",
+    "text": "Based on: “Linear Algebra Done Right” by Sheldon Axler\nThis section provides a rigorous introduction to linear algebra, focusing on: - Vector spaces and subspaces - Linear independence and bases - Linear maps and matrices - Eigenvalues and eigenvectors - Inner product spaces - Operators on inner product spaces\nExplore Linear Algebra →",
     "crumbs": [
-      "Mathematics",
-      "Linear Algebra",
-      "Linear Algebra Jupyter Notebooks"
+      "Mathematics"
     ]
   },
   {
-    "objectID": "mathematics/linear-algebra/notebooks.html#getting-started",
-    "href": "mathematics/linear-algebra/notebooks.html#getting-started",
-    "title": "Linear Algebra Jupyter Notebooks",
+    "objectID": "mathematics/index.html#coming-soon",
+    "href": "mathematics/index.html#coming-soon",
+    "title": "Mathematics",
     "section": "",
-    "text": "Python 3.7+\nJupyter Notebook or JupyterLab\nRequired packages: numpy, matplotlib, scikit-learn\n\n\n\n\npip install jupyter numpy matplotlib scikit-learn\n\n\n\n\nDownload the notebook files from the links above\nOpen your terminal/command prompt\nNavigate to the folder containing the notebooks\nRun: jupyter notebook\nOpen any notebook in your browser",
+    "text": "We’re continuously expanding our mathematics coverage. Future sections will include: - Real Analysis - Abstract Algebra - Differential Equations - Probability Theory - Number Theory",
     "crumbs": [
-      "Mathematics",
-      "Linear Algebra",
-      "Linear Algebra Jupyter Notebooks"
+      "Mathematics"
     ]
   },
   {
-    "objectID": "mathematics/linear-algebra/notebooks.html#features",
-    "href": "mathematics/linear-algebra/notebooks.html#features",
-    "title": "Linear Algebra Jupyter Notebooks",
+    "objectID": "mathematics/index.html#how-to-use-this-section",
+    "href": "mathematics/index.html#how-to-use-this-section",
+    "title": "Mathematics",
     "section": "",
-    "text": "Interactive Visualizations: Each notebook includes plots and animations to illustrate concepts\nComputational Examples: Hands-on coding examples using NumPy\nExercises: Practice problems to reinforce learning\nReal-world Applications: Examples like PCA for data analysis",
+    "text": "Each mathematical topic is organized into:\n\nOverview Pages: Introduction and roadmap for the topic\nNotes: Detailed explanations of concepts, theorems, and proofs\nExercises: Practice problems with varying difficulty levels\nComments: Community discussion for each page",
     "crumbs": [
-      "Mathematics",
-      "Linear Algebra",
-      "Linear Algebra Jupyter Notebooks"
+      "Mathematics"
     ]
   },
   {
-    "objectID": "mathematics/linear-algebra/notebooks.html#learning-path",
-    "href": "mathematics/linear-algebra/notebooks.html#learning-path",
-    "title": "Linear Algebra Jupyter Notebooks",
+    "objectID": "mathematics/index.html#study-tips",
+    "href": "mathematics/index.html#study-tips",
+    "title": "Mathematics",
     "section": "",
-    "text": "Start with Vector Spaces to understand the mathematical foundation\nMove to Linear Transformations to see how matrices work geometrically\nExplore Eigenvalues and Eigenvectors for advanced applications and data analysis\n\nThese notebooks complement the theoretical material in the Notes and provide practical experience with linear algebra computations.",
+    "text": "Start with the overview to understand the big picture\nWork through notes systematically\nAttempt exercises to test your understanding\nUse the comment sections to ask questions or share insights\n\n\nMathematics is not about numbers, equations, computations, or algorithms: it is about understanding. - William Paul Thurston",
+    "crumbs": [
+      "Mathematics"
+    ]
+  },
+  {
+    "objectID": "demo-comments.html",
+    "href": "demo-comments.html",
+    "title": "Comments Demo",
+    "section": "",
+    "text": "This page demonstrates what the comment section will look like when properly configured with Giscus.\n\n\nHere’s some sample mathematical content:\nTheorem: For any vector space \\(V\\) over field \\(\\mathbb{F}\\), the zero vector is unique.\nProof: Suppose there are two zero vectors \\(0_1\\) and \\(0_2\\). Then: \\[0_1 = 0_1 + 0_2 = 0_2\\]\nThe first equality uses the fact that \\(0_2\\) is a zero vector, and the second uses the fact that \\(0_1\\) is a zero vector.\n\n\n\nBelow you’ll see the actual Giscus comment system in action (using the Giscus repository as a demo):"
+  },
+  {
+    "objectID": "demo-comments.html#sample-content",
+    "href": "demo-comments.html#sample-content",
+    "title": "Comments Demo",
+    "section": "",
+    "text": "Here’s some sample mathematical content:\nTheorem: For any vector space \\(V\\) over field \\(\\mathbb{F}\\), the zero vector is unique.\nProof: Suppose there are two zero vectors \\(0_1\\) and \\(0_2\\). Then: \\[0_1 = 0_1 + 0_2 = 0_2\\]\nThe first equality uses the fact that \\(0_2\\) is a zero vector, and the second uses the fact that \\(0_1\\) is a zero vector."
+  },
+  {
+    "objectID": "demo-comments.html#discussion",
+    "href": "demo-comments.html#discussion",
+    "title": "Comments Demo",
+    "section": "",
+    "text": "Below you’ll see the actual Giscus comment system in action (using the Giscus repository as a demo):"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to Knowledge Hub",
+    "section": "",
+    "text": "This is a comprehensive knowledge repository designed to be your go-to resource for various academic subjects. Our goal is to provide well-organized, accessible content that serves both as a learning tool and reference material.\n\n\n\n\nOur mathematics section covers fundamental and advanced topics through carefully curated content based on renowned textbooks. Each section includes:\n\nComprehensive Notes: Detailed explanations and key concepts\nPractice Exercises: Problems to reinforce understanding\nInteractive Comments: Community discussions and clarifications\n\n\n\n\n\nLinear Algebra: Based on “Linear Algebra Done Right” by Sheldon Axler\n\n\n\n\n\nUse the navigation bar above to explore different subjects, or browse through the sidebar for specific topics within each subject area.\n\n\n\nThis knowledge hub is designed to grow over time. Each page includes a comment section where you can: - Ask questions about the material - Share insights and alternative explanations - Discuss problem-solving approaches - Suggest improvements or corrections\n\nHappy learning!"
+  },
+  {
+    "objectID": "index.html#what-youll-find-here",
+    "href": "index.html#what-youll-find-here",
+    "title": "Welcome to Knowledge Hub",
+    "section": "",
+    "text": "Our mathematics section covers fundamental and advanced topics through carefully curated content based on renowned textbooks. Each section includes:\n\nComprehensive Notes: Detailed explanations and key concepts\nPractice Exercises: Problems to reinforce understanding\nInteractive Comments: Community discussions and clarifications\n\n\n\n\n\nLinear Algebra: Based on “Linear Algebra Done Right” by Sheldon Axler"
+  },
+  {
+    "objectID": "index.html#how-to-navigate",
+    "href": "index.html#how-to-navigate",
+    "title": "Welcome to Knowledge Hub",
+    "section": "",
+    "text": "Use the navigation bar above to explore different subjects, or browse through the sidebar for specific topics within each subject area."
+  },
+  {
+    "objectID": "index.html#contributing",
+    "href": "index.html#contributing",
+    "title": "Welcome to Knowledge Hub",
+    "section": "",
+    "text": "This knowledge hub is designed to grow over time. Each page includes a comment section where you can: - Ask questions about the material - Share insights and alternative explanations - Discuss problem-solving approaches - Suggest improvements or corrections\n\nHappy learning!"
+  },
+  {
+    "objectID": "mathematics/linear-algebra/exercises.html",
+    "href": "mathematics/linear-algebra/exercises.html",
+    "title": "Linear Algebra Exercises",
+    "section": "",
+    "text": "Prove that \\(-(-v) = v\\) for every \\(v\\) in a vector space \\(V\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nLet \\(v \\in V\\). We know that \\(-v\\) is the additive inverse of \\(v\\), so \\(v + (-v) = 0\\).\nSince \\(-v \\in V\\), it has an additive inverse, which we denote as \\(-(-v)\\). By definition: \\((-v) + (-(-v)) = 0\\).\nNow, consider: \\[v + (-v) = 0 = (-v) + (-(-v))\\]\nAdding \\(-(-v)\\) to both sides: \\[-(-v) + v + (-v) = -(-v) + (-v) + (-(-v))\\] \\[-(-v) + 0 = -(-v) + 0\\] \\[-(-v) = -(-v)\\]\nThis is always true. Let’s try a different approach.\nFrom \\(v + (-v) = 0\\), we can add \\(-(-v)\\) to both sides: \\[-(-v) + v + (-v) = -(-v) + 0\\] \\[(-(-v) + v) + (-v) = -(-v)\\]\nSince \\((-v) + (-(-v)) = 0\\), we have \\(-(-v) = -(-v)\\).\nActually, let’s use uniqueness of additive inverse: Since \\(v + (-v) = 0\\) and \\((-v) + (-(-v)) = 0\\), and the additive inverse is unique, we must have \\(v = -(-v)\\).\n\n\n\n\n\n\nSuppose \\(v_1, v_2, v_3, v_4\\) spans \\(V\\). Prove that the list \\(v_1 - v_2, v_2 - v_3, v_3 - v_4, v_4\\) also spans \\(V\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nWe need to show that every vector in \\(V\\) can be written as a linear combination of \\(v_1 - v_2, v_2 - v_3, v_3 - v_4, v_4\\).\nSince \\(v_1, v_2, v_3, v_4\\) spans \\(V\\), any \\(v \\in V\\) can be written as: \\[v = a_1v_1 + a_2v_2 + a_3v_3 + a_4v_4\\]\nWe need to express \\(v_1, v_2, v_3\\) in terms of our new list: - \\(v_4 = v_4\\) - \\(v_3 = (v_3 - v_4) + v_4\\) - \\(v_2 = (v_2 - v_3) + v_3 = (v_2 - v_3) + (v_3 - v_4) + v_4\\) - \\(v_1 = (v_1 - v_2) + v_2 = (v_1 - v_2) + (v_2 - v_3) + (v_3 - v_4) + v_4\\)\nTherefore: \\[v = a_1[(v_1 - v_2) + (v_2 - v_3) + (v_3 - v_4) + v_4] + a_2[(v_2 - v_3) + (v_3 - v_4) + v_4] + a_3[(v_3 - v_4) + v_4] + a_4v_4\\]\nCollecting terms: \\[v = a_1(v_1 - v_2) + (a_1 + a_2)(v_2 - v_3) + (a_1 + a_2 + a_3)(v_3 - v_4) + (a_1 + a_2 + a_3 + a_4)v_4\\]\nThis shows that \\(v\\) is in the span of \\(v_1 - v_2, v_2 - v_3, v_3 - v_4, v_4\\).\n\n\n\n\n\n\n\n\n\nFind a basis for the vector space of polynomials in \\(\\mathcal{P}_3(\\mathbb{R})\\) that have the property that \\(p(2) = 0\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nWe need polynomials \\(p(x) = a_0 + a_1x + a_2x^2 + a_3x^3\\) such that \\(p(2) = 0\\).\nThis gives us: \\(a_0 + 2a_1 + 4a_2 + 8a_3 = 0\\), so \\(a_0 = -2a_1 - 4a_2 - 8a_3\\).\nTherefore: \\(p(x) = (-2a_1 - 4a_2 - 8a_3) + a_1x + a_2x^2 + a_3x^3\\) \\(= a_1(x - 2) + a_2(x^2 - 4) + a_3(x^3 - 8)\\)\nA basis is: \\(\\{x - 2, x^2 - 4, x^3 - 8\\}\\)\nWe can verify: - These polynomials are linearly independent (check by setting linear combination to zero) - They span the space (any polynomial with \\(p(2) = 0\\) can be written in this form) - The dimension is 3 (which makes sense: we have one constraint on a 4-dimensional space)\n\n\n\n\n\n\nProve that if \\(U_1, U_2, W\\) are subspaces of \\(V\\) such that \\(V = U_1 \\oplus W = U_2 \\oplus W\\), then \\(U_1 = U_2\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nWe need to show \\(U_1 \\subseteq U_2\\) and \\(U_2 \\subseteq U_1\\).\nLet \\(u_1 \\in U_1\\). Since \\(V = U_2 \\oplus W\\), we can write: \\[u_1 = u_2 + w\\] for unique \\(u_2 \\in U_2\\) and \\(w \\in W\\).\nSince \\(V = U_1 \\oplus W\\), we also have: \\[u_1 = u_1 + 0\\] where \\(u_1 \\in U_1\\) and \\(0 \\in W\\).\nBy uniqueness of the direct sum decomposition \\(V = U_1 \\oplus W\\): - The \\(U_1\\) component is \\(u_1\\) - The \\(W\\) component is \\(0\\)\nBut we also wrote \\(u_1 = u_2 + w\\) where \\(u_2 \\in U_2\\) and \\(w \\in W\\). Since \\(u_1 \\in U_1\\) and \\(V = U_1 \\oplus W\\), we must have \\(w = 0\\) and the \\(U_1\\) component equals \\(u_2\\).\nTherefore \\(u_1 = u_2 \\in U_2\\), so \\(U_1 \\subseteq U_2\\).\nBy symmetry, \\(U_2 \\subseteq U_1\\), so \\(U_1 = U_2\\).\n\n\n\n\n\n\n\n\n\nGive an example of a linear map \\(T: \\mathbb{R}^4 \\to \\mathbb{R}^2\\) such that \\(\\dim(\\text{null } T) = 2\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nBy the fundamental theorem of linear maps: \\[\\dim \\mathbb{R}^4 = \\dim(\\text{null } T) + \\dim(\\text{range } T)\\] \\[4 = 2 + \\dim(\\text{range } T)\\]\nSo \\(\\dim(\\text{range } T) = 2\\).\nDefine \\(T: \\mathbb{R}^4 \\to \\mathbb{R}^2\\) by: \\[T(x_1, x_2, x_3, x_4) = (x_1 + x_2, x_3 + x_4)\\]\nThen: - \\(\\text{null } T = \\{(x_1, x_2, x_3, x_4) : x_1 + x_2 = 0 \\text{ and } x_3 + x_4 = 0\\}\\) - \\(= \\{(a, -a, b, -b) : a, b \\in \\mathbb{R}\\}\\) - \\(= \\text{span}((1, -1, 0, 0), (0, 0, 1, -1))\\)\nSo \\(\\dim(\\text{null } T) = 2\\) as required.\n\n\n\n\nNote: This represents a sample of exercises. A complete version would include many more problems from each chapter, with varying difficulty levels and comprehensive solutions.\n\n\n\n\n\n\n\n\n\n\nNoteCommunity Discussion\n\n\n\nThe comment section will appear here once the site is deployed to GitHub Pages with Giscus configured. Readers will be able to:\n\nAsk questions about the exercises\nShare alternative solutions\nDiscuss mathematical concepts\nProvide feedback and suggestions\n\nTo enable comments after GitHub deployment: 1. Install the Giscus GitHub App 2. Enable Discussions in your repository 3. Configure the repository details in _quarto.yml",
     "crumbs": [
       "Mathematics",
       "Linear Algebra",
-      "Linear Algebra Jupyter Notebooks"
+      "Linear Algebra Exercises"
+    ]
+  },
+  {
+    "objectID": "mathematics/linear-algebra/exercises.html#chapter-1-vector-spaces",
+    "href": "mathematics/linear-algebra/exercises.html#chapter-1-vector-spaces",
+    "title": "Linear Algebra Exercises",
+    "section": "",
+    "text": "Prove that \\(-(-v) = v\\) for every \\(v\\) in a vector space \\(V\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nLet \\(v \\in V\\). We know that \\(-v\\) is the additive inverse of \\(v\\), so \\(v + (-v) = 0\\).\nSince \\(-v \\in V\\), it has an additive inverse, which we denote as \\(-(-v)\\). By definition: \\((-v) + (-(-v)) = 0\\).\nNow, consider: \\[v + (-v) = 0 = (-v) + (-(-v))\\]\nAdding \\(-(-v)\\) to both sides: \\[-(-v) + v + (-v) = -(-v) + (-v) + (-(-v))\\] \\[-(-v) + 0 = -(-v) + 0\\] \\[-(-v) = -(-v)\\]\nThis is always true. Let’s try a different approach.\nFrom \\(v + (-v) = 0\\), we can add \\(-(-v)\\) to both sides: \\[-(-v) + v + (-v) = -(-v) + 0\\] \\[(-(-v) + v) + (-v) = -(-v)\\]\nSince \\((-v) + (-(-v)) = 0\\), we have \\(-(-v) = -(-v)\\).\nActually, let’s use uniqueness of additive inverse: Since \\(v + (-v) = 0\\) and \\((-v) + (-(-v)) = 0\\), and the additive inverse is unique, we must have \\(v = -(-v)\\).\n\n\n\n\n\n\nSuppose \\(v_1, v_2, v_3, v_4\\) spans \\(V\\). Prove that the list \\(v_1 - v_2, v_2 - v_3, v_3 - v_4, v_4\\) also spans \\(V\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nWe need to show that every vector in \\(V\\) can be written as a linear combination of \\(v_1 - v_2, v_2 - v_3, v_3 - v_4, v_4\\).\nSince \\(v_1, v_2, v_3, v_4\\) spans \\(V\\), any \\(v \\in V\\) can be written as: \\[v = a_1v_1 + a_2v_2 + a_3v_3 + a_4v_4\\]\nWe need to express \\(v_1, v_2, v_3\\) in terms of our new list: - \\(v_4 = v_4\\) - \\(v_3 = (v_3 - v_4) + v_4\\) - \\(v_2 = (v_2 - v_3) + v_3 = (v_2 - v_3) + (v_3 - v_4) + v_4\\) - \\(v_1 = (v_1 - v_2) + v_2 = (v_1 - v_2) + (v_2 - v_3) + (v_3 - v_4) + v_4\\)\nTherefore: \\[v = a_1[(v_1 - v_2) + (v_2 - v_3) + (v_3 - v_4) + v_4] + a_2[(v_2 - v_3) + (v_3 - v_4) + v_4] + a_3[(v_3 - v_4) + v_4] + a_4v_4\\]\nCollecting terms: \\[v = a_1(v_1 - v_2) + (a_1 + a_2)(v_2 - v_3) + (a_1 + a_2 + a_3)(v_3 - v_4) + (a_1 + a_2 + a_3 + a_4)v_4\\]\nThis shows that \\(v\\) is in the span of \\(v_1 - v_2, v_2 - v_3, v_3 - v_4, v_4\\).",
+    "crumbs": [
+      "Mathematics",
+      "Linear Algebra",
+      "Linear Algebra Exercises"
+    ]
+  },
+  {
+    "objectID": "mathematics/linear-algebra/exercises.html#chapter-2-finite-dimensional-vector-spaces",
+    "href": "mathematics/linear-algebra/exercises.html#chapter-2-finite-dimensional-vector-spaces",
+    "title": "Linear Algebra Exercises",
+    "section": "",
+    "text": "Find a basis for the vector space of polynomials in \\(\\mathcal{P}_3(\\mathbb{R})\\) that have the property that \\(p(2) = 0\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nWe need polynomials \\(p(x) = a_0 + a_1x + a_2x^2 + a_3x^3\\) such that \\(p(2) = 0\\).\nThis gives us: \\(a_0 + 2a_1 + 4a_2 + 8a_3 = 0\\), so \\(a_0 = -2a_1 - 4a_2 - 8a_3\\).\nTherefore: \\(p(x) = (-2a_1 - 4a_2 - 8a_3) + a_1x + a_2x^2 + a_3x^3\\) \\(= a_1(x - 2) + a_2(x^2 - 4) + a_3(x^3 - 8)\\)\nA basis is: \\(\\{x - 2, x^2 - 4, x^3 - 8\\}\\)\nWe can verify: - These polynomials are linearly independent (check by setting linear combination to zero) - They span the space (any polynomial with \\(p(2) = 0\\) can be written in this form) - The dimension is 3 (which makes sense: we have one constraint on a 4-dimensional space)\n\n\n\n\n\n\nProve that if \\(U_1, U_2, W\\) are subspaces of \\(V\\) such that \\(V = U_1 \\oplus W = U_2 \\oplus W\\), then \\(U_1 = U_2\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nWe need to show \\(U_1 \\subseteq U_2\\) and \\(U_2 \\subseteq U_1\\).\nLet \\(u_1 \\in U_1\\). Since \\(V = U_2 \\oplus W\\), we can write: \\[u_1 = u_2 + w\\] for unique \\(u_2 \\in U_2\\) and \\(w \\in W\\).\nSince \\(V = U_1 \\oplus W\\), we also have: \\[u_1 = u_1 + 0\\] where \\(u_1 \\in U_1\\) and \\(0 \\in W\\).\nBy uniqueness of the direct sum decomposition \\(V = U_1 \\oplus W\\): - The \\(U_1\\) component is \\(u_1\\) - The \\(W\\) component is \\(0\\)\nBut we also wrote \\(u_1 = u_2 + w\\) where \\(u_2 \\in U_2\\) and \\(w \\in W\\). Since \\(u_1 \\in U_1\\) and \\(V = U_1 \\oplus W\\), we must have \\(w = 0\\) and the \\(U_1\\) component equals \\(u_2\\).\nTherefore \\(u_1 = u_2 \\in U_2\\), so \\(U_1 \\subseteq U_2\\).\nBy symmetry, \\(U_2 \\subseteq U_1\\), so \\(U_1 = U_2\\).",
+    "crumbs": [
+      "Mathematics",
+      "Linear Algebra",
+      "Linear Algebra Exercises"
+    ]
+  },
+  {
+    "objectID": "mathematics/linear-algebra/exercises.html#chapter-3-linear-maps",
+    "href": "mathematics/linear-algebra/exercises.html#chapter-3-linear-maps",
+    "title": "Linear Algebra Exercises",
+    "section": "",
+    "text": "Give an example of a linear map \\(T: \\mathbb{R}^4 \\to \\mathbb{R}^2\\) such that \\(\\dim(\\text{null } T) = 2\\).\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\nBy the fundamental theorem of linear maps: \\[\\dim \\mathbb{R}^4 = \\dim(\\text{null } T) + \\dim(\\text{range } T)\\] \\[4 = 2 + \\dim(\\text{range } T)\\]\nSo \\(\\dim(\\text{range } T) = 2\\).\nDefine \\(T: \\mathbb{R}^4 \\to \\mathbb{R}^2\\) by: \\[T(x_1, x_2, x_3, x_4) = (x_1 + x_2, x_3 + x_4)\\]\nThen: - \\(\\text{null } T = \\{(x_1, x_2, x_3, x_4) : x_1 + x_2 = 0 \\text{ and } x_3 + x_4 = 0\\}\\) - \\(= \\{(a, -a, b, -b) : a, b \\in \\mathbb{R}\\}\\) - \\(= \\text{span}((1, -1, 0, 0), (0, 0, 1, -1))\\)\nSo \\(\\dim(\\text{null } T) = 2\\) as required.\n\n\n\n\nNote: This represents a sample of exercises. A complete version would include many more problems from each chapter, with varying difficulty levels and comprehensive solutions.",
+    "crumbs": [
+      "Mathematics",
+      "Linear Algebra",
+      "Linear Algebra Exercises"
+    ]
+  },
+  {
+    "objectID": "mathematics/linear-algebra/exercises.html#comments-discussion",
+    "href": "mathematics/linear-algebra/exercises.html#comments-discussion",
+    "title": "Linear Algebra Exercises",
+    "section": "",
+    "text": "NoteCommunity Discussion\n\n\n\nThe comment section will appear here once the site is deployed to GitHub Pages with Giscus configured. Readers will be able to:\n\nAsk questions about the exercises\nShare alternative solutions\nDiscuss mathematical concepts\nProvide feedback and suggestions\n\nTo enable comments after GitHub deployment: 1. Install the Giscus GitHub App 2. Enable Discussions in your repository 3. Configure the repository details in _quarto.yml",
+    "crumbs": [
+      "Mathematics",
+      "Linear Algebra",
+      "Linear Algebra Exercises"
+    ]
+  },
+  {
+    "objectID": "mathematics/linear-algebra/notebooks/01-vector-spaces.html",
+    "href": "mathematics/linear-algebra/notebooks/01-vector-spaces.html",
+    "title": "Vector Spaces",
+    "section": "",
+    "text": "This notebook explores the fundamental concepts of vector spaces in linear algebra.\n\n\n\nUnderstand the definition of a vector space\nExplore examples of vector spaces\nWork with vector operations\nVerify vector space axioms\n\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom mpl_toolkits.mplot3d import Axes3D\n\n# Set up plotting style\nplt.style.use('default')\nplt.rcParams['figure.figsize'] = (10, 6)\n\n\n\n\n\nA vector space \\(V\\) over a field \\(F\\) is a set equipped with two operations: - Vector addition: \\(+: V \\times V \\to V\\) - Scalar multiplication: \\(\\cdot: F \\times V \\to V\\)\nThese operations must satisfy the following axioms…\n\n\nCode\n# Example: R^2 as a vector space\nv1 = np.array([2, 3])\nv2 = np.array([1, -1])\nscalar = 2.5\n\n# Vector addition\nv_sum = v1 + v2\nprint(f\"v1 + v2 = {v_sum}\")\n\n# Scalar multiplication\nv_scaled = scalar * v1\nprint(f\"{scalar} * v1 = {v_scaled}\")\n\n\n\n\n\n\n\nCode\n# Visualize vectors in R^2\nfig, ax = plt.subplots(1, 1, figsize=(8, 6))\n\n# Plot vectors\nax.quiver(0, 0, v1[0], v1[1], angles='xy', scale_units='xy', scale=1, color='blue', label='v1')\nax.quiver(0, 0, v2[0], v2[1], angles='xy', scale_units='xy', scale=1, color='red', label='v2')\nax.quiver(0, 0, v_sum[0], v_sum[1], angles='xy', scale_units='xy', scale=1, color='green', label='v1 + v2')\n\n# Set up the plot\nax.set_xlim(-1, 4)\nax.set_ylim(-2, 4)\nax.grid(True, alpha=0.3)\nax.set_aspect('equal')\nax.legend()\nax.set_title('Vector Addition in R²')\nax.set_xlabel('x')\nax.set_ylabel('y')\n\nplt.show()\n\n\n\n\n\n\nVerify that \\(\\mathbb{R}^3\\) with standard addition and scalar multiplication forms a vector space.\nShow that the set of all polynomials of degree at most \\(n\\) forms a vector space.\nDetermine if the set \\(\\{(x, y) \\in \\mathbb{R}^2 : x + y = 1\\}\\) is a vector space.",
+    "crumbs": [
+      "Mathematics",
+      "Linear Algebra",
+      "Interactive Notebooks",
+      "Vector Spaces"
+    ]
+  },
+  {
+    "objectID": "mathematics/linear-algebra/notebooks/01-vector-spaces.html#learning-objectives",
+    "href": "mathematics/linear-algebra/notebooks/01-vector-spaces.html#learning-objectives",
+    "title": "Vector Spaces",
+    "section": "",
+    "text": "Understand the definition of a vector space\nExplore examples of vector spaces\nWork with vector operations\nVerify vector space axioms\n\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom mpl_toolkits.mplot3d import Axes3D\n\n# Set up plotting style\nplt.style.use('default')\nplt.rcParams['figure.figsize'] = (10, 6)",
+    "crumbs": [
+      "Mathematics",
+      "Linear Algebra",
+      "Interactive Notebooks",
+      "Vector Spaces"
+    ]
+  },
+  {
+    "objectID": "mathematics/linear-algebra/notebooks/01-vector-spaces.html#definition-of-vector-space",
+    "href": "mathematics/linear-algebra/notebooks/01-vector-spaces.html#definition-of-vector-space",
+    "title": "Vector Spaces",
+    "section": "",
+    "text": "A vector space \\(V\\) over a field \\(F\\) is a set equipped with two operations: - Vector addition: \\(+: V \\times V \\to V\\) - Scalar multiplication: \\(\\cdot: F \\times V \\to V\\)\nThese operations must satisfy the following axioms…\n\n\nCode\n# Example: R^2 as a vector space\nv1 = np.array([2, 3])\nv2 = np.array([1, -1])\nscalar = 2.5\n\n# Vector addition\nv_sum = v1 + v2\nprint(f\"v1 + v2 = {v_sum}\")\n\n# Scalar multiplication\nv_scaled = scalar * v1\nprint(f\"{scalar} * v1 = {v_scaled}\")",
+    "crumbs": [
+      "Mathematics",
+      "Linear Algebra",
+      "Interactive Notebooks",
+      "Vector Spaces"
+    ]
+  },
+  {
+    "objectID": "mathematics/linear-algebra/notebooks/01-vector-spaces.html#visualization-of-vector-operations",
+    "href": "mathematics/linear-algebra/notebooks/01-vector-spaces.html#visualization-of-vector-operations",
+    "title": "Vector Spaces",
+    "section": "",
+    "text": "Code\n# Visualize vectors in R^2\nfig, ax = plt.subplots(1, 1, figsize=(8, 6))\n\n# Plot vectors\nax.quiver(0, 0, v1[0], v1[1], angles='xy', scale_units='xy', scale=1, color='blue', label='v1')\nax.quiver(0, 0, v2[0], v2[1], angles='xy', scale_units='xy', scale=1, color='red', label='v2')\nax.quiver(0, 0, v_sum[0], v_sum[1], angles='xy', scale_units='xy', scale=1, color='green', label='v1 + v2')\n\n# Set up the plot\nax.set_xlim(-1, 4)\nax.set_ylim(-2, 4)\nax.grid(True, alpha=0.3)\nax.set_aspect('equal')\nax.legend()\nax.set_title('Vector Addition in R²')\nax.set_xlabel('x')\nax.set_ylabel('y')\n\nplt.show()",
+    "crumbs": [
+      "Mathematics",
+      "Linear Algebra",
+      "Interactive Notebooks",
+      "Vector Spaces"
+    ]
+  },
+  {
+    "objectID": "mathematics/linear-algebra/notebooks/01-vector-spaces.html#exercises",
+    "href": "mathematics/linear-algebra/notebooks/01-vector-spaces.html#exercises",
+    "title": "Vector Spaces",
+    "section": "",
+    "text": "Verify that \\(\\mathbb{R}^3\\) with standard addition and scalar multiplication forms a vector space.\nShow that the set of all polynomials of degree at most \\(n\\) forms a vector space.\nDetermine if the set \\(\\{(x, y) \\in \\mathbb{R}^2 : x + y = 1\\}\\) is a vector space.",
+    "crumbs": [
+      "Mathematics",
+      "Linear Algebra",
+      "Interactive Notebooks",
+      "Vector Spaces"
+    ]
+  },
+  {
+    "objectID": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html",
+    "href": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html",
+    "title": "Eigenvalues and Eigenvectors",
+    "section": "",
+    "text": "This notebook explores eigenvalues and eigenvectors, fundamental concepts in linear algebra.\n\n\n\nUnderstand eigenvalues and eigenvectors\nCompute eigenvalues and eigenvectors\nVisualize eigenvectors geometrically\nExplore applications in data analysis\n\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.datasets import make_blobs\nfrom sklearn.decomposition import PCA\n\nplt.rcParams['figure.figsize'] = (12, 8)\nnp.random.seed(42)\n\n\n\n\n\nFor a square matrix \\(A\\), a non-zero vector \\(v\\) is an eigenvector with eigenvalue \\(\\lambda\\) if:\n\\[Av = \\lambda v\\]\nThis means the transformation \\(A\\) scales the vector \\(v\\) by factor \\(\\lambda\\) without changing its direction.\n\n\nCode\n# Example: Find eigenvalues and eigenvectors\nA = np.array([[3, 1],\n              [0, 2]])\n\n# Compute eigenvalues and eigenvectors\neigenvalues, eigenvectors = np.linalg.eig(A)\n\nprint(f\"Matrix A:\\n{A}\")\nprint(f\"\\nEigenvalues: {eigenvalues}\")\nprint(f\"\\nEigenvectors:\\n{eigenvectors}\")\n\n# Verify the eigenvalue equation\nfor i in range(len(eigenvalues)):\n    λ = eigenvalues[i]\n    v = eigenvectors[:, i]\n    \n    Av = A @ v\n    λv = λ * v\n    \n    print(f\"\\nFor eigenvalue {λ:.3f}:\")\n    print(f\"Av = {Av}\")\n    print(f\"λv = {λv}\")\n    print(f\"Equal? {np.allclose(Av, λv)}\")\n\n\n\n\n\n\n\nCode\n# Visualize eigenvectors and their transformation\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))\n\n# Original eigenvectors\ncolors = ['red', 'blue']\nfor i in range(len(eigenvalues)):\n    v = eigenvectors[:, i]\n    ax1.quiver(0, 0, v[0], v[1], angles='xy', scale_units='xy', scale=1, \n               color=colors[i], width=0.005, label=f'v{i+1}')\n    \n    # Show transformed eigenvectors\n    Av = A @ v\n    ax2.quiver(0, 0, Av[0], Av[1], angles='xy', scale_units='xy', scale=1, \n               color=colors[i], width=0.005, label=f'Av{i+1} = {eigenvalues[i]:.1f}v{i+1}')\n\n# Add some other vectors to show general transformation\ntest_vectors = np.array([[1, 0], [0, 1], [1, 1], [-1, 1]]).T\ntransformed_vectors = A @ test_vectors\n\nfor i in range(test_vectors.shape[1]):\n    v_orig = test_vectors[:, i]\n    v_trans = transformed_vectors[:, i]\n    \n    ax1.quiver(0, 0, v_orig[0], v_orig[1], angles='xy', scale_units='xy', scale=1, \n               color='gray', alpha=0.5, width=0.003)\n    ax2.quiver(0, 0, v_trans[0], v_trans[1], angles='xy', scale_units='xy', scale=1, \n               color='gray', alpha=0.5, width=0.003)\n\n# Setup plots\nfor ax, title in zip([ax1, ax2], ['Original Vectors', 'Transformed Vectors']):\n    ax.set_xlim(-2, 4)\n    ax.set_ylim(-2, 3)\n    ax.grid(True, alpha=0.3)\n    ax.set_aspect('equal')\n    ax.set_title(title)\n    ax.legend()\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nPCA uses eigenvalues and eigenvectors to find the principal directions of variation in data.\n\n\nCode\n# Generate sample data\nX, _ = make_blobs(n_samples=200, centers=1, n_features=2, \n                  random_state=42, cluster_std=2.0)\n\n# Add correlation by transforming the data\ntransform_matrix = np.array([[1, 0.8], [0, 1]])\nX = X @ transform_matrix.T\n\n# Perform PCA\npca = PCA(n_components=2)\nX_pca = pca.fit_transform(X)\n\n# Get principal components (eigenvectors of covariance matrix)\ncomponents = pca.components_\nexplained_variance = pca.explained_variance_\n\nprint(f\"Explained variance: {explained_variance}\")\nprint(f\"Explained variance ratio: {pca.explained_variance_ratio_}\")\n\n# Visualize\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))\n\n# Original data with principal components\nax1.scatter(X[:, 0], X[:, 1], alpha=0.6, s=30)\nmean_point = np.mean(X, axis=0)\n\n# Plot principal components\nfor i, (component, variance) in enumerate(zip(components, explained_variance)):\n    # Scale by square root of eigenvalue for visualization\n    scaled_component = component * np.sqrt(variance) * 2\n    ax1.arrow(mean_point[0], mean_point[1], \n              scaled_component[0], scaled_component[1],\n              head_width=0.3, head_length=0.3, fc=f'C{i}', ec=f'C{i}',\n              label=f'PC{i+1} (var={variance:.2f})')\n\nax1.set_title('Original Data with Principal Components')\nax1.legend()\nax1.grid(True, alpha=0.3)\nax1.set_aspect('equal')\n\n# Transformed data (in PC space)\nax2.scatter(X_pca[:, 0], X_pca[:, 1], alpha=0.6, s=30)\nax2.set_title('Data in Principal Component Space')\nax2.set_xlabel('First Principal Component')\nax2.set_ylabel('Second Principal Component')\nax2.grid(True, alpha=0.3)\nax2.set_aspect('equal')\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nEigenvalues are roots of the characteristic polynomial: \\(\\det(A - \\lambda I) = 0\\)\n\n\nCode\n# Example: Compute characteristic polynomial manually\nA = np.array([[2, 1],\n              [1, 2]])\n\nprint(f\"Matrix A:\\n{A}\")\n\n# For 2x2 matrix [[a,b],[c,d]], characteristic polynomial is:\n# λ² - (a+d)λ + (ad-bc) = 0\na, b = A[0, 0], A[0, 1]\nc, d = A[1, 0], A[1, 1]\n\ntrace = a + d\ndeterminant = a*d - b*c\n\nprint(f\"\\nTrace (a+d): {trace}\")\nprint(f\"Determinant (ad-bc): {determinant}\")\nprint(f\"Characteristic polynomial: λ² - {trace}λ + {determinant} = 0\")\n\n# Solve quadratic equation\ndiscriminant = trace**2 - 4*determinant\nλ1 = (trace + np.sqrt(discriminant)) / 2\nλ2 = (trace - np.sqrt(discriminant)) / 2\n\nprint(f\"\\nEigenvalues from formula: {λ1:.3f}, {λ2:.3f}\")\n\n# Compare with numpy\neigenvals_numpy = np.linalg.eigvals(A)\nprint(f\"Eigenvalues from numpy: {eigenvals_numpy}\")\n\n\n\n\n\n\nFind the eigenvalues and eigenvectors of \\(\\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}\\)\nShow that if \\(v\\) is an eigenvector of \\(A\\) with eigenvalue \\(\\lambda\\), then \\(v\\) is also an eigenvector of \\(A^2\\) with eigenvalue \\(\\lambda^2\\)\nProve that the eigenvalues of a triangular matrix are its diagonal entries\nUse PCA to analyze a dataset of your choice and interpret the principal components",
+    "crumbs": [
+      "Mathematics",
+      "Linear Algebra",
+      "Interactive Notebooks",
+      "Eigenvalues and Eigenvectors"
+    ]
+  },
+  {
+    "objectID": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#learning-objectives",
+    "href": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#learning-objectives",
+    "title": "Eigenvalues and Eigenvectors",
+    "section": "",
+    "text": "Understand eigenvalues and eigenvectors\nCompute eigenvalues and eigenvectors\nVisualize eigenvectors geometrically\nExplore applications in data analysis\n\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.datasets import make_blobs\nfrom sklearn.decomposition import PCA\n\nplt.rcParams['figure.figsize'] = (12, 8)\nnp.random.seed(42)",
+    "crumbs": [
+      "Mathematics",
+      "Linear Algebra",
+      "Interactive Notebooks",
+      "Eigenvalues and Eigenvectors"
+    ]
+  },
+  {
+    "objectID": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#definition",
+    "href": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#definition",
+    "title": "Eigenvalues and Eigenvectors",
+    "section": "",
+    "text": "For a square matrix \\(A\\), a non-zero vector \\(v\\) is an eigenvector with eigenvalue \\(\\lambda\\) if:\n\\[Av = \\lambda v\\]\nThis means the transformation \\(A\\) scales the vector \\(v\\) by factor \\(\\lambda\\) without changing its direction.\n\n\nCode\n# Example: Find eigenvalues and eigenvectors\nA = np.array([[3, 1],\n              [0, 2]])\n\n# Compute eigenvalues and eigenvectors\neigenvalues, eigenvectors = np.linalg.eig(A)\n\nprint(f\"Matrix A:\\n{A}\")\nprint(f\"\\nEigenvalues: {eigenvalues}\")\nprint(f\"\\nEigenvectors:\\n{eigenvectors}\")\n\n# Verify the eigenvalue equation\nfor i in range(len(eigenvalues)):\n    λ = eigenvalues[i]\n    v = eigenvectors[:, i]\n    \n    Av = A @ v\n    λv = λ * v\n    \n    print(f\"\\nFor eigenvalue {λ:.3f}:\")\n    print(f\"Av = {Av}\")\n    print(f\"λv = {λv}\")\n    print(f\"Equal? {np.allclose(Av, λv)}\")",
+    "crumbs": [
+      "Mathematics",
+      "Linear Algebra",
+      "Interactive Notebooks",
+      "Eigenvalues and Eigenvectors"
+    ]
+  },
+  {
+    "objectID": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#geometric-visualization",
+    "href": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#geometric-visualization",
+    "title": "Eigenvalues and Eigenvectors",
+    "section": "",
+    "text": "Code\n# Visualize eigenvectors and their transformation\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))\n\n# Original eigenvectors\ncolors = ['red', 'blue']\nfor i in range(len(eigenvalues)):\n    v = eigenvectors[:, i]\n    ax1.quiver(0, 0, v[0], v[1], angles='xy', scale_units='xy', scale=1, \n               color=colors[i], width=0.005, label=f'v{i+1}')\n    \n    # Show transformed eigenvectors\n    Av = A @ v\n    ax2.quiver(0, 0, Av[0], Av[1], angles='xy', scale_units='xy', scale=1, \n               color=colors[i], width=0.005, label=f'Av{i+1} = {eigenvalues[i]:.1f}v{i+1}')\n\n# Add some other vectors to show general transformation\ntest_vectors = np.array([[1, 0], [0, 1], [1, 1], [-1, 1]]).T\ntransformed_vectors = A @ test_vectors\n\nfor i in range(test_vectors.shape[1]):\n    v_orig = test_vectors[:, i]\n    v_trans = transformed_vectors[:, i]\n    \n    ax1.quiver(0, 0, v_orig[0], v_orig[1], angles='xy', scale_units='xy', scale=1, \n               color='gray', alpha=0.5, width=0.003)\n    ax2.quiver(0, 0, v_trans[0], v_trans[1], angles='xy', scale_units='xy', scale=1, \n               color='gray', alpha=0.5, width=0.003)\n\n# Setup plots\nfor ax, title in zip([ax1, ax2], ['Original Vectors', 'Transformed Vectors']):\n    ax.set_xlim(-2, 4)\n    ax.set_ylim(-2, 3)\n    ax.grid(True, alpha=0.3)\n    ax.set_aspect('equal')\n    ax.set_title(title)\n    ax.legend()\n\nplt.tight_layout()\nplt.show()",
+    "crumbs": [
+      "Mathematics",
+      "Linear Algebra",
+      "Interactive Notebooks",
+      "Eigenvalues and Eigenvectors"
+    ]
+  },
+  {
+    "objectID": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#principal-component-analysis-pca",
+    "href": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#principal-component-analysis-pca",
+    "title": "Eigenvalues and Eigenvectors",
+    "section": "",
+    "text": "PCA uses eigenvalues and eigenvectors to find the principal directions of variation in data.\n\n\nCode\n# Generate sample data\nX, _ = make_blobs(n_samples=200, centers=1, n_features=2, \n                  random_state=42, cluster_std=2.0)\n\n# Add correlation by transforming the data\ntransform_matrix = np.array([[1, 0.8], [0, 1]])\nX = X @ transform_matrix.T\n\n# Perform PCA\npca = PCA(n_components=2)\nX_pca = pca.fit_transform(X)\n\n# Get principal components (eigenvectors of covariance matrix)\ncomponents = pca.components_\nexplained_variance = pca.explained_variance_\n\nprint(f\"Explained variance: {explained_variance}\")\nprint(f\"Explained variance ratio: {pca.explained_variance_ratio_}\")\n\n# Visualize\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))\n\n# Original data with principal components\nax1.scatter(X[:, 0], X[:, 1], alpha=0.6, s=30)\nmean_point = np.mean(X, axis=0)\n\n# Plot principal components\nfor i, (component, variance) in enumerate(zip(components, explained_variance)):\n    # Scale by square root of eigenvalue for visualization\n    scaled_component = component * np.sqrt(variance) * 2\n    ax1.arrow(mean_point[0], mean_point[1], \n              scaled_component[0], scaled_component[1],\n              head_width=0.3, head_length=0.3, fc=f'C{i}', ec=f'C{i}',\n              label=f'PC{i+1} (var={variance:.2f})')\n\nax1.set_title('Original Data with Principal Components')\nax1.legend()\nax1.grid(True, alpha=0.3)\nax1.set_aspect('equal')\n\n# Transformed data (in PC space)\nax2.scatter(X_pca[:, 0], X_pca[:, 1], alpha=0.6, s=30)\nax2.set_title('Data in Principal Component Space')\nax2.set_xlabel('First Principal Component')\nax2.set_ylabel('Second Principal Component')\nax2.grid(True, alpha=0.3)\nax2.set_aspect('equal')\n\nplt.tight_layout()\nplt.show()",
+    "crumbs": [
+      "Mathematics",
+      "Linear Algebra",
+      "Interactive Notebooks",
+      "Eigenvalues and Eigenvectors"
+    ]
+  },
+  {
+    "objectID": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#characteristic-polynomial",
+    "href": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#characteristic-polynomial",
+    "title": "Eigenvalues and Eigenvectors",
+    "section": "",
+    "text": "Eigenvalues are roots of the characteristic polynomial: \\(\\det(A - \\lambda I) = 0\\)\n\n\nCode\n# Example: Compute characteristic polynomial manually\nA = np.array([[2, 1],\n              [1, 2]])\n\nprint(f\"Matrix A:\\n{A}\")\n\n# For 2x2 matrix [[a,b],[c,d]], characteristic polynomial is:\n# λ² - (a+d)λ + (ad-bc) = 0\na, b = A[0, 0], A[0, 1]\nc, d = A[1, 0], A[1, 1]\n\ntrace = a + d\ndeterminant = a*d - b*c\n\nprint(f\"\\nTrace (a+d): {trace}\")\nprint(f\"Determinant (ad-bc): {determinant}\")\nprint(f\"Characteristic polynomial: λ² - {trace}λ + {determinant} = 0\")\n\n# Solve quadratic equation\ndiscriminant = trace**2 - 4*determinant\nλ1 = (trace + np.sqrt(discriminant)) / 2\nλ2 = (trace - np.sqrt(discriminant)) / 2\n\nprint(f\"\\nEigenvalues from formula: {λ1:.3f}, {λ2:.3f}\")\n\n# Compare with numpy\neigenvals_numpy = np.linalg.eigvals(A)\nprint(f\"Eigenvalues from numpy: {eigenvals_numpy}\")",
+    "crumbs": [
+      "Mathematics",
+      "Linear Algebra",
+      "Interactive Notebooks",
+      "Eigenvalues and Eigenvectors"
+    ]
+  },
+  {
+    "objectID": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#exercises",
+    "href": "mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html#exercises",
+    "title": "Eigenvalues and Eigenvectors",
+    "section": "",
+    "text": "Find the eigenvalues and eigenvectors of \\(\\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}\\)\nShow that if \\(v\\) is an eigenvector of \\(A\\) with eigenvalue \\(\\lambda\\), then \\(v\\) is also an eigenvector of \\(A^2\\) with eigenvalue \\(\\lambda^2\\)\nProve that the eigenvalues of a triangular matrix are its diagonal entries\nUse PCA to analyze a dataset of your choice and interpret the principal components",
+    "crumbs": [
+      "Mathematics",
+      "Linear Algebra",
+      "Interactive Notebooks",
+      "Eigenvalues and Eigenvectors"
     ]
   }
 ]
