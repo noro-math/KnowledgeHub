@@ -1224,6 +1224,35 @@ document.addEventListener('DOMContentLoaded', function() {
     updateButtonColor();
     
     console.log('Line numbers script initialization complete');
+    
+    // Debug: Check for Giscus
+    setTimeout(() => {
+      console.log('Checking for Giscus...');
+      const giscusScript = document.querySelector('script[src*="giscus.app"]');
+      const giscusFrame = document.querySelector('iframe.giscus-frame');
+      const giscusContainer = document.querySelector('.giscus');
+      
+      console.log('Giscus script found:', !!giscusScript);
+      console.log('Giscus frame found:', !!giscusFrame);
+      console.log('Giscus container found:', !!giscusContainer);
+      
+      if (giscusScript && !giscusContainer) {
+        console.log('Creating manual Giscus container...');
+        const container = document.createElement('div');
+        container.className = 'giscus';
+        container.style.marginTop = '2rem';
+        container.style.padding = '1rem';
+        container.style.border = '1px solid #ddd';
+        container.innerHTML = '<p>Comments should load here...</p>';
+        
+        // Insert before the closing content div
+        const content = document.querySelector('main.content') || document.querySelector('#quarto-document-content');
+        if (content) {
+          content.appendChild(container);
+          console.log('Manual Giscus container added');
+        }
+      }
+    }, 3000);
 });
 </script>
 

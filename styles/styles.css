@@ -455,6 +455,36 @@ ol ol ol li {
    END LIST ITEM CONFIGURATION
    ======================================== */
 
+/* Ensure Giscus comments are visible */
+.giscus, 
+.giscus-frame,
+iframe[src*="giscus"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  min-height: 150px !important;
+  border: none !important;
+  margin-top: 2rem !important;
+}
+
+/* Debug: Add a placeholder for comments */
+.giscus::before {
+  content: "Comments loading..." !important;
+  display: block !important;
+  padding: 1rem !important;
+  background: #f0f0f0 !important;
+  border: 1px dashed #ccc !important;
+  text-align: center !important;
+  color: #666 !important;
+}
+
+[data-quarto-color-scheme="dark"] .giscus::before {
+  background: #2d3748 !important;
+  border-color: #4a5568 !important;
+  color: #cbd5e0 !important;
+}
+
 /* Line number toggle button */
 .line-number-toggle {
   position: fixed;
