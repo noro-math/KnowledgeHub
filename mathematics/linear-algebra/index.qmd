@@ -1,0 +1,56 @@
+---
+title: "Linear Algebra"
+subtitle: "Based on Linear Algebra Done Right by Sheldon Axler"
+---
+
+# Linear Algebra
+
+## About This Section
+
+This section follows Sheldon Axler's "Linear Algebra Done Right," which takes a unique approach to linear algebra by:
+- Emphasizing vector spaces and linear maps over matrices
+- Avoiding determinants until the end
+- Focusing on understanding rather than computation
+
+## Chapter Overview
+
+### Part I: Vector Spaces
+1. **Vector Spaces**: Definition, examples, and basic properties
+2. **Finite-Dimensional Vector Spaces**: Span, linear independence, and bases
+3. **Linear Maps**: Definition, null spaces, and ranges
+
+### Part II: Eigenvalues and Eigenvectors
+4. **Polynomials**: Background for understanding characteristic polynomials
+5. **Eigenvalues and Eigenvectors**: Finding and understanding eigenvalues
+6. **Upper-Triangular Matrices**: Simplifying linear operators
+
+### Part III: Inner Product Spaces
+7. **Inner Products**: Norms, orthogonality, and orthonormal bases
+8. **Operators on Inner Product Spaces**: Self-adjoint and normal operators
+9. **Operators on Complex Vector Spaces**: Spectral theorem
+10. **Operators on Real Vector Spaces**: Special cases and applications
+
+## Resources
+
+- [**Notes**](notes.qmd): Comprehensive chapter-by-chapter notes
+- [**Exercises**](exercises.qmd): Practice problems and solutions
+
+## Learning Path
+
+1. **Start Here**: Read through the notes for each chapter
+2. **Practice**: Work through exercises to reinforce concepts
+3. **Discuss**: Use comment sections to ask questions or share insights
+4. **Review**: Revisit challenging topics as needed
+
+## Key Concepts to Master
+
+- Understanding vector spaces abstractly
+- Linear independence and spanning sets
+- Null space and range of linear maps
+- Eigenvalues and their geometric meaning
+- Inner products and orthogonality
+- Spectral theorem and its applications
+
+---
+
+*The purpose of computation is insight, not numbers.* - Richard Hamming

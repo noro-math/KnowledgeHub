@@ -1,0 +1,36 @@
+---
+title: "Comments Demo"
+format:
+  html:
+    comments:
+      giscus:
+        repo: giscus/giscus
+        repo-id: "MDEwOlJlcG9zaXRvcnkzNzM2NDM1OTg="
+        category: "General"
+        category-id: "DIC_kwDOFjQgPs4CA_2S"
+        mapping: "pathname"
+        reactions-enabled: true
+        input-position: "bottom"
+        theme: "light"
+        language: "en"
+        loading: "lazy"
+---
+
+# Comments Demo Page
+
+This page demonstrates what the comment section will look like when properly configured with Giscus.
+
+## Sample Content
+
+Here's some sample mathematical content:
+
+**Theorem**: For any vector space $V$ over field $\mathbb{F}$, the zero vector is unique.
+
+**Proof**: Suppose there are two zero vectors $0_1$ and $0_2$. Then:
+$$0_1 = 0_1 + 0_2 = 0_2$$
+
+The first equality uses the fact that $0_2$ is a zero vector, and the second uses the fact that $0_1$ is a zero vector.
+
+## Discussion
+
+Below you'll see the actual Giscus comment system in action (using the Giscus repository as a demo):

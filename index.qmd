@@ -1,0 +1,36 @@
+---
+title: "Welcome to Knowledge Hub"
+---
+
+# Welcome to Knowledge Hub
+
+This is a comprehensive knowledge repository designed to be your go-to resource for various academic subjects. Our goal is to provide well-organized, accessible content that serves both as a learning tool and reference material.
+
+## What You'll Find Here
+
+### Mathematics
+Our mathematics section covers fundamental and advanced topics through carefully curated content based on renowned textbooks. Each section includes:
+
+- **Comprehensive Notes**: Detailed explanations and key concepts
+- **Practice Exercises**: Problems to reinforce understanding
+- **Interactive Comments**: Community discussions and clarifications
+
+### Current Mathematics Sections
+
+- **Linear Algebra**: Based on "Linear Algebra Done Right" by Sheldon Axler
+
+## How to Navigate
+
+Use the navigation bar above to explore different subjects, or browse through the sidebar for specific topics within each subject area.
+
+## Contributing
+
+This knowledge hub is designed to grow over time. Each page includes a comment section where you can:
+- Ask questions about the material
+- Share insights and alternative explanations
+- Discuss problem-solving approaches
+- Suggest improvements or corrections
+
+---
+
+*Happy learning!*

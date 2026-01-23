@@ -1,0 +1,107 @@
+---
+title: "Linear Algebra Notes"
+subtitle: "Comprehensive notes from Linear Algebra Done Right"
+---
+
+# Linear Algebra Notes
+
+## Chapter 1: Vector Spaces
+
+### 1.1 Complex Numbers and Fields
+
+A **field** is a set with two operations (addition and multiplication) that satisfy certain properties. The most important fields for linear algebra are:
+- $\mathbb{R}$ (real numbers)
+- $\mathbb{C}$ (complex numbers)
+
+### 1.2 Definition of Vector Space
+
+A **vector space** is a set $V$ along with operations of addition and scalar multiplication that satisfy eight axioms:
+
+**Addition axioms:**
+1. Commutativity: $u + v = v + u$
+2. Associativity: $(u + v) + w = u + (v + w)$
+3. Additive identity: $\exists 0 \in V$ such that $v + 0 = v$
+4. Additive inverse: $\forall v \in V, \exists -v$ such that $v + (-v) = 0$
+
+**Scalar multiplication axioms:**
+5. Distributivity: $a(u + v) = au + av$
+6. Distributivity: $(a + b)v = av + bv$
+7. Associativity: $a(bv) = (ab)v$
+8. Multiplicative identity: $1v = v$
+
+### 1.3 Examples of Vector Spaces
+
+1. **$\mathbb{F}^n$**: The set of all $n$-tuples with entries from field $\mathbb{F}$
+2. **Function spaces**: $\mathbb{F}^S$ - functions from set $S$ to field $\mathbb{F}$
+3. **Polynomial spaces**: $\mathcal{P}(\mathbb{F})$ - all polynomials with coefficients in $\mathbb{F}$
+
+## Chapter 2: Finite-Dimensional Vector Spaces
+
+### 2.1 Span and Linear Independence
+
+**Linear combination**: A vector $v$ is a linear combination of vectors $v_1, \ldots, v_m$ if:
+$$v = a_1v_1 + \cdots + a_mv_m$$
+for some scalars $a_1, \ldots, a_m$.
+
+**Span**: The span of vectors $v_1, \ldots, v_m$ is the set of all linear combinations:
+$$\text{span}(v_1, \ldots, v_m) = \{a_1v_1 + \cdots + a_mv_m : a_1, \ldots, a_m \in \mathbb{F}\}$$
+
+**Linear independence**: Vectors $v_1, \ldots, v_m$ are linearly independent if:
+$$a_1v_1 + \cdots + a_mv_m = 0 \implies a_1 = \cdots = a_m = 0$$
+
+### 2.2 Bases
+
+A **basis** of vector space $V$ is a list of vectors that:
+1. Spans $V$
+2. Is linearly independent
+
+**Key theorem**: Every finite-dimensional vector space has a basis.
+
+### 2.3 Dimension
+
+The **dimension** of a finite-dimensional vector space is the length of any basis.
+
+**Important properties:**
+- All bases of a vector space have the same length
+- $\dim(\mathbb{F}^n) = n$
+- $\dim(\mathcal{P}_m(\mathbb{F})) = m + 1$
+
+## Chapter 3: Linear Maps
+
+### 3.1 Definition and Examples
+
+A **linear map** from $V$ to $W$ is a function $T: V \to W$ such that:
+1. **Additivity**: $T(u + v) = Tu + Tv$
+2. **Homogeneity**: $T(av) = aTv$
+
+### 3.2 Null Space and Range
+
+For linear map $T: V \to W$:
+
+**Null space**: $\text{null } T = \{v \in V : Tv = 0\}$
+
+**Range**: $\text{range } T = \{Tv : v \in V\}$
+
+**Fundamental theorem**: If $V$ is finite-dimensional, then:
+$$\dim V = \dim(\text{null } T) + \dim(\text{range } T)$$
+
+---
+
+*Note: This is a sample of the notes structure. Each chapter would be expanded with detailed explanations, examples, and proofs.*
+
+## Comments & Discussion
+
+::: {.callout-note}
+## Community Discussion
+The comment section will appear here once the site is deployed to GitHub Pages with Giscus configured. Readers will be able to:
+
+- Ask questions about the mathematical concepts
+- Request clarification on proofs
+- Share additional insights or examples
+- Discuss connections to other topics
+
+**To enable comments after GitHub deployment:**
+1. Install the Giscus GitHub App
+2. Enable Discussions in your repository
+3. Configure the repository details in `_quarto.yml`
+:::

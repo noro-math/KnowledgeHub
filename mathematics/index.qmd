@@ -1,0 +1,51 @@
+---
+title: "Mathematics"
+---
+
+# Mathematics Knowledge Hub
+
+Welcome to the Mathematics section of our knowledge hub. Here you'll find comprehensive coverage of various mathematical topics, organized by textbook and subject area.
+
+## Available Sections
+
+### Linear Algebra
+**Based on: "Linear Algebra Done Right" by Sheldon Axler**
+
+This section provides a rigorous introduction to linear algebra, focusing on:
+- Vector spaces and subspaces
+- Linear independence and bases
+- Linear maps and matrices
+- Eigenvalues and eigenvectors
+- Inner product spaces
+- Operators on inner product spaces
+
+[Explore Linear Algebra →](linear-algebra/index.qmd)
+
+## Coming Soon
+
+We're continuously expanding our mathematics coverage. Future sections will include:
+- Real Analysis
+- Abstract Algebra
+- Differential Equations
+- Probability Theory
+- Number Theory
+
+## How to Use This Section
+
+Each mathematical topic is organized into:
+
+1. **Overview Pages**: Introduction and roadmap for the topic
+2. **Notes**: Detailed explanations of concepts, theorems, and proofs
+3. **Exercises**: Practice problems with varying difficulty levels
+4. **Comments**: Community discussion for each page
+
+## Study Tips
+
+- Start with the overview to understand the big picture
+- Work through notes systematically
+- Attempt exercises to test your understanding
+- Use the comment sections to ask questions or share insights
+
+---
+
+*Mathematics is not about numbers, equations, computations, or algorithms: it is about understanding.* - William Paul Thurston

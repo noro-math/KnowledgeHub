@@ -1,0 +1,37 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Knowledge Hub"
+  description: "A comprehensive knowledge repository covering various subjects"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: mathematics/index.qmd
+        text: Mathematics
+      - href: demo-comments.qmd
+        text: Comments Demo
+    right:
+      - icon: github
+        href: https://github.com/yourusername/knowledge-hub
+        aria-label: GitHub
+  sidebar:
+    - title: "Mathematics"
+      contents:
+        - mathematics/index.qmd
+        - section: "Linear Algebra"
+          contents:
+            - mathematics/linear-algebra/index.qmd
+            - mathematics/linear-algebra/notes.qmd
+            - mathematics/linear-algebra/exercises.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: true
