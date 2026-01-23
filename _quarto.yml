@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - styles/line-numbers.js
 
 website:
   title: "Knowledge Hub"
@@ -14,38 +16,132 @@ website:
       - href: demo-comments.qmd
         text: Comments Demo
     right:
-      - text: "<i class='bi bi-sun-fill theme-icon-active' id='theme-toggle'></i>"
-        href: "#"
-        aria-label: "Toggle dark mode"
       - icon: github
         href: https://github.com/yourusername/knowledge-hub
         aria-label: GitHub
   sidebar:
     - title: "Mathematics"
       contents:
-        - mathematics/index.qmd
+        - href: mathematics/index.qmd
+          text: "Mathematics Overview"
         - section: "Linear Algebra"
           contents:
-            - mathematics/linear-algebra/index.qmd
-            - mathematics/linear-algebra/notes.qmd
-            - mathematics/linear-algebra/exercises.qmd
+            - href: mathematics/linear-algebra/index.qmd
+              text: "Linear Algebra Overview"
+            - href: mathematics/linear-algebra/notes.qmd
+              text: "Notes"
+            - href: mathematics/linear-algebra/exercises.qmd
+              text: "Exercises"
             - section: "Interactive Notebooks"
               contents:
-                - mathematics/linear-algebra/notebooks/01-vector-spaces.ipynb
-                - mathematics/linear-algebra/notebooks/02-linear-transformations.ipynb
-                - mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.ipynb
+                - href: mathematics/linear-algebra/notebooks/01-vector-spaces.ipynb
+                  text: "Vector Spaces"
+                - href: mathematics/linear-algebra/notebooks/02-linear-transformations.ipynb
+                  text: "Linear Transformations"
+                - href: mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.ipynb
+                  text: "Eigenvalues & Eigenvectors"
 
 format:
   html:
     theme: 
       light: flatly
-      dark: slate
-    css: styles.css
+      dark: darkly
+    css: styles/styles.css
     toc: true
     toc-depth: 3
     number-sections: true
     code-fold: true
-    include-after-body: theme-toggle.html
+    code-line-numbers: true
+    theme-dark-toggle: false
+    theme-toggle: false
+    page-layout: article
+    breadcrumbs: false
+    include-after-body: 
+      - styles/theme-toggle.html
+      - text: |
+          <script>
+          // Line numbers functionality - embedded inline to work from any directory
+          document.addEventListener('DOMContentLoaded', function() {
+              console.log('Line numbers script loaded');
+              
+              // Create toggle button
+              const toggleButton = document.createElement('button');
+              toggleButton.className = 'line-number-toggle';
+              toggleButton.innerHTML = '123';
+              toggleButton.title = 'Toggle line numbers';
+              toggleButton.setAttribute('aria-label', 'Toggle line numbers');
+              
+              // Add button to page
+              document.body.appendChild(toggleButton);
+              console.log('Toggle button added');
+              
+              // Get main content area - try multiple selectors
+              let mainContent = document.querySelector('main.content') || 
+                               document.querySelector('main') || 
+                               document.querySelector('.content') || 
+                               document.querySelector('#quarto-document-content');
+              
+              if (!mainContent) {
+                  console.error('Could not find main content area');
+                  return;
+              }
+              
+              console.log('Main content found:', mainContent);
+              
+              // Check if line numbers are enabled from localStorage
+              const lineNumbersEnabled = localStorage.getItem('lineNumbersEnabled') === 'true';
+              if (lineNumbersEnabled) {
+                  mainContent.classList.add('line-numbers-enabled');
+                  toggleButton.style.backgroundColor = '#28a745'; // Green when active
+                  console.log('Line numbers enabled from localStorage');
+              }
+              
+              // Toggle functionality
+              toggleButton.addEventListener('click', function() {
+                  console.log('Toggle button clicked');
+                  const isEnabled = mainContent.classList.contains('line-numbers-enabled');
+                  
+                  if (isEnabled) {
+                      mainContent.classList.remove('line-numbers-enabled');
+                      toggleButton.style.backgroundColor = '#3498db';
+                      localStorage.setItem('lineNumbersEnabled', 'false');
+                      console.log('Line numbers disabled');
+                  } else {
+                      mainContent.classList.add('line-numbers-enabled');
+                      toggleButton.style.backgroundColor = '#28a745';
+                      localStorage.setItem('lineNumbersEnabled', 'true');
+                      console.log('Line numbers enabled');
+                  }
+              });
+              
+              // Update button color based on theme
+              function updateButtonColor() {
+                  const isDark = document.documentElement.getAttribute('data-quarto-color-scheme') === 'dark';
+                  if (!mainContent.classList.contains('line-numbers-enabled')) {
+                      toggleButton.style.backgroundColor = isDark ? '#63b3ed' : '#3498db';
+                  }
+              }
+              
+              // Listen for theme changes
+              const observer = new MutationObserver(function(mutations) {
+                  mutations.forEach(function(mutation) {
+                      if (mutation.type === 'attributes' && mutation.attributeName === 'data-quarto-color-scheme') {
+                          updateButtonColor();
+                      }
+                  });
+              });
+              
+              observer.observe(document.documentElement, {
+                  attributes: true,
+                  attributeFilter: ['data-quarto-color-scheme']
+              });
+              
+              // Initial color update
+              updateButtonColor();
+              
+              console.log('Line numbers script initialization complete');
+          });
+          </script>
     comments:
       giscus:
         repo: noro-math/KnowledgeHub

@@ -24,11 +24,14 @@ This section provides a rigorous introduction to linear algebra, focusing on:
 ## Coming Soon
 
 We're continuously expanding our mathematics coverage. Future sections will include:
+
 - Real Analysis
 - Abstract Algebra
 - Differential Equations
 - Probability Theory
 - Number Theory
+  - Another item
+    - Another item
 
 ## How to Use This Section
 

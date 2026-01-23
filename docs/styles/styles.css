@@ -1,0 +1,1289 @@
+/* Custom styles for Knowledge Hub */
+
+/* Theme toggle button */
+#theme-toggle {
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease-in-out;
+  color: var(--bs-navbar-color);
+  text-decoration: none !important;
+}
+
+#theme-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: var(--bs-navbar-active-color);
+  transform: scale(1.1);
+}
+
+[data-quarto-color-scheme="dark"] #theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Light mode styles */
+[data-quarto-color-scheme="light"] {
+  --primary-color: #2c3e50;
+  --secondary-color: #34495e;
+  --accent-color: #3498db;
+  --bg-color: #ffffff;
+  --text-color: #2c3e50;
+  --border-color: #dee2e6;
+  --code-bg: #f8f9fa;
+}
+
+/* Dark mode styles */
+[data-quarto-color-scheme="dark"] {
+  --primary-color: #e2e8f0;
+  --secondary-color: #cbd5e0;
+  --accent-color: #63b3ed;
+  --bg-color: #1a202c;
+  --text-color: #e2e8f0;
+  --border-color: #4a5568;
+  --code-bg: #2d3748;
+}
+
+/* Apply theme colors */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Main layout improvements */
+.navbar-brand {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+/* Content styling */
+.content {
+  max-width: 900px;
+}
+
+/* Mathematics notation improvements */
+.math {
+  font-size: 1.1em;
+}
+
+/* Exercise callouts */
+.callout-tip {
+  border-left: 4px solid var(--accent-color);
+}
+
+.callout-tip .callout-header {
+  background-color: rgba(52, 152, 219, 0.1);
+}
+
+[data-quarto-color-scheme="dark"] .callout-tip .callout-header {
+  background-color: rgba(99, 179, 237, 0.2);
+}
+
+/* Code blocks */
+pre {
+  background-color: var(--code-bg) !important;
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  padding: 1rem;
+  color: var(--text-color);
+}
+
+/* Table of contents */
+.toc-title {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* Navigation improvements */
+.sidebar-navigation .sidebar-item {
+  margin-bottom: 0.25rem;
+}
+
+.sidebar-navigation .sidebar-item a {
+  padding: 0.375rem 0.75rem !important;
+  border-radius: 0.25rem;
+  transition: background-color 0.15s ease-in-out;
+  color: var(--text-color);
+}
+
+.sidebar-navigation .sidebar-item a:hover {
+  background-color: rgba(52, 152, 219, 0.1);
+  text-decoration: none;
+}
+
+/* Nested sidebar items - consistent indentation */
+.sidebar-navigation .sidebar-item .sidebar-item a {
+  padding-left: 2rem !important;
+}
+
+[data-quarto-color-scheme="dark"] .sidebar-navigation .sidebar-item a:hover {
+  background-color: rgba(99, 179, 237, 0.2);
+}
+
+/* Chapter and section headers */
+h1 {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  color: var(--secondary-color);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  color: var(--secondary-color);
+  margin-top: 1.5rem;
+}
+
+/* Theorem and definition boxes */
+.theorem, .definition, .lemma, .proof {
+  background-color: var(--code-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  color: var(--text-color);
+}
+
+.theorem::before {
+  content: "Theorem: ";
+  font-weight: bold;
+  color: #dc3545;
+}
+
+.definition::before {
+  content: "Definition: ";
+  font-weight: bold;
+  color: #28a745;
+}
+
+.lemma::before {
+  content: "Lemma: ";
+  font-weight: bold;
+  color: #ffc107;
+}
+
+.proof::before {
+  content: "Proof: ";
+  font-weight: bold;
+  color: #6f42c1;
+}
+
+/* Dark mode adjustments for theorem colors */
+[data-quarto-color-scheme="dark"] .theorem::before {
+  color: #ff6b6b;
+}
+
+[data-quarto-color-scheme="dark"] .definition::before {
+  color: #51cf66;
+}
+
+[data-quarto-color-scheme="dark"] .lemma::before {
+  color: #ffd43b;
+}
+
+[data-quarto-color-scheme="dark"] .proof::before {
+  color: #9775fa;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .content {
+    padding: 1rem;
+  }
+  
+  .math {
+    font-size: 1em;
+  }
+  
+  #theme-toggle {
+    font-size: 1.1rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+/* Always reserve space for line numbers */
+main.content,
+#quarto-document-content {
+  padding-left: 4rem !important;
+  position: relative;
+}
+
+/* Line numbers for all content - only visible when enabled */
+.line-numbers-enabled {
+  counter-reset: line-number;
+}
+
+/* Apply line numbers to content elements, but exclude navigation */
+.line-numbers-enabled p:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *),
+.line-numbers-enabled h1:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *),
+.line-numbers-enabled h2:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *),
+.line-numbers-enabled h3:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *),
+.line-numbers-enabled h4:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *),
+.line-numbers-enabled h5:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *),
+.line-numbers-enabled h6:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *),
+.line-numbers-enabled li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *),
+.line-numbers-enabled blockquote:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *),
+.line-numbers-enabled div.cell:not(.breadcrumb *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *) {
+  position: relative;
+  counter-increment: line-number;
+  margin-left: 0 !important;
+}
+
+/* Line number pseudo-elements - only visible when line-numbers-enabled class is present */
+.line-numbers-enabled p:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+.line-numbers-enabled h1:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+.line-numbers-enabled h2:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+.line-numbers-enabled h3:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+.line-numbers-enabled h4:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+.line-numbers-enabled h5:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+.line-numbers-enabled h6:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+.line-numbers-enabled blockquote:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+.line-numbers-enabled div.cell:not(.breadcrumb *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before {
+  content: counter(line-number);
+  position: absolute;
+  left: -5rem;
+  top: 0.35em;
+  width: 3rem;
+  text-align: right;
+  color: #888 !important;
+  font-size: 0.75rem !important;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+  line-height: inherit !important;
+  user-select: none;
+  pointer-events: none;
+  font-weight: 400 !important;
+  z-index: 10;
+  padding-right: 0.75rem;
+  background: none !important;
+}
+
+/* List items get line numbers aligned with other elements - absolute positioning relative to content */
+.line-numbers-enabled li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before {
+  content: counter(line-number);
+  position: absolute;
+  left: -5rem !important;
+  top: 0.35em;
+  width: 3rem;
+  text-align: right;
+  color: #888 !important;
+  font-size: 0.75rem !important;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+  line-height: inherit !important;
+  user-select: none;
+  pointer-events: none;
+  font-weight: 400 !important;
+  z-index: 10;
+  padding-right: 0.75rem;
+  background: none !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  text-indent: 0 !important;
+  transform: none !important;
+}
+
+/* Override list indentation effect on line numbers for nested lists */
+.line-numbers-enabled ul li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+.line-numbers-enabled ol li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before {
+  left: -5rem !important;
+  margin-left: -1.5rem !important; /* Compensate for list padding */
+}
+
+.line-numbers-enabled ul ul li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+.line-numbers-enabled ol ol li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+.line-numbers-enabled ul ol li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+.line-numbers-enabled ol ul li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before {
+  left: -5rem !important;
+  margin-left: -2.75rem !important; /* Compensate for nested list padding */
+}
+
+.line-numbers-enabled ul ul ul li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+.line-numbers-enabled ol ol ol li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before {
+  left: -5rem !important;
+  margin-left: -4rem !important; /* Compensate for deeply nested list padding */
+}
+
+.line-numbers-enabled ul ul ul li:not(.breadcrumb *):not(.navbar *):not(.sidebar *)::before,
+.line-numbers-enabled ol ol ol li:not(.breadcrumb *):not(.navbar *):not(.sidebar *)::before {
+  left: -5rem !important;
+  margin-left: -4rem !important; /* Compensate for deeply nested list padding */
+}
+
+/* Dark mode line numbers */
+[data-quarto-color-scheme="dark"] .line-numbers-enabled p:not(.breadcrumb *):not(.navbar *):not(.sidebar *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled h1:not(.breadcrumb *):not(.navbar *):not(.sidebar *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled h2:not(.breadcrumb *):not(.navbar *):not(.sidebar *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled h3:not(.breadcrumb *):not(.navbar *):not(.sidebar *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled h4:not(.breadcrumb *):not(.navbar *):not(.sidebar *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled h5:not(.breadcrumb *):not(.navbar *):not(.sidebar *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled h6:not(.breadcrumb *):not(.navbar *):not(.sidebar *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled blockquote:not(.breadcrumb *):not(.navbar *):not(.sidebar *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled div.cell:not(.breadcrumb *):not(.sidebar *)::before {
+  color: #aaa !important;
+  background: none !important;
+}
+
+/* Dark mode list items - all levels aligned */
+[data-quarto-color-scheme="dark"] .line-numbers-enabled li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled ul li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled ol li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled ul ul li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled ol ol li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled ul ol li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled ol ul li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled ul ul ul li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled ol ol ol li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before {
+  color: #aaa !important;
+  background: none !important;
+  left: -5rem !important;
+  top: 0.35em;
+  position: absolute !important;
+  transform: none !important;
+}
+
+/* ========================================
+   📝 LIST ITEM INDENTATION & STYLING
+   ======================================== 
+   
+   📍 TO CUSTOMIZE LIST INDENTATION:
+   Modify the values below to adjust list item spacing
+   and indentation for different list levels.
+   ======================================== */
+
+/* Ensure navigation elements are never affected by line numbers or list styling */
+.breadcrumb, .breadcrumb *, 
+.navbar, .navbar *, 
+.sidebar, .sidebar *, 
+.quarto-page-breadcrumbs, .quarto-page-breadcrumbs *,
+.quarto-navbar, .quarto-navbar *,
+.nav, .nav *,
+.navigation, .navigation *,
+.sidebar-navigation, .sidebar-navigation *,
+.quarto-sidebar, .quarto-sidebar * {
+  counter-increment: none !important;
+  list-style: none !important;
+  list-style-type: none !important;
+}
+
+/* Only disable line number pseudo-elements, not all pseudo-elements */
+.line-numbers-enabled .breadcrumb::before, 
+.line-numbers-enabled .breadcrumb *::before,
+.line-numbers-enabled .navbar::before, 
+.line-numbers-enabled .navbar *::before,
+.line-numbers-enabled .sidebar::before, 
+.line-numbers-enabled .sidebar *::before,
+.line-numbers-enabled .quarto-page-breadcrumbs::before, 
+.line-numbers-enabled .quarto-page-breadcrumbs *::before,
+.line-numbers-enabled .quarto-navbar::before, 
+.line-numbers-enabled .quarto-navbar *::before,
+.line-numbers-enabled .nav::before, 
+.line-numbers-enabled .nav *::before,
+.line-numbers-enabled .navigation::before, 
+.line-numbers-enabled .navigation *::before,
+.line-numbers-enabled .sidebar-navigation::before, 
+.line-numbers-enabled .sidebar-navigation *::before,
+.line-numbers-enabled .quarto-sidebar::before, 
+.line-numbers-enabled .quarto-sidebar *::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Base list styling */
+ul, ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Nested list indentation */
+ul ul, ol ol, ul ol, ol ul {
+  padding-left: 1.25rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+/* List item spacing */
+li {
+  margin-bottom: 0.25rem;
+  line-height: 1.6;
+}
+
+/* Nested list items - reduced spacing */
+li li {
+  margin-bottom: 0.125rem;
+}
+
+/* List item content alignment with line numbers */
+.line-numbers-enabled li {
+  padding-left: 0;
+  text-indent: 0;
+}
+
+/* Ensure proper spacing for list markers */
+ul li {
+  list-style-type: disc;
+}
+
+ul ul li {
+  list-style-type: circle;
+}
+
+ul ul ul li {
+  list-style-type: square;
+}
+
+ol li {
+  list-style-type: decimal;
+}
+
+ol ol li {
+  list-style-type: lower-alpha;
+}
+
+ol ol ol li {
+  list-style-type: lower-roman;
+}
+
+/* Dark mode list adjustments */
+[data-quarto-color-scheme="dark"] li {
+  color: var(--text-color);
+}
+
+/* ========================================
+   END LIST ITEM CONFIGURATION
+   ======================================== */
+
+/* Line number toggle button */
+.line-number-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.line-number-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  main.content,
+  #quarto-document-content {
+    padding-left: 3rem !important;
+  }
+  
+  .line-numbers-enabled p:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+  .line-numbers-enabled h1:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+  .line-numbers-enabled h2:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+  .line-numbers-enabled h3:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+  .line-numbers-enabled h4:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+  .line-numbers-enabled h5:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+  .line-numbers-enabled h6:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+  .line-numbers-enabled blockquote:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before,
+  .line-numbers-enabled div.cell:not(.breadcrumb *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before {
+    left: -2.75rem;
+    top: 0.35em;
+    width: 2.25rem;
+    font-size: 0.65rem !important;
+    line-height: inherit !important;
+    padding-right: 0.5rem;
+  }
+  
+  .line-numbers-enabled li:not(.breadcrumb *):not(.navbar *):not(.sidebar *):not(.quarto-page-breadcrumbs *):not(.quarto-navbar *):not(.nav *):not(.navigation *)::before {
+    left: -2.75rem !important;
+    top: 0.1em;
+    width: 2.25rem;
+    font-size: 0.65rem !important;
+    line-height: inherit !important;
+    padding-right: 0.5rem;
+    background: none !important;
+    margin-left: 0 !important;
+    position: absolute !important;
+    transform: none !important;
+  }
+  
+  .line-number-toggle {
+    bottom: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Theme toggle button */
+.theme-toggle-btn {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+[data-quarto-color-scheme="light"] .theme-toggle-btn {
+  background: #3498db;
+}
+
+[data-quarto-color-scheme="dark"] .theme-toggle-btn {
+  background: #63b3ed;
+}
+
+@media (max-width: 768px) {
+  .theme-toggle-btn {
+    bottom: 70px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Hide the built-in Quarto theme toggle */
+.quarto-color-scheme-toggle {
+  display: none !important;
+}
+
+.quarto-navbar-tools:has(.quarto-color-scheme-toggle:only-child) {
+  display: none !important;
+}
+
+.quarto-navbar-tools {
+  display: none !important;
+}
+
+/* Fix dark mode sidebar styling */
+[data-quarto-color-scheme="dark"] .sidebar {
+  background-color: #1a202c !important;
+  border-right: 1px solid #4a5568 !important;
+}
+
+[data-quarto-color-scheme="dark"] .sidebar-navigation {
+  background-color: #1a202c !important;
+}
+
+[data-quarto-color-scheme="dark"] .sidebar-navigation .sidebar-item a {
+  color: #e2e8f0 !important;
+  background-color: transparent !important;
+  padding: 0.375rem 0.75rem !important;
+}
+
+[data-quarto-color-scheme="dark"] .sidebar-navigation .sidebar-item a:hover {
+  background-color: rgba(99, 179, 237, 0.2) !important;
+  color: #ffffff !important;
+}
+
+[data-quarto-color-scheme="dark"] .sidebar-navigation .sidebar-item.active > a,
+[data-quarto-color-scheme="dark"] .sidebar-navigation .sidebar-item a.active {
+  background-color: rgba(99, 179, 237, 0.3) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+[data-quarto-color-scheme="dark"] .sidebar-title {
+  color: #ffffff !important;
+  background-color: #2d3748 !important;
+  border-bottom: 1px solid #4a5568 !important;
+}
+
+[data-quarto-color-scheme="dark"] .sidebar-section-title {
+  color: #cbd5e0 !important;
+  font-weight: 600;
+}
+
+[data-quarto-color-scheme="dark"] .sidebar-menu-container {
+  background-color: #1a202c !important;
+}
+
+[data-quarto-color-scheme="dark"] .quarto-sidebar-toggle {
+  color: #e2e8f0 !important;
+  background-color: #2d3748 !important;
+  border: 1px solid #4a5568 !important;
+}
+
+[data-quarto-color-scheme="dark"] .quarto-sidebar-toggle:hover {
+  background-color: #4a5568 !important;
+  color: #ffffff !important;
+}
+
+/* Fix nested sidebar items */
+[data-quarto-color-scheme="dark"] .sidebar-navigation .sidebar-item .sidebar-item a {
+  color: #cbd5e0 !important;
+  padding-left: 2rem !important;
+  padding-top: 0.375rem !important;
+  padding-bottom: 0.375rem !important;
+  padding-right: 0.75rem !important;
+}
+
+[data-quarto-color-scheme="dark"] .sidebar-navigation .sidebar-item .sidebar-item a:hover {
+  background-color: rgba(99, 179, 237, 0.15) !important;
+  color: #ffffff !important;
+}
+
+[data-quarto-color-scheme="dark"] .sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+[data-quarto-color-scheme="dark"] .sidebar::-webkit-scrollbar-track {
+  background: #2d3748;
+}
+
+[data-quarto-color-scheme="dark"] .sidebar::-webkit-scrollbar-thumb {
+  background: #4a5568;
+  border-radius: 4px;
+}
+
+[data-quarto-color-scheme="dark"] .sidebar::-webkit-scrollbar-thumb:hover {
+  background: #63b3ed;
+}
+
+/* Fix breadcrumb navigation in dark mode */
+[data-quarto-color-scheme="dark"] .breadcrumb {
+  background-color: transparent !important;
+}
+
+[data-quarto-color-scheme="dark"] .breadcrumb-item {
+  color: #e2e8f0 !important;
+}
+
+[data-quarto-color-scheme="dark"] .breadcrumb-item a {
+  color: #63b3ed !important;
+  text-decoration: none;
+}
+
+[data-quarto-color-scheme="dark"] .breadcrumb-item a:hover {
+  color: #ffffff !important;
+  text-decoration: underline;
+}
+
+
+
+[data-quarto-color-scheme="dark"] .breadcrumb-item.active {
+  color: #ffffff !important;
+}
+
+[data-quarto-color-scheme="dark"] .nav-separator,
+[data-quarto-color-scheme="dark"] .breadcrumb-separator {
+  color: #cbd5e0 !important;
+}
+
+[data-quarto-color-scheme="dark"] .quarto-title-block {
+  background-color: transparent !important;
+}
+
+[data-quarto-color-scheme="dark"] .quarto-title-block .breadcrumb {
+  background-color: transparent !important;
+}
+
+
+
+[data-quarto-color-scheme="dark"] .nav-path {
+  color: #e2e8f0 !important;
+}
+
+[data-quarto-color-scheme="dark"] .nav-path .nav-path-separator {
+  color: #cbd5e0 !important;
+}
+
+/* Ensure consistent breadcrumb spacing in dark mode */
+[data-quarto-color-scheme="dark"] .quarto-page-breadcrumbs {
+  margin-bottom: 1rem !important;
+  padding: 0.75rem 0 !important;
+}
+
+[data-quarto-color-scheme="dark"] .quarto-page-breadcrumbs .breadcrumb {
+  background-color: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: 0.9rem !important;
+}
+
+[data-quarto-color-scheme="dark"] .quarto-title-breadcrumbs {
+  margin-bottom: 0.5rem !important;
+}
+
+/* Breadcrumb navigation improvements - use default Bootstrap behavior */
+.quarto-page-breadcrumbs {
+  display: none !important; /* Hide breadcrumbs completely */
+}
+
+/* Hide all breadcrumb elements */
+.breadcrumb,
+.quarto-page-breadcrumbs,
+.quarto-title-breadcrumbs,
+nav[aria-label="breadcrumb"] {
+  display: none !important;
+}
+
+
+
+/* Ensure consistent sidebar spacing across themes */
+.sidebar-navigation .sidebar-item {
+  margin-bottom: 0.25rem !important;
+}
+
+[data-quarto-color-scheme="dark"] .sidebar-navigation .sidebar-item {
+  margin-bottom: 0.25rem !important;
+}
+
+.sidebar-navigation .sidebar-item-section {
+  margin-bottom: 0.25rem !important;
+}
+
+[data-quarto-color-scheme="dark"] .sidebar-navigation .sidebar-item-section {
+  margin-bottom: 0.25rem !important;
+}
+
+.sidebar-navigation .sidebar-item .sidebar-item .sidebar-item a {
+  padding-left: 3rem !important;
+}
+
+[data-quarto-color-scheme="dark"] .sidebar-navigation .sidebar-item .sidebar-item .sidebar-item a {
+  padding-left: 3rem !important;
+  color: #a0aec0 !important;
+}
+
+.sidebar-menu-container {
+  padding: 0 !important;
+}
+
+[data-quarto-color-scheme="dark"] .sidebar-menu-container {
+  background-color: #1a202c !important;
+  padding: 0 !important;
+}
+
+.sidebar-navigation ul {
+  padding-left: 0 !important;
+  margin: 0 !important;
+}
+
+[data-quarto-color-scheme="dark"] .sidebar-navigation ul {
+  padding-left: 0 !important;
+  margin: 0 !important;
+}
+
+/* Comprehensive callout dark mode styling */
+[data-quarto-color-scheme="dark"] .callout-header {
+  color: #ffffff !important;
+  background-color: transparent !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-title-container {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  background-color: transparent !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-title {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  background-color: transparent !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-icon-container {
+  background-color: transparent !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-icon {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Callout-tip (Green theme) */
+[data-quarto-color-scheme="dark"] .callout-tip {
+  border-left: 4px solid #28a745 !important;
+  background-color: rgba(40, 167, 69, 0.1) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-tip .callout-header {
+  background-color: rgba(40, 167, 69, 0.25) !important;
+  border-bottom: 1px solid rgba(40, 167, 69, 0.3) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-tip .callout-header * {
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-tip .callout-icon {
+  color: #ffffff !important;
+}
+
+/* Callout-note (Blue theme) */
+[data-quarto-color-scheme="dark"] .callout-note {
+  border-left: 4px solid #007bff !important;
+  background-color: rgba(0, 123, 255, 0.1) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-note .callout-header {
+  background-color: rgba(0, 123, 255, 0.25) !important;
+  border-bottom: 1px solid rgba(0, 123, 255, 0.3) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-note .callout-header * {
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-note .callout-icon {
+  color: #ffffff !important;
+}
+
+/* Callout-warning (Yellow/Orange theme) */
+[data-quarto-color-scheme="dark"] .callout-warning {
+  border-left: 4px solid #ffc107 !important;
+  background-color: rgba(255, 193, 7, 0.1) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-warning .callout-header {
+  background-color: rgba(255, 193, 7, 0.25) !important;
+  border-bottom: 1px solid rgba(255, 193, 7, 0.3) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-warning .callout-header * {
+  background-color: transparent !important;
+  color: #000000 !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-warning .callout-icon {
+  color: #000000 !important;
+}
+
+/* Callout-important (Red theme) */
+[data-quarto-color-scheme="dark"] .callout-important {
+  border-left: 4px solid #dc3545 !important;
+  background-color: rgba(220, 53, 69, 0.1) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-important .callout-header {
+  background-color: rgba(220, 53, 69, 0.25) !important;
+  border-bottom: 1px solid rgba(220, 53, 69, 0.3) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-important .callout-header * {
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-important .callout-icon {
+  color: #ffffff !important;
+}
+
+/* Callout-caution (Orange theme) */
+[data-quarto-color-scheme="dark"] .callout-caution {
+  border-left: 4px solid #fd7e14 !important;
+  background-color: rgba(253, 126, 20, 0.1) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-caution .callout-header {
+  background-color: rgba(253, 126, 20, 0.25) !important;
+  border-bottom: 1px solid rgba(253, 126, 20, 0.3) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-caution .callout-header * {
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-caution .callout-icon {
+  color: #ffffff !important;
+}
+
+/* Additional callout types */
+[data-quarto-color-scheme="dark"] .callout-info {
+  border-left: 4px solid #17a2b8 !important;
+  background-color: rgba(23, 162, 184, 0.1) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-info .callout-header {
+  background-color: rgba(23, 162, 184, 0.25) !important;
+  border-bottom: 1px solid rgba(23, 162, 184, 0.3) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-info .callout-header * {
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-info .callout-icon {
+  color: #ffffff !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-success {
+  border-left: 4px solid #28a745 !important;
+  background-color: rgba(40, 167, 69, 0.1) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-success .callout-header {
+  background-color: rgba(40, 167, 69, 0.25) !important;
+  border-bottom: 1px solid rgba(40, 167, 69, 0.3) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-success .callout-header * {
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-success .callout-icon {
+  color: #ffffff !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-danger {
+  border-left: 4px solid #dc3545 !important;
+  background-color: rgba(220, 53, 69, 0.1) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-danger .callout-header {
+  background-color: rgba(220, 53, 69, 0.25) !important;
+  border-bottom: 1px solid rgba(220, 53, 69, 0.3) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-danger .callout-header * {
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-danger .callout-icon {
+  color: #ffffff !important;
+}
+
+/* Improve code block contrast in dark mode */
+[data-quarto-color-scheme="dark"] pre {
+  background-color: #1e1e1e !important;
+  border: 1px solid #404040 !important;
+  color: #f8f8f2 !important;
+}
+
+[data-quarto-color-scheme="dark"] code {
+  background-color: #2d2d2d !important;
+  color: #f8f8f2 !important;
+  border: 1px solid #404040 !important;
+  padding: 0.2em 0.4em !important;
+  border-radius: 0.25rem !important;
+}
+
+[data-quarto-color-scheme="dark"] pre code {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  color: #f8f8f2 !important;
+}
+
+[data-quarto-color-scheme="dark"] p code,
+[data-quarto-color-scheme="dark"] li code,
+[data-quarto-color-scheme="dark"] td code,
+[data-quarto-color-scheme="dark"] th code {
+  background-color: #2d2d2d !important;
+  color: #e6db74 !important;
+  border: 1px solid #404040 !important;
+  font-weight: 500 !important;
+}
+
+[data-quarto-color-scheme="dark"] .sourceCode {
+  background-color: #1e1e1e !important;
+  border: 1px solid #404040 !important;
+}
+
+/* Enhanced syntax highlighting */
+[data-quarto-color-scheme="dark"] .sourceCode .kw { color: #66d9ef !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .dt { color: #a6e22e !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .dv { color: #ae81ff !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .bn { color: #ae81ff !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .fl { color: #ae81ff !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .ch { color: #e6db74 !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .st { color: #e6db74 !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .co { color: #75715e !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .ot { color: #f92672 !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .al { color: #fd971f !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .fu { color: #a6e22e !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .er { color: #f92672 !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .wa { color: #fd971f !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .cn { color: #ae81ff !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .sc { color: #e6db74 !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .vs { color: #e6db74 !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .ss { color: #e6db74 !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .im { color: #f8f8f2 !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .va { color: #f8f8f2 !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .cf { color: #66d9ef !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .op { color: #f92672 !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .bu { color: #f8f8f2 !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .ex { color: #a6e22e !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .pp { color: #f92672 !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .at { color: #fd971f !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .do { color: #75715e !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .an { color: #75715e !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .cv { color: #75715e !important; }
+[data-quarto-color-scheme="dark"] .sourceCode .in { color: #75715e !important; }
+
+[data-quarto-color-scheme="dark"] .math {
+  color: #f8f8f2 !important;
+}
+
+[data-quarto-color-scheme="dark"] .math.inline {
+  color: #f8f8f2 !important;
+  font-weight: 500 !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-body {
+  color: #e2e8f0 !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-body p {
+  color: #e2e8f0 !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-body li {
+  color: #e2e8f0 !important;
+}
+
+/* Enhanced callout-note icon visibility */
+[data-quarto-color-scheme="dark"] .callout-note .callout-icon {
+  color: #63b3ed !important;
+  font-weight: bold !important;
+  text-shadow: 0 0 3px rgba(99, 179, 237, 0.8) !important;
+  opacity: 1 !important;
+  filter: brightness(1.5) contrast(1.2) !important;
+}
+
+.callout-note .callout-icon {
+  color: #007bff !important;
+  font-weight: bold !important;
+  text-shadow: 0 0 2px rgba(0, 123, 255, 0.5) !important;
+  opacity: 1 !important;
+  filter: brightness(1.2) contrast(1.1) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-note .callout-icon::before,
+[data-quarto-color-scheme="dark"] .callout-note .callout-icon::after {
+  color: #63b3ed !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
+  text-shadow: 0 0 3px rgba(99, 179, 237, 0.8) !important;
+  filter: brightness(1.5) !important;
+}
+
+.callout-note .callout-icon::before,
+.callout-note .callout-icon::after {
+  color: #007bff !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
+  text-shadow: 0 0 2px rgba(0, 123, 255, 0.5) !important;
+  filter: brightness(1.2) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-note i,
+[data-quarto-color-scheme="dark"] .callout-note .bi,
+[data-quarto-color-scheme="dark"] .callout-note .fa,
+[data-quarto-color-scheme="dark"] .callout-note .fas,
+[data-quarto-color-scheme="dark"] .callout-note .far,
+[data-quarto-color-scheme="dark"] .callout-note .fab {
+  color: #63b3ed !important;
+  opacity: 1 !important;
+  filter: brightness(1.5) contrast(1.2) !important;
+}
+
+.callout-note i,
+.callout-note .bi,
+.callout-note .fa,
+.callout-note .fas,
+.callout-note .far,
+.callout-note .fab {
+  color: #007bff !important;
+  opacity: 1 !important;
+  filter: brightness(1.2) contrast(1.1) !important;
+}
+
+[data-quarto-color-scheme="dark"] .callout-note .bi-info-circle,
+[data-quarto-color-scheme="dark"] .callout-note .bi-info-circle-fill,
+[data-quarto-color-scheme="dark"] .callout-note .fa-info-circle,
+[data-quarto-color-scheme="dark"] .callout-note .fa-info {
+  color: #63b3ed !important;
+  filter: brightness(1.5) contrast(1.3) !important;
+  text-shadow: 0 0 4px rgba(99, 179, 237, 1) !important;
+}
+
+.callout-note .bi-info-circle,
+.callout-note .bi-info-circle-fill,
+.callout-note .fa-info-circle,
+.callout-note .fa-info {
+  color: #007bff !important;
+  filter: brightness(1.3) contrast(1.2) !important;
+  text-shadow: 0 0 3px rgba(0, 123, 255, 0.8) !important;
+}
+
+/* ========================================
+   🎯 UNIFIED CALLOUT LINE NUMBER CONFIGURATION
+   ======================================== 
+   
+   📍 TO CHANGE CALLOUT LINE NUMBER INDENTATION:
+   Find the line below that says "left: -5rem !important;"
+   and change the value:
+   
+   Examples:
+   left: -4rem !important;     // Further left (more indented)
+   left: -3rem !important;     // Closer to content (less indented)
+   left: -2.5rem !important;   // Even closer
+   
+   ⚠️  All callout types will use the same indentation value.
+   ======================================== */
+
+/* 🔧 MAIN CALLOUT LINE NUMBER POSITIONING - EDIT HERE */
+.line-numbers-enabled .callout:not(.breadcrumb *):not(.sidebar *)::before,
+.line-numbers-enabled .callout-note:not(.breadcrumb *):not(.sidebar *)::before,
+.line-numbers-enabled .callout-tip:not(.breadcrumb *):not(.sidebar *)::before,
+.line-numbers-enabled .callout-warning:not(.breadcrumb *):not(.sidebar *)::before,
+.line-numbers-enabled .callout-important:not(.breadcrumb *):not(.sidebar *)::before,
+.line-numbers-enabled .callout-caution:not(.breadcrumb *):not(.sidebar *)::before,
+.line-numbers-enabled .callout-info:not(.breadcrumb *):not(.sidebar *)::before,
+.line-numbers-enabled .callout-success:not(.breadcrumb *):not(.sidebar *)::before,
+.line-numbers-enabled .callout-danger:not(.breadcrumb *):not(.sidebar *)::before {
+  content: counter(line-number) !important;
+  position: absolute !important;
+  left: -5.3rem !important;  /* 👈 CHANGE THIS VALUE TO ADJUST INDENTATION */
+  top: 0.35em !important;
+  width: 3rem !important;
+  text-align: right !important;
+  color: #888 !important;
+  font-size: 0.75rem !important;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', 'Liberation Mono', monospace !important;
+  line-height: inherit !important;
+  user-select: none !important;
+  pointer-events: none !important;
+  font-weight: 400 !important;
+  z-index: 10 !important;
+  padding-right: 0.75rem !important;
+  background: none !important;
+  margin-left: 0 !important;
+  transform: none !important;
+}
+
+/* 📦 CALLOUT CONTAINER POSITIONING */
+.line-numbers-enabled .callout,
+.line-numbers-enabled .callout-note,
+.line-numbers-enabled .callout-tip,
+.line-numbers-enabled .callout-warning,
+.line-numbers-enabled .callout-important,
+.line-numbers-enabled .callout-caution,
+.line-numbers-enabled .callout-info,
+.line-numbers-enabled .callout-success,
+.line-numbers-enabled .callout-danger {
+  position: relative !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  counter-increment: line-number !important;
+}
+
+/* 🌙 DARK MODE COLORS */
+[data-quarto-color-scheme="dark"] .line-numbers-enabled .callout:not(.breadcrumb *):not(.sidebar *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled .callout-note:not(.breadcrumb *):not(.sidebar *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled .callout-tip:not(.breadcrumb *):not(.sidebar *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled .callout-warning:not(.breadcrumb *):not(.sidebar *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled .callout-important:not(.breadcrumb *):not(.sidebar *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled .callout-caution:not(.breadcrumb *):not(.sidebar *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled .callout-info:not(.breadcrumb *):not(.sidebar *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled .callout-success:not(.breadcrumb *):not(.sidebar *)::before,
+[data-quarto-color-scheme="dark"] .line-numbers-enabled .callout-danger:not(.breadcrumb *):not(.sidebar *)::before {
+  color: #aaa !important;
+  background: none !important;
+}
+
+/* 🚫 PREVENT NESTED LINE NUMBERS */
+.line-numbers-enabled .callout .callout-header::before,
+.line-numbers-enabled .callout .callout-body::before,
+.line-numbers-enabled .callout .callout-body p::before,
+.line-numbers-enabled .callout .callout-body h1::before,
+.line-numbers-enabled .callout .callout-body h2::before,
+.line-numbers-enabled .callout .callout-body h3::before,
+.line-numbers-enabled .callout .callout-body h4::before,
+.line-numbers-enabled .callout .callout-body h5::before,
+.line-numbers-enabled .callout .callout-body h6::before,
+.line-numbers-enabled .callout .callout-body ul::before,
+.line-numbers-enabled .callout .callout-body ol::before,
+.line-numbers-enabled .callout .callout-body li::before,
+.line-numbers-enabled .callout .callout-body-container::before,
+.line-numbers-enabled .callout .callout-body-container p::before,
+.line-numbers-enabled .callout .callout-body-container h1::before,
+.line-numbers-enabled .callout .callout-body-container h2::before,
+.line-numbers-enabled .callout .callout-body-container h3::before,
+.line-numbers-enabled .callout .callout-body-container h4::before,
+.line-numbers-enabled .callout .callout-body-container h5::before,
+.line-numbers-enabled .callout .callout-body-container h6::before,
+.line-numbers-enabled .callout .callout-body-container ul::before,
+.line-numbers-enabled .callout .callout-body-container ol::before,
+.line-numbers-enabled .callout .callout-body-container li::before {
+  display: none !important;
+}
+
+/* 🔄 PREVENT COUNTER INCREMENT FOR NESTED ELEMENTS */
+.line-numbers-enabled .callout .callout-header,
+.line-numbers-enabled .callout .callout-body,
+.line-numbers-enabled .callout .callout-body p,
+.line-numbers-enabled .callout .callout-body h1,
+.line-numbers-enabled .callout .callout-body h2,
+.line-numbers-enabled .callout .callout-body h3,
+.line-numbers-enabled .callout .callout-body h4,
+.line-numbers-enabled .callout .callout-body h5,
+.line-numbers-enabled .callout .callout-body h6,
+.line-numbers-enabled .callout .callout-body ul,
+.line-numbers-enabled .callout .callout-body ol,
+.line-numbers-enabled .callout .callout-body li,
+.line-numbers-enabled .callout .callout-body-container,
+.line-numbers-enabled .callout .callout-body-container p,
+.line-numbers-enabled .callout .callout-body-container h1,
+.line-numbers-enabled .callout .callout-body-container h2,
+.line-numbers-enabled .callout .callout-body-container h3,
+.line-numbers-enabled .callout .callout-body-container h4,
+.line-numbers-enabled .callout .callout-body-container h5,
+.line-numbers-enabled .callout .callout-body-container h6,
+.line-numbers-enabled .callout .callout-body-container ul,
+.line-numbers-enabled .callout .callout-body-container ol,
+.line-numbers-enabled .callout .callout-body-container li {
+  counter-increment: none !important;
+}
+
+/* ✅ FORCE DISPLAY FOR ALL CALLOUT LINE NUMBERS */
+.line-numbers-enabled .callout::before,
+.line-numbers-enabled .callout.callout-note::before,
+.line-numbers-enabled .callout.callout-tip::before,
+.line-numbers-enabled .callout.callout-warning::before,
+.line-numbers-enabled .callout.callout-important::before,
+.line-numbers-enabled .callout.callout-caution::before,
+.line-numbers-enabled .callout.callout-info::before,
+.line-numbers-enabled .callout.callout-success::before,
+.line-numbers-enabled .callout.callout-danger::before {
+  display: block !important;
+}
+
+/* ========================================
+   END UNIFIED CALLOUT CONFIGURATION
+   ======================================== */

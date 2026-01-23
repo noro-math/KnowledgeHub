@@ -155,3 +155,68 @@ The comment section will appear here once the site is deployed to GitHub Pages w
 2. Enable Discussions in your repository
 3. Configure the repository details in `_quarto.yml`
 :::
+
+---
+
+## Callout Examples for Color Testing
+
+Here are all the different types of callouts to test icon colors and styling:
+
+### Note Callout
+::: {.callout-note}
+## Note
+This is a note callout with the "i" icon. The icon should be bright blue in both light and dark modes.
+:::
+
+### Tip Callout
+::: {.callout-tip}
+## Tip
+This is a tip callout with a lightbulb icon. Should have green theming.
+:::
+
+### Warning Callout
+::: {.callout-warning}
+## Warning
+This is a warning callout with an exclamation icon. Should have yellow/orange theming.
+:::
+
+### Important Callout
+::: {.callout-important}
+## Important
+This is an important callout with an exclamation icon. Should have red theming.
+:::
+
+### Caution Callout
+::: {.callout-caution}
+## Caution
+This is a caution callout with a triangle warning icon. Should have orange theming.
+:::
+
+
+
+### Custom Titled Callouts
+
+::: {.callout-note collapse="true"}
+## Custom Note Title
+Testing custom titles with note styling.
+:::
+
+::: {.callout-tip collapse="true"}
+## Pro Tip
+Testing custom titles with tip styling.
+:::
+
+::: {.callout-warning collapse="true"}
+## Alert
+Testing custom titles with warning styling.
+:::
+
+::: {.callout-important collapse="true"}
+## Critical
+Testing custom titles with important styling.
+:::
+
+::: {.callout-warning collapse="true"}
+## Warning
+Testing custom titles with important styling.
+:::

@@ -1,0 +1,135 @@
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Create theme toggle button
+    const themeToggle = document.createElement('button');
+    themeToggle.id = 'theme-toggle';
+    themeToggle.className = 'theme-toggle-btn';
+    themeToggle.setAttribute('aria-label', 'Toggle dark mode');
+    
+    // Add to page
+    document.body.appendChild(themeToggle);
+    
+    // Check for saved theme preference or default to 'light'
+    const savedTheme = localStorage.getItem('quarto-color-scheme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const currentTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+    
+    // Apply the theme
+    setTheme(currentTheme);
+    
+    // Add click event listener to the toggle button
+    themeToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Get current theme
+        const currentTheme = document.documentElement.getAttribute('data-quarto-color-scheme') || 'light';
+        
+        // Switch theme
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        // Apply new theme
+        setTheme(newTheme);
+        
+        // Save theme preference
+        localStorage.setItem('quarto-color-scheme', newTheme);
+        
+        console.log('Theme switched to:', newTheme);
+    });
+    
+    function setTheme(theme) {
+        console.log('Setting theme to:', theme);
+        
+        // Set Quarto theme attributes
+        document.documentElement.setAttribute('data-quarto-color-scheme', theme);
+        document.documentElement.setAttribute('data-bs-theme', theme);
+        
+        // Also set the color-scheme CSS property for better browser integration
+        document.documentElement.style.colorScheme = theme;
+        
+        // Update toggle button icon
+        updateToggleIcon(theme);
+        
+        // Update Giscus theme
+        updateGiscusTheme(theme);
+        
+        // Force update of any other theme-dependent elements
+        setTimeout(() => {
+            // Trigger a custom event for other components that might need to update
+            window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
+        }, 100);
+    }
+    
+    function updateToggleIcon(theme) {
+        if (theme === 'dark') {
+            themeToggle.innerHTML = '<i class="bi bi-moon-fill"></i>';
+            themeToggle.setAttribute('aria-label', 'Switch to light mode');
+            themeToggle.setAttribute('title', 'Switch to light mode');
+        } else {
+            themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+            themeToggle.setAttribute('aria-label', 'Switch to dark mode');
+            themeToggle.setAttribute('title', 'Switch to dark mode');
+        }
+    }
+    
+    function updateGiscusTheme(theme) {
+        // Method 1: Send message to existing Giscus iframe
+        const giscusFrame = document.querySelector('iframe.giscus-frame');
+        if (giscusFrame) {
+            console.log('Updating Giscus theme via iframe message');
+            giscusFrame.contentWindow.postMessage({
+                giscus: {
+                    setConfig: {
+                        theme: theme
+                    }
+                }
+            }, 'https://giscus.app');
+        }
+        
+        // Method 2: Update Giscus script attributes if they exist
+        const giscusScript = document.querySelector('script[data-repo]');
+        if (giscusScript) {
+            console.log('Updating Giscus script theme attribute');
+            giscusScript.setAttribute('data-theme', theme);
+        }
+        
+        // Method 3: Try to reload Giscus completely
+        setTimeout(() => {
+            const giscusContainer = document.querySelector('.giscus');
+            if (giscusContainer) {
+                console.log('Attempting to reload Giscus with new theme');
+                // Store the current container
+                const parent = giscusContainer.parentNode;
+                const nextSibling = giscusContainer.nextSibling;
+                
+                // Remove current Giscus
+                giscusContainer.remove();
+                
+                // Create new container
+                const newContainer = document.createElement('div');
+                newContainer.className = 'giscus';
+                
+                // Insert back
+                if (nextSibling) {
+                    parent.insertBefore(newContainer, nextSibling);
+                } else {
+                    parent.appendChild(newContainer);
+                }
+                
+                // Trigger Giscus reload if the global function exists
+                if (window.giscus) {
+                    window.giscus.setConfig({ theme: theme });
+                }
+            }
+        }, 200);
+    }
+    
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        // Only auto-switch if user hasn't manually set a preference
+        if (!localStorage.getItem('quarto-color-scheme')) {
+            const newTheme = e.matches ? 'dark' : 'light';
+            setTheme(newTheme);
+        }
+    });
+});
+</script>
