@@ -1,0 +1,64 @@
+---
+title: "Linear Algebra Jupyter Notebooks"
+---
+
+# Interactive Jupyter Notebooks
+
+This section contains interactive Jupyter notebooks for learning linear algebra concepts through computational examples and visualizations.
+
+## Available Notebooks
+
+### [01 - Vector Spaces](notebooks/01-vector-spaces.ipynb)
+Introduction to vector spaces, operations, and axioms. Learn about:
+- Definition and properties of vector spaces
+- Vector operations and visualizations
+- Verification of vector space axioms
+- Examples in R² and R³
+
+### [02 - Linear Transformations](notebooks/02-linear-transformations.ipynb)
+Linear transformations, matrices, and geometric interpretations. Topics include:
+- Definition and properties of linear transformations
+- Matrix representations
+- Geometric visualization of transformations
+- Kernel and image of transformations
+
+### [03 - Eigenvalues and Eigenvectors](notebooks/03-eigenvalues-eigenvectors.ipynb)
+Eigenvalues, eigenvectors, and applications like PCA. Covers:
+- Definition and computation of eigenvalues/eigenvectors
+- Geometric interpretation
+- Principal Component Analysis (PCA)
+- Real-world applications
+
+## Getting Started
+
+### Prerequisites
+- Python 3.7+
+- Jupyter Notebook or JupyterLab
+- Required packages: `numpy`, `matplotlib`, `scikit-learn`
+
+### Installation
+```bash
+pip install jupyter numpy matplotlib scikit-learn
+```
+
+### Running the Notebooks
+1. Download the notebook files from the links above
+2. Open your terminal/command prompt
+3. Navigate to the folder containing the notebooks
+4. Run: `jupyter notebook`
+5. Open any notebook in your browser
+
+## Features
+
+- **Interactive Visualizations**: Each notebook includes plots and animations to illustrate concepts
+- **Computational Examples**: Hands-on coding examples using NumPy
+- **Exercises**: Practice problems to reinforce learning
+- **Real-world Applications**: Examples like PCA for data analysis
+
+## Learning Path
+
+1. **Start with Vector Spaces** to understand the mathematical foundation
+2. **Move to Linear Transformations** to see how matrices work geometrically
+3. **Explore Eigenvalues and Eigenvectors** for advanced applications and data analysis
+
+These notebooks complement the theoretical material in the [Notes](notes.qmd) and provide practical experience with linear algebra computations.

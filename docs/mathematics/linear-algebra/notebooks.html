@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Mathematics – Knowledge Hub</title>
+<title>Linear Algebra Jupyter Notebooks – Knowledge Hub</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,31 +20,66 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-ffa9a6279353761231ec249df0a7fdd3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-bae33c85dea990b555726d9e885fc0e5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-ffa9a6279353761231ec249df0a7fdd3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ffa9a6279353761231ec249df0a7fdd3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-bae33c85dea990b555726d9e885fc0e5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-ffa9a6279353761231ec249df0a7fdd3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -74,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -246,9 +281,9 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Knowledge Hub</span>
     </a>
   </div>
@@ -259,21 +294,21 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../mathematics/index.html"> 
+    <a class="nav-link" href="../../mathematics/index.html"> 
 <span class="menu-text">Mathematics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../demo-comments.html"> 
+    <a class="nav-link" href="../../demo-comments.html"> 
 <span class="menu-text">Comments Demo</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../#"> 
+    <a class="nav-link" href="../../#"> 
 <span class="menu-text"><i class="bi bi-sun-fill theme-icon-active" id="theme-toggle"></i></span></a>
   </li>  
   <li class="nav-item compact">
@@ -293,7 +328,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../mathematics/index.html">Mathematics</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../mathematics/linear-algebra/index.html">Linear Algebra</a></li><li class="breadcrumb-item"><a href="../../mathematics/linear-algebra/notebooks.html">Linear Algebra Jupyter Notebooks</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -304,14 +339,14 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="../index.html" class="sidebar-logo-link">
+      <a href="../../index.html" class="sidebar-logo-link">
       </a>
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../mathematics/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../mathematics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Mathematics</span></a>
   </div>
 </li>
@@ -326,25 +361,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../mathematics/linear-algebra/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../mathematics/linear-algebra/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Linear Algebra</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../mathematics/linear-algebra/notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../mathematics/linear-algebra/notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Linear Algebra Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../mathematics/linear-algebra/exercises.html" class="sidebar-item-text sidebar-link">
+  <a href="../../mathematics/linear-algebra/exercises.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Linear Algebra Exercises</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../mathematics/linear-algebra/notebooks.html" class="sidebar-item-text sidebar-link">
+  <a href="../../mathematics/linear-algebra/notebooks.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Linear Algebra Jupyter Notebooks</span></a>
   </div>
 </li>
@@ -360,15 +395,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#mathematics-knowledge-hub" id="toc-mathematics-knowledge-hub" class="nav-link active" data-scroll-target="#mathematics-knowledge-hub"><span class="header-section-number">1</span> Mathematics Knowledge Hub</a>
+  <li><a href="#interactive-jupyter-notebooks" id="toc-interactive-jupyter-notebooks" class="nav-link active" data-scroll-target="#interactive-jupyter-notebooks"><span class="header-section-number">1</span> Interactive Jupyter Notebooks</a>
   <ul class="collapse">
-  <li><a href="#available-sections" id="toc-available-sections" class="nav-link" data-scroll-target="#available-sections"><span class="header-section-number">1.1</span> Available Sections</a>
+  <li><a href="#available-notebooks" id="toc-available-notebooks" class="nav-link" data-scroll-target="#available-notebooks"><span class="header-section-number">1.1</span> Available Notebooks</a>
   <ul class="collapse">
-  <li><a href="#linear-algebra" id="toc-linear-algebra" class="nav-link" data-scroll-target="#linear-algebra"><span class="header-section-number">1.1.1</span> Linear Algebra</a></li>
+  <li><a href="#vector-spaces" id="toc-vector-spaces" class="nav-link" data-scroll-target="#vector-spaces"><span class="header-section-number">1.1.1</span> 01 - Vector Spaces</a></li>
+  <li><a href="#linear-transformations" id="toc-linear-transformations" class="nav-link" data-scroll-target="#linear-transformations"><span class="header-section-number">1.1.2</span> 02 - Linear Transformations</a></li>
+  <li><a href="#eigenvalues-and-eigenvectors" id="toc-eigenvalues-and-eigenvectors" class="nav-link" data-scroll-target="#eigenvalues-and-eigenvectors"><span class="header-section-number">1.1.3</span> 03 - Eigenvalues and Eigenvectors</a></li>
   </ul></li>
-  <li><a href="#coming-soon" id="toc-coming-soon" class="nav-link" data-scroll-target="#coming-soon"><span class="header-section-number">1.2</span> Coming Soon</a></li>
-  <li><a href="#how-to-use-this-section" id="toc-how-to-use-this-section" class="nav-link" data-scroll-target="#how-to-use-this-section"><span class="header-section-number">1.3</span> How to Use This Section</a></li>
-  <li><a href="#study-tips" id="toc-study-tips" class="nav-link" data-scroll-target="#study-tips"><span class="header-section-number">1.4</span> Study Tips</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><span class="header-section-number">1.2</span> Getting Started</a>
+  <ul class="collapse">
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites"><span class="header-section-number">1.2.1</span> Prerequisites</a></li>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation"><span class="header-section-number">1.2.2</span> Installation</a></li>
+  <li><a href="#running-the-notebooks" id="toc-running-the-notebooks" class="nav-link" data-scroll-target="#running-the-notebooks"><span class="header-section-number">1.2.3</span> Running the Notebooks</a></li>
+  </ul></li>
+  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features"><span class="header-section-number">1.3</span> Features</a></li>
+  <li><a href="#learning-path" id="toc-learning-path" class="nav-link" data-scroll-target="#learning-path"><span class="header-section-number">1.4</span> Learning Path</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -377,9 +419,9 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../mathematics/linear-algebra/index.html">Linear Algebra</a></li><li class="breadcrumb-item"><a href="../../mathematics/linear-algebra/notebooks.html">Linear Algebra Jupyter Notebooks</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Mathematics</h1>
+<h1 class="title">Linear Algebra Jupyter Notebooks</h1>
 </div>
 
 
@@ -396,42 +438,66 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="mathematics-knowledge-hub" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Mathematics Knowledge Hub</h1>
-<p>Welcome to the Mathematics section of our knowledge hub. Here you’ll find comprehensive coverage of various mathematical topics, organized by textbook and subject area.</p>
-<section id="available-sections" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="available-sections"><span class="header-section-number">1.1</span> Available Sections</h2>
-<section id="linear-algebra" class="level3" data-number="1.1.1">
-<h3 data-number="1.1.1" class="anchored" data-anchor-id="linear-algebra"><span class="header-section-number">1.1.1</span> Linear Algebra</h3>
-<p><strong>Based on: “Linear Algebra Done Right” by Sheldon Axler</strong></p>
-<p>This section provides a rigorous introduction to linear algebra, focusing on: - Vector spaces and subspaces - Linear independence and bases - Linear maps and matrices - Eigenvalues and eigenvectors - Inner product spaces - Operators on inner product spaces</p>
-<p><a href="../mathematics/linear-algebra/index.html">Explore Linear Algebra →</a></p>
+<section id="interactive-jupyter-notebooks" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Interactive Jupyter Notebooks</h1>
+<p>This section contains interactive Jupyter notebooks for learning linear algebra concepts through computational examples and visualizations.</p>
+<section id="available-notebooks" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="available-notebooks"><span class="header-section-number">1.1</span> Available Notebooks</h2>
+<section id="vector-spaces" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="vector-spaces"><span class="header-section-number">1.1.1</span> <a href="../../mathematics/linear-algebra/notebooks/01-vector-spaces.html">01 - Vector Spaces</a></h3>
+<p>Introduction to vector spaces, operations, and axioms. Learn about: - Definition and properties of vector spaces - Vector operations and visualizations - Verification of vector space axioms - Examples in R² and R³</p>
+</section>
+<section id="linear-transformations" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="linear-transformations"><span class="header-section-number">1.1.2</span> <a href="../../mathematics/linear-algebra/notebooks/02-linear-transformations.html">02 - Linear Transformations</a></h3>
+<p>Linear transformations, matrices, and geometric interpretations. Topics include: - Definition and properties of linear transformations - Matrix representations - Geometric visualization of transformations - Kernel and image of transformations</p>
+</section>
+<section id="eigenvalues-and-eigenvectors" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="eigenvalues-and-eigenvectors"><span class="header-section-number">1.1.3</span> <a href="../../mathematics/linear-algebra/notebooks/03-eigenvalues-eigenvectors.html">03 - Eigenvalues and Eigenvectors</a></h3>
+<p>Eigenvalues, eigenvectors, and applications like PCA. Covers: - Definition and computation of eigenvalues/eigenvectors - Geometric interpretation - Principal Component Analysis (PCA) - Real-world applications</p>
 </section>
 </section>
-<section id="coming-soon" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="coming-soon"><span class="header-section-number">1.2</span> Coming Soon</h2>
-<p>We’re continuously expanding our mathematics coverage. Future sections will include: - Real Analysis - Abstract Algebra - Differential Equations - Probability Theory - Number Theory</p>
+<section id="getting-started" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">1.2</span> Getting Started</h2>
+<section id="prerequisites" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="prerequisites"><span class="header-section-number">1.2.1</span> Prerequisites</h3>
+<ul>
+<li>Python 3.7+</li>
+<li>Jupyter Notebook or JupyterLab</li>
+<li>Required packages: <code>numpy</code>, <code>matplotlib</code>, <code>scikit-learn</code></li>
+</ul>
 </section>
-<section id="how-to-use-this-section" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="how-to-use-this-section"><span class="header-section-number">1.3</span> How to Use This Section</h2>
-<p>Each mathematical topic is organized into:</p>
+<section id="installation" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="installation"><span class="header-section-number">1.2.2</span> Installation</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install jupyter numpy matplotlib scikit-learn</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="running-the-notebooks" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="running-the-notebooks"><span class="header-section-number">1.2.3</span> Running the Notebooks</h3>
 <ol type="1">
-<li><strong>Overview Pages</strong>: Introduction and roadmap for the topic</li>
-<li><strong>Notes</strong>: Detailed explanations of concepts, theorems, and proofs</li>
-<li><strong>Exercises</strong>: Practice problems with varying difficulty levels</li>
-<li><strong>Comments</strong>: Community discussion for each page</li>
+<li>Download the notebook files from the links above</li>
+<li>Open your terminal/command prompt</li>
+<li>Navigate to the folder containing the notebooks</li>
+<li>Run: <code>jupyter notebook</code></li>
+<li>Open any notebook in your browser</li>
 </ol>
 </section>
-<section id="study-tips" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="study-tips"><span class="header-section-number">1.4</span> Study Tips</h2>
+</section>
+<section id="features" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="features"><span class="header-section-number">1.3</span> Features</h2>
 <ul>
-<li>Start with the overview to understand the big picture</li>
-<li>Work through notes systematically</li>
-<li>Attempt exercises to test your understanding</li>
-<li>Use the comment sections to ask questions or share insights</li>
+<li><strong>Interactive Visualizations</strong>: Each notebook includes plots and animations to illustrate concepts</li>
+<li><strong>Computational Examples</strong>: Hands-on coding examples using NumPy</li>
+<li><strong>Exercises</strong>: Practice problems to reinforce learning</li>
+<li><strong>Real-world Applications</strong>: Examples like PCA for data analysis</li>
 </ul>
-<hr>
-<p><em>Mathematics is not about numbers, equations, computations, or algorithms: it is about understanding.</em> - William Paul Thurston</p>
+</section>
+<section id="learning-path" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="learning-path"><span class="header-section-number">1.4</span> Learning Path</h2>
+<ol type="1">
+<li><strong>Start with Vector Spaces</strong> to understand the mathematical foundation</li>
+<li><strong>Move to Linear Transformations</strong> to see how matrices work geometrically</li>
+<li><strong>Explore Eigenvalues and Eigenvectors</strong> for advanced applications and data analysis</li>
+</ol>
+<p>These notebooks complement the theoretical material in the <a href="../../mathematics/linear-algebra/notes.html">Notes</a> and provide practical experience with linear algebra computations.</p>
 
 
 </section>
