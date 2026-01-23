@@ -29,6 +29,8 @@ website:
             - mathematics/linear-algebra/index.qmd
             - mathematics/linear-algebra/notes.qmd
             - mathematics/linear-algebra/exercises.qmd
+            - text: "Jupyter Notebooks"
+              href: mathematics/linear-algebra/notebooks/
 
 format:
   html:
