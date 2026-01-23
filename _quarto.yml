@@ -35,3 +35,15 @@ format:
     toc-depth: 3
     number-sections: true
     code-fold: true
+    comments:
+      giscus:
+        repo: noro-math/KnowledgeHub
+        repo-id: "R_kgDOQ_Zwdw"
+        category: "General"
+        category-id: "DIC_kwDOQ_Zwd84C1Tsd"
+        mapping: "pathname"
+        reactions-enabled: true
+        input-position: "bottom"
+        theme: "preferred_color_scheme"
+        language: "en"
+        loading: "lazy"
