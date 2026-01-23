@@ -219,6 +219,81 @@ git push
 - Check that the `docs` folder is being generated
 - Ensure repository is public
 
+## Adding Comments to Your Pages
+
+### Method 1: Global Comments (Recommended)
+Comments are already configured globally in `_quarto.yml`, so they appear on all pages automatically. No additional setup needed!
+
+### Method 2: Page-Specific Comments
+To add comments to specific pages only, add this to the YAML frontmatter of any `.qmd` file:
+
+```yaml
+---
+title: "Your Page Title"
+format:
+  html:
+    comments:
+      giscus:
+        repo: YOUR_USERNAME/knowledge-hub
+        repo-id: "YOUR_REPO_ID_FROM_GISCUS"
+        category: "General"
+        category-id: "YOUR_CATEGORY_ID_FROM_GISCUS"
+        mapping: "pathname"
+        reactions-enabled: true
+        input-position: "bottom"
+        theme: "preferred_color_scheme"
+        language: "en"
+        loading: "lazy"
+---
+
+# Your Content Here
+
+Your page content goes here. Comments will appear at the bottom.
+```
+
+### Method 3: Disable Comments on Specific Pages
+To disable comments on a specific page (when global comments are enabled), add this to the frontmatter:
+
+```yaml
+---
+title: "Page Without Comments"
+comments: false
+---
+```
+
+### Method 4: Custom Comment Themes
+You can customize the comment theme per page:
+
+```yaml
+---
+title: "Dark Theme Comments"
+format:
+  html:
+    comments:
+      giscus:
+        theme: "dark"  # Options: light, dark, preferred_color_scheme
+---
+```
+
+### Testing Your Comments
+1. **Build and serve locally**: `quarto preview`
+2. **Navigate to a page with comments**
+3. **Scroll to the bottom** - you should see the Giscus comment widget
+4. **Try leaving a test comment** (requires GitHub login)
+
+### Comment Configuration Options
+
+| Option | Description | Example Values |
+|--------|-------------|----------------|
+| `repo` | Your GitHub repository | `username/repo-name` |
+| `repo-id` | Repository ID from giscus.app | `"R_kgDOQ_Zwdw"` |
+| `category` | Discussion category name | `"General"`, `"Q&A"` |
+| `category-id` | Category ID from giscus.app | `"DIC_kwDOQ_Zwd84C1Tsd"` |
+| `mapping` | How to map pages to discussions | `"pathname"`, `"title"` |
+| `theme` | Comment widget theme | `"light"`, `"dark"`, `"preferred_color_scheme"` |
+| `reactions-enabled` | Enable emoji reactions | `true`, `false` |
+| `input-position` | Comment box position | `"top"`, `"bottom"` |
+
 ## Contributing
 
 ### Adding New Content

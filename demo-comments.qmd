@@ -11,7 +11,7 @@ format:
         mapping: "pathname"
         reactions-enabled: true
         input-position: "bottom"
-        theme: "light"
+        theme: "preferred_color_scheme"
         language: "en"
         loading: "lazy"
 ---

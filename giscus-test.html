@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Giscus Test</title>
+</head>
+<body>
+    <h1>Giscus Configuration Test</h1>
+    
+    <p>This is a test page to verify Giscus configuration.</p>
+    
+    <!-- Giscus Comments -->
+    <script src="https://giscus.app/client.js"
+        data-repo="noro-math/KnowledgeHub"
+        data-repo-id="R_kgDOQ_Zwdw"
+        data-category="General"
+        data-category-id="DIC_kwDOQ_Zwd84C1Tsd"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+    </script>
+    
+    <script>
+        // Debug script to check Giscus loading
+        setTimeout(() => {
+            console.log('Checking Giscus elements...');
+            const giscusScript = document.querySelector('script[src*="giscus.app"]');
+            const giscusFrame = document.querySelector('iframe.giscus-frame');
+            const giscusContainer = document.querySelector('.giscus');
+            
+            console.log('Giscus script:', giscusScript);
+            console.log('Giscus frame:', giscusFrame);
+            console.log('Giscus container:', giscusContainer);
+            
+            if (!giscusFrame) {
+                console.error('Giscus frame not found - check repository configuration');
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
