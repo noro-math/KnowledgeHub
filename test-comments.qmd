@@ -1,0 +1,34 @@
+---
+title: "Test Comments Page"
+format:
+  html:
+    comments:
+      giscus:
+        repo: giscus/giscus
+        repo-id: "MDEwOlJlcG9zaXRvcnkzNzM2NDM1OTg="
+        category: "General"
+        category-id: "DIC_kwDOFjQgPs4CA_2S"
+        mapping: "pathname"
+        reactions-enabled: true
+        input-position: "bottom"
+        theme: "light"
+        language: "en"
+        loading: "lazy"
+---
+
+# Test Comments Page
+
+This is a minimal test page to check if Giscus comments work in Quarto.
+
+## Content
+
+Here's some sample content to make sure the page renders properly.
+
+**Mathematical example:**
+$$E = mc^2$$
+
+## Comments
+
+The comments should appear below this section. If you see "Loading comments..." that never changes, there's a configuration issue.
+
+If you don't see any comment section at all, Quarto isn't rendering the Giscus configuration properly.

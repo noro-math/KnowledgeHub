@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Giscus Test</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 20px; 
+        }
+        .status { 
+            padding: 10px; 
+            margin: 10px 0; 
+            border-radius: 5px; 
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <h1>Giscus Loading Test</h1>
+    
+    <div id="status" class="status info">
+        Testing Giscus loading...
+    </div>
+    
+    <p>This page tests if Giscus can load properly with the working configuration.</p>
+    
+    <h2>Comments Section</h2>
+    <div id="comments-container">
+        <!-- Giscus will load here -->
+    </div>
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="giscus/giscus"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzNzM2NDM1OTg="
+        data-category="General"
+        data-category-id="DIC_kwDOFjQgPs4CA_2S"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+    </script>
+    
+    <script>
+        let checkCount = 0;
+        const maxChecks = 20; // Check for 10 seconds
+        
+        function checkGiscusStatus() {
+            checkCount++;
+            const statusDiv = document.getElementById('status');
+            
+            // Look for Giscus elements
+            const giscusScript = document.querySelector('script[src*="giscus.app"]');
+            const giscusFrame = document.querySelector('iframe.giscus-frame');
+            const giscusContainer = document.querySelector('.giscus');
+            
+            console.log(`Check ${checkCount}:`, {
+                script: !!giscusScript,
+                frame: !!giscusFrame,
+                container: !!giscusContainer
+            });
+            
+            if (giscusFrame) {
+                statusDiv.className = 'status success';
+                statusDiv.innerHTML = '✅ Success! Giscus loaded properly. You should see comments below.';
+                return;
+            }
+            
+            if (checkCount >= maxChecks) {
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = `
+                    ❌ Giscus failed to load after ${maxChecks/2} seconds.<br>
+                    Check browser console for errors.<br>
+                    Common issues: Network problems, ad blockers, or browser restrictions.
+                `;
+                return;
+            }
+            
+            statusDiv.innerHTML = `⏳ Waiting for Giscus... (${checkCount}/${maxChecks})`;
+            setTimeout(checkGiscusStatus, 500);
+        }
+        
+        // Start checking after a brief delay
+        setTimeout(checkGiscusStatus, 1000);
+        
+        // Log any errors
+        window.addEventListener('error', function(e) {
+            console.error('Page error:', e.error);
+        });
+        
+        // Log Giscus messages
+        window.addEventListener('message', function(event) {
+            if (event.origin === 'https://giscus.app') {
+                console.log('Giscus message:', event.data);
+            }
+        });
+    </script>
+</body>
+</html>

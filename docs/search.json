@@ -540,5 +540,187 @@
     "title": "Welcome to Knowledge Hub",
     "section": "",
     "text": "This knowledge hub is designed to grow over time. Each page includes a comment section where you can: - Ask questions about the material - Share insights and alternative explanations - Discuss problem-solving approaches - Suggest improvements or corrections\n\nHappy learning!"
+  },
+  {
+    "objectID": "fix-comments.html",
+    "href": "fix-comments.html",
+    "title": "1 Fix Your Giscus Comments - Complete Solution",
+    "section": "",
+    "text": "Your comments show “Loading comments…” but never load. This is almost always due to one of these issues:\n\nRepository doesn’t exist or isn’t public\nDiscussions not enabled\nGiscus app not installed\nWrong repository or category IDs\n\n\n\n\n\n\nI’ll help you create a new public repository specifically for comments:\n\nCreate new repository:\n\nGo to GitHub → New Repository\nName: knowledge-hub-comments\nMake it PUBLIC\nInitialize with README\n\nEnable Discussions:\n\nSettings → Features → Check “Discussions”\n\nInstall Giscus:\n\nGo to https://github.com/apps/giscus\nInstall on your new repository\n\nGet Configuration:\n\nGo to https://giscus.app\nEnter: YOUR_USERNAME/knowledge-hub-comments\nCopy the generated configuration\n\n\n\n\n\nIf noro-math/KnowledgeHub exists:\n\nMake sure it’s public:\n\nRepository Settings → General → Danger Zone → Change visibility → Public\n\nEnable Discussions:\n\nSettings → Features → Check “Discussions”\n\nInstall Giscus app:\n\nhttps://github.com/apps/giscus → Configure → Add repository\n\nGet correct IDs:\n\nUse https://giscus.app to generate correct configuration\n\n\n\n\n\n\nUse this working configuration temporarily to test:\ncomments:\n  giscus:\n    repo: giscus/giscus\n    repo-id: \"MDEwOlJlcG9zaXRvcnkzNzM2NDM1OTg=\"\n    category: \"General\"\n    category-id: \"DIC_kwDOFjQgPs4CA_2S\"\n    mapping: \"pathname\"\n    reactions-enabled: true\n    input-position: \"bottom\"\n    theme: \"preferred_color_scheme\"\n    language: \"en\"\n    loading: \"lazy\"\n\n\n\n\nOpen debug-giscus.html in browser\nCheck browser console for errors\nVerify repository exists and is public\nTest with the working configuration above\n\n\n\n\n\n“Repository not found” → Repository is private or doesn’t exist\n“Category not found” → Create “General” category in Discussions\n“Loading comments…” → Usually wrong IDs or app not installed\nCORS errors → Site not served over HTTPS\n\n\n\n\nRun through this checklist:\n\nRepository exists and is public\nDiscussions are enabled\nGiscus app is installed on the repository\n“General” discussion category exists\nConfiguration IDs are from giscus.app\nNo console errors in browser\nSite is served over HTTPS\n\n\n\n\nCreate a minimal test:\n\nCreate simple HTML file:\n\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;&lt;title&gt;Test&lt;/title&gt;&lt;/head&gt;\n&lt;body&gt;\n&lt;h1&gt;Comment Test&lt;/h1&gt;\n&lt;script src=\"https://giscus.app/client.js\"\n        data-repo=\"giscus/giscus\"\n        data-repo-id=\"MDEwOlJlcG9zaXRvcnkzNzM2NDM1OTg=\"\n        data-category=\"General\"\n        data-category-id=\"DIC_kwDOFjQgPs4CA_2S\"\n        data-mapping=\"pathname\"\n        data-strict=\"0\"\n        data-reactions-enabled=\"1\"\n        data-emit-metadata=\"0\"\n        data-input-position=\"bottom\"\n        data-theme=\"light\"\n        data-lang=\"en\"\n        crossorigin=\"anonymous\"\n        async&gt;\n&lt;/script&gt;\n&lt;/body&gt;\n&lt;/html&gt;\n\nOpen in browser - comments should load\nIf this works, the issue is with your Quarto configuration\nIf this doesn’t work, the issue is with your browser/network\n\n\n\n\n\nTry the working test configuration first\nUse the debug tool to identify the specific issue\nFollow the repository setup steps\nTest with minimal HTML file if needed\n\nThe most common issue is that the repository noro-math/KnowledgeHub either doesn’t exist, isn’t public, or doesn’t have the Giscus app installed."
+  },
+  {
+    "objectID": "fix-comments.html#the-problem",
+    "href": "fix-comments.html#the-problem",
+    "title": "1 Fix Your Giscus Comments - Complete Solution",
+    "section": "",
+    "text": "Your comments show “Loading comments…” but never load. This is almost always due to one of these issues:\n\nRepository doesn’t exist or isn’t public\nDiscussions not enabled\nGiscus app not installed\nWrong repository or category IDs"
+  },
+  {
+    "objectID": "fix-comments.html#immediate-solution",
+    "href": "fix-comments.html#immediate-solution",
+    "title": "1 Fix Your Giscus Comments - Complete Solution",
+    "section": "",
+    "text": "I’ll help you create a new public repository specifically for comments:\n\nCreate new repository:\n\nGo to GitHub → New Repository\nName: knowledge-hub-comments\nMake it PUBLIC\nInitialize with README\n\nEnable Discussions:\n\nSettings → Features → Check “Discussions”\n\nInstall Giscus:\n\nGo to https://github.com/apps/giscus\nInstall on your new repository\n\nGet Configuration:\n\nGo to https://giscus.app\nEnter: YOUR_USERNAME/knowledge-hub-comments\nCopy the generated configuration\n\n\n\n\n\nIf noro-math/KnowledgeHub exists:\n\nMake sure it’s public:\n\nRepository Settings → General → Danger Zone → Change visibility → Public\n\nEnable Discussions:\n\nSettings → Features → Check “Discussions”\n\nInstall Giscus app:\n\nhttps://github.com/apps/giscus → Configure → Add repository\n\nGet correct IDs:\n\nUse https://giscus.app to generate correct configuration"
+  },
+  {
+    "objectID": "fix-comments.html#quick-test-configuration",
+    "href": "fix-comments.html#quick-test-configuration",
+    "title": "1 Fix Your Giscus Comments - Complete Solution",
+    "section": "",
+    "text": "Use this working configuration temporarily to test:\ncomments:\n  giscus:\n    repo: giscus/giscus\n    repo-id: \"MDEwOlJlcG9zaXRvcnkzNzM2NDM1OTg=\"\n    category: \"General\"\n    category-id: \"DIC_kwDOFjQgPs4CA_2S\"\n    mapping: \"pathname\"\n    reactions-enabled: true\n    input-position: \"bottom\"\n    theme: \"preferred_color_scheme\"\n    language: \"en\"\n    loading: \"lazy\""
+  },
+  {
+    "objectID": "fix-comments.html#debugging-steps",
+    "href": "fix-comments.html#debugging-steps",
+    "title": "1 Fix Your Giscus Comments - Complete Solution",
+    "section": "",
+    "text": "Open debug-giscus.html in browser\nCheck browser console for errors\nVerify repository exists and is public\nTest with the working configuration above"
+  },
+  {
+    "objectID": "fix-comments.html#common-error-messages",
+    "href": "fix-comments.html#common-error-messages",
+    "title": "1 Fix Your Giscus Comments - Complete Solution",
+    "section": "",
+    "text": "“Repository not found” → Repository is private or doesn’t exist\n“Category not found” → Create “General” category in Discussions\n“Loading comments…” → Usually wrong IDs or app not installed\nCORS errors → Site not served over HTTPS"
+  },
+  {
+    "objectID": "fix-comments.html#step-by-step-verification",
+    "href": "fix-comments.html#step-by-step-verification",
+    "title": "1 Fix Your Giscus Comments - Complete Solution",
+    "section": "",
+    "text": "Run through this checklist:\n\nRepository exists and is public\nDiscussions are enabled\nGiscus app is installed on the repository\n“General” discussion category exists\nConfiguration IDs are from giscus.app\nNo console errors in browser\nSite is served over HTTPS"
+  },
+  {
+    "objectID": "fix-comments.html#if-nothing-works",
+    "href": "fix-comments.html#if-nothing-works",
+    "title": "1 Fix Your Giscus Comments - Complete Solution",
+    "section": "",
+    "text": "Create a minimal test:\n\nCreate simple HTML file:\n\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;&lt;title&gt;Test&lt;/title&gt;&lt;/head&gt;\n&lt;body&gt;\n&lt;h1&gt;Comment Test&lt;/h1&gt;\n&lt;script src=\"https://giscus.app/client.js\"\n        data-repo=\"giscus/giscus\"\n        data-repo-id=\"MDEwOlJlcG9zaXRvcnkzNzM2NDM1OTg=\"\n        data-category=\"General\"\n        data-category-id=\"DIC_kwDOFjQgPs4CA_2S\"\n        data-mapping=\"pathname\"\n        data-strict=\"0\"\n        data-reactions-enabled=\"1\"\n        data-emit-metadata=\"0\"\n        data-input-position=\"bottom\"\n        data-theme=\"light\"\n        data-lang=\"en\"\n        crossorigin=\"anonymous\"\n        async&gt;\n&lt;/script&gt;\n&lt;/body&gt;\n&lt;/html&gt;\n\nOpen in browser - comments should load\nIf this works, the issue is with your Quarto configuration\nIf this doesn’t work, the issue is with your browser/network"
+  },
+  {
+    "objectID": "fix-comments.html#next-steps",
+    "href": "fix-comments.html#next-steps",
+    "title": "1 Fix Your Giscus Comments - Complete Solution",
+    "section": "",
+    "text": "Try the working test configuration first\nUse the debug tool to identify the specific issue\nFollow the repository setup steps\nTest with minimal HTML file if needed\n\nThe most common issue is that the repository noro-math/KnowledgeHub either doesn’t exist, isn’t public, or doesn’t have the Giscus app installed."
+  },
+  {
+    "objectID": "GISCUS_TROUBLESHOOTING.html",
+    "href": "GISCUS_TROUBLESHOOTING.html",
+    "title": "1 Giscus Comments Not Loading - Troubleshooting Guide",
+    "section": "",
+    "text": "Your comments show “Loading comments…” but never actually load the comment widget.\n\n\n\n\n\nOpen debug-giscus.html in your browser to see detailed diagnostic information.\n\n\n\nYour repository noro-math/KnowledgeHub must have: - ✅ Public visibility - ✅ Discussions enabled - ✅ Giscus app installed - ✅ At least one discussion category\n\n\n\n\nGo to https://github.com/apps/giscus\nClick “Configure”\nMake sure noro-math/KnowledgeHub is in the selected repositories\nIf not listed, add it\n\n\n\n\n\nGo to your repository: https://github.com/noro-math/KnowledgeHub\nClick “Discussions” tab\nVerify there’s a “General” category\nIf not, create one: Settings → Discussions → Categories → New Category\n\n\n\n\nCRITICAL: Your current repo-id and category-id might be wrong.\n\nGo to https://giscus.app\nEnter: noro-math/KnowledgeHub\nSelect “General” category\nCopy the EXACT configuration it generates\n\n\n\n\n\n\nSolution: Check repository name spelling and ensure it’s public\n\n\n\nSolution:\nRepository Settings → General → Features → Check \"Discussions\"\n\n\n\nSolution: Always use giscus.app to generate correct repo-id and category-id\n\n\n\nSolution: Ensure your site is served over HTTPS (GitHub Pages does this automatically)\n\n\n\nSolution: Create “General” category in Discussions\n\n\n\n\n\nIf you want to test immediately, temporarily use this working configuration:\ncomments:\n  giscus:\n    repo: giscus/giscus\n    repo-id: \"MDEwOlJlcG9zaXRvcnkzNzM2NDM1OTg=\"\n    category: \"General\"\n    category-id: \"DIC_kwDOFjQgPs4CA_2S\"\n    mapping: \"pathname\"\n    reactions-enabled: true\n    input-position: \"bottom\"\n    theme: \"preferred_color_scheme\"\n    language: \"en\"\n    loading: \"lazy\"\n\n\n\n\nOpen browser Developer Tools (F12)\nGo to Console tab\nLook for errors like:\n\nFailed to load resource\nCORS error\nRepository not found\nCategory not found\n\n\n\n\n\n\nOpen Developer Tools → Network tab\nReload the page\nLook for failed requests to:\n\ngiscus.app\napi.github.com\n\n\n\n\n\n\nRepository exists and is public\nDiscussions are enabled\nGiscus app is installed\nCategory “General” exists\nConfiguration IDs are correct\nNo console errors\nSite is served over HTTPS\n\n\n\n\n\nCreate a new public repository for testing\nEnable discussions\nInstall Giscus app\nUse giscus.app to generate config\nTest with minimal HTML file\n\n\n\n\nIf none of these steps work, the issue might be: - GitHub API rate limiting - Temporary Giscus service issues - Repository permissions problem\nCheck Giscus status at: https://github.com/giscus/giscus/discussions"
+  },
+  {
+    "objectID": "GISCUS_TROUBLESHOOTING.html#current-issue",
+    "href": "GISCUS_TROUBLESHOOTING.html#current-issue",
+    "title": "1 Giscus Comments Not Loading - Troubleshooting Guide",
+    "section": "",
+    "text": "Your comments show “Loading comments…” but never actually load the comment widget."
+  },
+  {
+    "objectID": "GISCUS_TROUBLESHOOTING.html#step-by-step-diagnosis",
+    "href": "GISCUS_TROUBLESHOOTING.html#step-by-step-diagnosis",
+    "title": "1 Giscus Comments Not Loading - Troubleshooting Guide",
+    "section": "",
+    "text": "Open debug-giscus.html in your browser to see detailed diagnostic information.\n\n\n\nYour repository noro-math/KnowledgeHub must have: - ✅ Public visibility - ✅ Discussions enabled - ✅ Giscus app installed - ✅ At least one discussion category\n\n\n\n\nGo to https://github.com/apps/giscus\nClick “Configure”\nMake sure noro-math/KnowledgeHub is in the selected repositories\nIf not listed, add it\n\n\n\n\n\nGo to your repository: https://github.com/noro-math/KnowledgeHub\nClick “Discussions” tab\nVerify there’s a “General” category\nIf not, create one: Settings → Discussions → Categories → New Category\n\n\n\n\nCRITICAL: Your current repo-id and category-id might be wrong.\n\nGo to https://giscus.app\nEnter: noro-math/KnowledgeHub\nSelect “General” category\nCopy the EXACT configuration it generates\n\n\n\n\n\n\nSolution: Check repository name spelling and ensure it’s public\n\n\n\nSolution:\nRepository Settings → General → Features → Check \"Discussions\"\n\n\n\nSolution: Always use giscus.app to generate correct repo-id and category-id\n\n\n\nSolution: Ensure your site is served over HTTPS (GitHub Pages does this automatically)\n\n\n\nSolution: Create “General” category in Discussions"
+  },
+  {
+    "objectID": "GISCUS_TROUBLESHOOTING.html#quick-fix-use-working-configuration",
+    "href": "GISCUS_TROUBLESHOOTING.html#quick-fix-use-working-configuration",
+    "title": "1 Giscus Comments Not Loading - Troubleshooting Guide",
+    "section": "",
+    "text": "If you want to test immediately, temporarily use this working configuration:\ncomments:\n  giscus:\n    repo: giscus/giscus\n    repo-id: \"MDEwOlJlcG9zaXRvcnkzNzM2NDM1OTg=\"\n    category: \"General\"\n    category-id: \"DIC_kwDOFjQgPs4CA_2S\"\n    mapping: \"pathname\"\n    reactions-enabled: true\n    input-position: \"bottom\"\n    theme: \"preferred_color_scheme\"\n    language: \"en\"\n    loading: \"lazy\""
+  },
+  {
+    "objectID": "GISCUS_TROUBLESHOOTING.html#browser-console-debugging",
+    "href": "GISCUS_TROUBLESHOOTING.html#browser-console-debugging",
+    "title": "1 Giscus Comments Not Loading - Troubleshooting Guide",
+    "section": "",
+    "text": "Open browser Developer Tools (F12)\nGo to Console tab\nLook for errors like:\n\nFailed to load resource\nCORS error\nRepository not found\nCategory not found"
+  },
+  {
+    "objectID": "GISCUS_TROUBLESHOOTING.html#network-tab-debugging",
+    "href": "GISCUS_TROUBLESHOOTING.html#network-tab-debugging",
+    "title": "1 Giscus Comments Not Loading - Troubleshooting Guide",
+    "section": "",
+    "text": "Open Developer Tools → Network tab\nReload the page\nLook for failed requests to:\n\ngiscus.app\napi.github.com"
+  },
+  {
+    "objectID": "GISCUS_TROUBLESHOOTING.html#final-verification-steps",
+    "href": "GISCUS_TROUBLESHOOTING.html#final-verification-steps",
+    "title": "1 Giscus Comments Not Loading - Troubleshooting Guide",
+    "section": "",
+    "text": "Repository exists and is public\nDiscussions are enabled\nGiscus app is installed\nCategory “General” exists\nConfiguration IDs are correct\nNo console errors\nSite is served over HTTPS"
+  },
+  {
+    "objectID": "GISCUS_TROUBLESHOOTING.html#if-still-not-working",
+    "href": "GISCUS_TROUBLESHOOTING.html#if-still-not-working",
+    "title": "1 Giscus Comments Not Loading - Troubleshooting Guide",
+    "section": "",
+    "text": "Create a new public repository for testing\nEnable discussions\nInstall Giscus app\nUse giscus.app to generate config\nTest with minimal HTML file"
+  },
+  {
+    "objectID": "GISCUS_TROUBLESHOOTING.html#contact-information",
+    "href": "GISCUS_TROUBLESHOOTING.html#contact-information",
+    "title": "1 Giscus Comments Not Loading - Troubleshooting Guide",
+    "section": "",
+    "text": "If none of these steps work, the issue might be: - GitHub API rate limiting - Temporary Giscus service issues - Repository permissions problem\nCheck Giscus status at: https://github.com/giscus/giscus/discussions"
+  },
+  {
+    "objectID": "GISCUS_SETUP.html",
+    "href": "GISCUS_SETUP.html",
+    "title": "1 Giscus Setup Guide",
+    "section": "",
+    "text": "Your Giscus comments show “comments loading…” but never load. This is typically due to configuration issues.\n\n\n\n\n\nGo to your GitHub repository noro-math/KnowledgeHub and ensure:\n\n✅ Repository is public\n✅ Discussions are enabled (Settings → General → Features → Discussions)\n✅ Repository exists and is accessible\n\n\n\n\n\nGo to giscus.app\nScroll down to the “Configuration” section\nEnter your repository: noro-math/KnowledgeHub\nSelect a Discussion Category (create “General” if it doesn’t exist)\nChoose mapping: “pathname” (recommended)\nThe tool will generate the correct IDs for you\n\n\n\n\nThe configuration tool at giscus.app will give you the correct: - repo-id - category-id\nThese must match exactly what GitHub provides.\n\n\n\nReplace the current Giscus configuration in _quarto.yml with the values from giscus.app.\n\n\n\n\nOpen the giscus-test.html file I created in a browser\nCheck the browser console for any errors\nIf it works there, rebuild your Quarto site\n\n\n\n\n\n\n\n\nEnsure repository name is exactly noro-math/KnowledgeHub\nRepository must be public\nYou must have admin access\n\n\n\n\n\nCreate a “General” discussion category in your repository\nOr use an existing category and update the configuration\n\n\n\n\n\nAlways use the configuration tool at giscus.app to get correct IDs\nDon’t copy IDs from other repositories\n\n\n\n\n\nIf you want to test immediately, you can temporarily use the working giscus demo repository:\ncomments:\n  giscus:\n    repo: giscus/giscus\n    repo-id: \"MDEwOlJlcG9zaXRvcnkzNzM2NDM1OTg=\"\n    category: \"General\"\n    category-id: \"DIC_kwDOFjQgPs4CA_2S\"\n    mapping: \"pathname\"\n    reactions-enabled: true\n    input-position: \"bottom\"\n    theme: \"preferred_color_scheme\"\n    language: \"en\"\n    loading: \"lazy\"\nThis will show you how comments should look when working properly."
+  },
+  {
+    "objectID": "GISCUS_SETUP.html#current-issue",
+    "href": "GISCUS_SETUP.html#current-issue",
+    "title": "1 Giscus Setup Guide",
+    "section": "",
+    "text": "Your Giscus comments show “comments loading…” but never load. This is typically due to configuration issues."
+  },
+  {
+    "objectID": "GISCUS_SETUP.html#step-by-step-fix",
+    "href": "GISCUS_SETUP.html#step-by-step-fix",
+    "title": "1 Giscus Setup Guide",
+    "section": "",
+    "text": "Go to your GitHub repository noro-math/KnowledgeHub and ensure:\n\n✅ Repository is public\n✅ Discussions are enabled (Settings → General → Features → Discussions)\n✅ Repository exists and is accessible\n\n\n\n\n\nGo to giscus.app\nScroll down to the “Configuration” section\nEnter your repository: noro-math/KnowledgeHub\nSelect a Discussion Category (create “General” if it doesn’t exist)\nChoose mapping: “pathname” (recommended)\nThe tool will generate the correct IDs for you\n\n\n\n\nThe configuration tool at giscus.app will give you the correct: - repo-id - category-id\nThese must match exactly what GitHub provides.\n\n\n\nReplace the current Giscus configuration in _quarto.yml with the values from giscus.app.\n\n\n\n\nOpen the giscus-test.html file I created in a browser\nCheck the browser console for any errors\nIf it works there, rebuild your Quarto site"
+  },
+  {
+    "objectID": "GISCUS_SETUP.html#common-issues",
+    "href": "GISCUS_SETUP.html#common-issues",
+    "title": "1 Giscus Setup Guide",
+    "section": "",
+    "text": "Ensure repository name is exactly noro-math/KnowledgeHub\nRepository must be public\nYou must have admin access\n\n\n\n\n\nCreate a “General” discussion category in your repository\nOr use an existing category and update the configuration\n\n\n\n\n\nAlways use the configuration tool at giscus.app to get correct IDs\nDon’t copy IDs from other repositories"
+  },
+  {
+    "objectID": "GISCUS_SETUP.html#quick-fix",
+    "href": "GISCUS_SETUP.html#quick-fix",
+    "title": "1 Giscus Setup Guide",
+    "section": "",
+    "text": "If you want to test immediately, you can temporarily use the working giscus demo repository:\ncomments:\n  giscus:\n    repo: giscus/giscus\n    repo-id: \"MDEwOlJlcG9zaXRvcnkzNzM2NDM1OTg=\"\n    category: \"General\"\n    category-id: \"DIC_kwDOFjQgPs4CA_2S\"\n    mapping: \"pathname\"\n    reactions-enabled: true\n    input-position: \"bottom\"\n    theme: \"preferred_color_scheme\"\n    language: \"en\"\n    loading: \"lazy\"\nThis will show you how comments should look when working properly."
+  },
+  {
+    "objectID": "test-comments.html",
+    "href": "test-comments.html",
+    "title": "Test Comments Page",
+    "section": "",
+    "text": "This is a minimal test page to check if Giscus comments work in Quarto.\n\n\nHere’s some sample content to make sure the page renders properly.\nMathematical example: \\[E = mc^2\\]\n\n\n\nThe comments should appear below this section. If you see “Loading comments…” that never changes, there’s a configuration issue.\nIf you don’t see any comment section at all, Quarto isn’t rendering the Giscus configuration properly."
+  },
+  {
+    "objectID": "test-comments.html#content",
+    "href": "test-comments.html#content",
+    "title": "Test Comments Page",
+    "section": "",
+    "text": "Here’s some sample content to make sure the page renders properly.\nMathematical example: \\[E = mc^2\\]"
+  },
+  {
+    "objectID": "test-comments.html#comments",
+    "href": "test-comments.html#comments",
+    "title": "Test Comments Page",
+    "section": "",
+    "text": "The comments should appear below this section. If you see “Loading comments…” that never changes, there’s a configuration issue.\nIf you don’t see any comment section at all, Quarto isn’t rendering the Giscus configuration properly."
   }
 ]

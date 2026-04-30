@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Welcome to Knowledge Hub – Knowledge Hub</title>
+<title>giscus_setup – Knowledge Hub</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -91,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -126,71 +160,121 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#welcome-to-knowledge-hub" id="toc-welcome-to-knowledge-hub" class="nav-link active" data-scroll-target="#welcome-to-knowledge-hub"><span class="header-section-number">1</span> Welcome to Knowledge Hub</a>
+  <li><a href="#giscus-setup-guide" id="toc-giscus-setup-guide" class="nav-link active" data-scroll-target="#giscus-setup-guide"><span class="header-section-number">1</span> Giscus Setup Guide</a>
   <ul class="collapse">
-  <li><a href="#what-youll-find-here" id="toc-what-youll-find-here" class="nav-link" data-scroll-target="#what-youll-find-here"><span class="header-section-number">1.1</span> What You’ll Find Here</a>
+  <li><a href="#current-issue" id="toc-current-issue" class="nav-link" data-scroll-target="#current-issue"><span class="header-section-number">1.1</span> Current Issue</a></li>
+  <li><a href="#step-by-step-fix" id="toc-step-by-step-fix" class="nav-link" data-scroll-target="#step-by-step-fix"><span class="header-section-number">1.2</span> Step-by-Step Fix</a>
   <ul class="collapse">
-  <li><a href="#mathematics" id="toc-mathematics" class="nav-link" data-scroll-target="#mathematics"><span class="header-section-number">1.1.1</span> Mathematics</a></li>
-  <li><a href="#current-mathematics-sections" id="toc-current-mathematics-sections" class="nav-link" data-scroll-target="#current-mathematics-sections"><span class="header-section-number">1.1.2</span> Current Mathematics Sections</a></li>
+  <li><a href="#verify-repository-settings" id="toc-verify-repository-settings" class="nav-link" data-scroll-target="#verify-repository-settings"><span class="header-section-number">1.2.1</span> 1. Verify Repository Settings</a></li>
+  <li><a href="#install-giscus-app" id="toc-install-giscus-app" class="nav-link" data-scroll-target="#install-giscus-app"><span class="header-section-number">1.2.2</span> 2. Install Giscus App</a></li>
+  <li><a href="#get-correct-configuration" id="toc-get-correct-configuration" class="nav-link" data-scroll-target="#get-correct-configuration"><span class="header-section-number">1.2.3</span> 3. Get Correct Configuration</a></li>
+  <li><a href="#update-your-configuration" id="toc-update-your-configuration" class="nav-link" data-scroll-target="#update-your-configuration"><span class="header-section-number">1.2.4</span> 4. Update Your Configuration</a></li>
+  <li><a href="#test-the-setup" id="toc-test-the-setup" class="nav-link" data-scroll-target="#test-the-setup"><span class="header-section-number">1.2.5</span> 5. Test the Setup</a></li>
   </ul></li>
-  <li><a href="#how-to-navigate" id="toc-how-to-navigate" class="nav-link" data-scroll-target="#how-to-navigate"><span class="header-section-number">1.2</span> How to Navigate</a></li>
-  <li><a href="#contributing" id="toc-contributing" class="nav-link" data-scroll-target="#contributing"><span class="header-section-number">1.3</span> Contributing</a></li>
+  <li><a href="#common-issues" id="toc-common-issues" class="nav-link" data-scroll-target="#common-issues"><span class="header-section-number">1.3</span> Common Issues</a>
+  <ul class="collapse">
+  <li><a href="#repository-not-found" id="toc-repository-not-found" class="nav-link" data-scroll-target="#repository-not-found"><span class="header-section-number">1.3.1</span> Repository Not Found</a></li>
+  <li><a href="#category-not-found" id="toc-category-not-found" class="nav-link" data-scroll-target="#category-not-found"><span class="header-section-number">1.3.2</span> Category Not Found</a></li>
+  <li><a href="#wrong-ids" id="toc-wrong-ids" class="nav-link" data-scroll-target="#wrong-ids"><span class="header-section-number">1.3.3</span> Wrong IDs</a></li>
+  </ul></li>
+  <li><a href="#quick-fix" id="toc-quick-fix" class="nav-link" data-scroll-target="#quick-fix"><span class="header-section-number">1.4</span> Quick Fix</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Welcome to Knowledge Hub</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="welcome-to-knowledge-hub" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Welcome to Knowledge Hub</h1>
-<p>This is a comprehensive knowledge repository designed to be your go-to resource for various academic subjects. Our goal is to provide well-organized, accessible content that serves both as a learning tool and reference material.</p>
-<section id="what-youll-find-here" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="what-youll-find-here"><span class="header-section-number">1.1</span> What You’ll Find Here</h2>
-<section id="mathematics" class="level3" data-number="1.1.1">
-<h3 data-number="1.1.1" class="anchored" data-anchor-id="mathematics"><span class="header-section-number">1.1.1</span> Mathematics</h3>
-<p>Our mathematics section covers fundamental and advanced topics through carefully curated content based on renowned textbooks. Each section includes:</p>
+<section id="giscus-setup-guide" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Giscus Setup Guide</h1>
+<section id="current-issue" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="current-issue"><span class="header-section-number">1.1</span> Current Issue</h2>
+<p>Your Giscus comments show “comments loading…” but never load. This is typically due to configuration issues.</p>
+</section>
+<section id="step-by-step-fix" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="step-by-step-fix"><span class="header-section-number">1.2</span> Step-by-Step Fix</h2>
+<section id="verify-repository-settings" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="verify-repository-settings"><span class="header-section-number">1.2.1</span> 1. Verify Repository Settings</h3>
+<p>Go to your GitHub repository <code>noro-math/KnowledgeHub</code> and ensure:</p>
 <ul>
-<li><strong>Comprehensive Notes</strong>: Detailed explanations and key concepts</li>
-<li><strong>Practice Exercises</strong>: Problems to reinforce understanding</li>
-<li><strong>Interactive Comments</strong>: Community discussions and clarifications</li>
+<li>✅ Repository is <strong>public</strong></li>
+<li>✅ <strong>Discussions</strong> are enabled (Settings → General → Features → Discussions)</li>
+<li>✅ Repository exists and is accessible</li>
 </ul>
 </section>
-<section id="current-mathematics-sections" class="level3" data-number="1.1.2">
-<h3 data-number="1.1.2" class="anchored" data-anchor-id="current-mathematics-sections"><span class="header-section-number">1.1.2</span> Current Mathematics Sections</h3>
+<section id="install-giscus-app" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="install-giscus-app"><span class="header-section-number">1.2.2</span> 2. Install Giscus App</h3>
+<ol type="1">
+<li>Go to <a href="https://giscus.app">giscus.app</a></li>
+<li>Scroll down to the “Configuration” section</li>
+<li>Enter your repository: <code>noro-math/KnowledgeHub</code></li>
+<li>Select a Discussion Category (create “General” if it doesn’t exist)</li>
+<li>Choose mapping: “pathname” (recommended)</li>
+<li>The tool will generate the correct IDs for you</li>
+</ol>
+</section>
+<section id="get-correct-configuration" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="get-correct-configuration"><span class="header-section-number">1.2.3</span> 3. Get Correct Configuration</h3>
+<p>The configuration tool at giscus.app will give you the correct: - <code>repo-id</code> - <code>category-id</code></p>
+<p>These must match exactly what GitHub provides.</p>
+</section>
+<section id="update-your-configuration" class="level3" data-number="1.2.4">
+<h3 data-number="1.2.4" class="anchored" data-anchor-id="update-your-configuration"><span class="header-section-number">1.2.4</span> 4. Update Your Configuration</h3>
+<p>Replace the current Giscus configuration in <code>_quarto.yml</code> with the values from giscus.app.</p>
+</section>
+<section id="test-the-setup" class="level3" data-number="1.2.5">
+<h3 data-number="1.2.5" class="anchored" data-anchor-id="test-the-setup"><span class="header-section-number">1.2.5</span> 5. Test the Setup</h3>
+<ol type="1">
+<li>Open the <code>giscus-test.html</code> file I created in a browser</li>
+<li>Check the browser console for any errors</li>
+<li>If it works there, rebuild your Quarto site</li>
+</ol>
+</section>
+</section>
+<section id="common-issues" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="common-issues"><span class="header-section-number">1.3</span> Common Issues</h2>
+<section id="repository-not-found" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="repository-not-found"><span class="header-section-number">1.3.1</span> Repository Not Found</h3>
 <ul>
-<li><strong>Linear Algebra</strong>: Based on “Linear Algebra Done Right” by Sheldon Axler</li>
+<li>Ensure repository name is exactly <code>noro-math/KnowledgeHub</code></li>
+<li>Repository must be public</li>
+<li>You must have admin access</li>
+</ul>
+</section>
+<section id="category-not-found" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="category-not-found"><span class="header-section-number">1.3.2</span> Category Not Found</h3>
+<ul>
+<li>Create a “General” discussion category in your repository</li>
+<li>Or use an existing category and update the configuration</li>
+</ul>
+</section>
+<section id="wrong-ids" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="wrong-ids"><span class="header-section-number">1.3.3</span> Wrong IDs</h3>
+<ul>
+<li>Always use the configuration tool at giscus.app to get correct IDs</li>
+<li>Don’t copy IDs from other repositories</li>
 </ul>
 </section>
 </section>
-<section id="how-to-navigate" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="how-to-navigate"><span class="header-section-number">1.2</span> How to Navigate</h2>
-<p>Use the navigation bar above to explore different subjects, or browse through the sidebar for specific topics within each subject area.</p>
-</section>
-<section id="contributing" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="contributing"><span class="header-section-number">1.3</span> Contributing</h2>
-<p>This knowledge hub is designed to grow over time. Each page includes a comment section where you can: - Ask questions about the material - Share insights and alternative explanations - Discuss problem-solving approaches - Suggest improvements or corrections</p>
-<hr>
-<p><em>Happy learning!</em></p>
+<section id="quick-fix" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="quick-fix"><span class="header-section-number">1.4</span> Quick Fix</h2>
+<p>If you want to test immediately, you can temporarily use the working giscus demo repository:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">comments</span><span class="kw">:</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="at">  </span><span class="fu">giscus</span><span class="kw">:</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="at">    </span><span class="fu">repo</span><span class="kw">:</span><span class="at"> giscus/giscus</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="at">    </span><span class="fu">repo-id</span><span class="kw">:</span><span class="at"> </span><span class="st">"MDEwOlJlcG9zaXRvcnkzNzM2NDM1OTg="</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="at">    </span><span class="fu">category</span><span class="kw">:</span><span class="at"> </span><span class="st">"General"</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="at">    </span><span class="fu">category-id</span><span class="kw">:</span><span class="at"> </span><span class="st">"DIC_kwDOFjQgPs4CA_2S"</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="at">    </span><span class="fu">mapping</span><span class="kw">:</span><span class="at"> </span><span class="st">"pathname"</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="at">    </span><span class="fu">reactions-enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="at">    </span><span class="fu">input-position</span><span class="kw">:</span><span class="at"> </span><span class="st">"bottom"</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> </span><span class="st">"preferred_color_scheme"</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="at">    </span><span class="fu">language</span><span class="kw">:</span><span class="at"> </span><span class="st">"en"</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="at">    </span><span class="fu">loading</span><span class="kw">:</span><span class="at"> </span><span class="st">"lazy"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will show you how comments should look when working properly.</p>
 
 
 </section>
@@ -979,6 +1063,35 @@ document.addEventListener('DOMContentLoaded', function() {
     updateButtonColor();
     
     console.log('Line numbers script initialization complete');
+    
+    // Debug: Check for Giscus
+    setTimeout(() => {
+      console.log('Checking for Giscus...');
+      const giscusScript = document.querySelector('script[src*="giscus.app"]');
+      const giscusFrame = document.querySelector('iframe.giscus-frame');
+      const giscusContainer = document.querySelector('.giscus');
+      
+      console.log('Giscus script found:', !!giscusScript);
+      console.log('Giscus frame found:', !!giscusFrame);
+      console.log('Giscus container found:', !!giscusContainer);
+      
+      if (giscusScript && !giscusContainer) {
+        console.log('Creating manual Giscus container...');
+        const container = document.createElement('div');
+        container.className = 'giscus';
+        container.style.marginTop = '2rem';
+        container.style.padding = '1rem';
+        container.style.border = '1px solid #ddd';
+        container.innerHTML = '<p>Comments should load here...</p>';
+        
+        // Insert before the closing content div
+        const content = document.querySelector('main.content') || document.querySelector('#quarto-document-content');
+        if (content) {
+          content.appendChild(container);
+          console.log('Manual Giscus container added');
+        }
+      }
+    }, 3000);
 });
 </script>
 
